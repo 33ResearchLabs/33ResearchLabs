@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Card, CardContent, CardHeader } from "../../Components/UI/Card";
 import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export const CreateBlogPage = () => {
   const [title, setTitle] = useState("");
