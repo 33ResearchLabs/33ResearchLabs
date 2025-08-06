@@ -28,9 +28,7 @@ const BlogDetailPage = () => {
       // If not found in state, fetch from backend
       const fetchBlog = async () => {
         try {
-          const res = await axios.get(
-            `${BackendUrl}/api/admin/dashboard/blogs/${id}`
-          );
+          const res = await axios.get(`${BackendUrl}/api/users/blog/${id}`);
           setBlog(res.data);
         } catch (err) {
           console.error("Error fetching blog:", err);
