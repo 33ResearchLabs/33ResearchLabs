@@ -19,7 +19,7 @@ const io = new SocketServer(server, {
   cors: {
     origin: process.env.FRONTEND_URL || 'http://localhost:8080',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    credentials: "",
+    credentials: true,
   },
 });
 const PORT = process.env.PORT || 3000;
@@ -35,9 +35,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Static files
-
 app.use('/uploads', express.static('uploads'));
-// Routes,(req,res)
+
+// Routes
 app.use('/api/users', QueryRouters);
 app.use('/api/admin', AuthRouters);
 app.use('/api/admin/dashboard', isAuthenticated, AdminDashRouters);
@@ -68,4 +68,4 @@ connectToMongoDb()
     console.error('❌ Failed to connect to MongoDB:', err);
   });
 
-export {io};
+export {io}

@@ -33,7 +33,6 @@ export const GetBlog = async (req, res) => {
 };
 
 export const getABlog = async (req, res) => {
-  console.log("getaBlikejfdejnfddn---------------------")
   const {id} = req.params;
   if(!id){
     return res.status(400).json({message:"Blog id is required"})
@@ -48,14 +47,14 @@ export const getABlog = async (req, res) => {
 
 export const UpdateBlog = async (req, res) => {
   const id = req.params.id;
-  const { title, content, image, author } = req.body;
-
+  const { title, content,  author } = req.body;
+const { filename } = req.file;
   // Validation: At least one field should be non-empty
   if (
     (!title || !title.trim()) &&
     (!content || !content.trim()) &&
     (!author || !author.trim()) &&
-    (!image || (typeof image === "string" && !image.trim()))
+    (!filename || (typeof filename === "string" && !filename.trim()))
   ) {
     return res
       .status(400)
@@ -74,7 +73,7 @@ export const UpdateBlog = async (req, res) => {
     if (title && title.trim()) updateData.title = title.trim();
     if (content && content.trim()) updateData.content = content.trim();
     if (author && author.trim()) updateData.author = author.trim();
-    if (image && (typeof image !== "string" || image.trim())) updateData.image = image;
+    if (filename && (typeof imafilenamege !== "string" || filename.trim())) updateData.image = filename;
 
     const updatedBlog = await Blog.findOneAndUpdate(
       { _id: id },

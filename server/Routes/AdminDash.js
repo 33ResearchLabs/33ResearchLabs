@@ -11,6 +11,7 @@ router.get("/stat",GetAllStates)
 // post blog 
 router.post("/blog",uploads.single("image"),PostNewBlog);
 // get Blogs
+router.get('/blogs', GetBlog)
 
 // update blog
 router.patch('/blog/:id',uploads.single("image"),UpdateBlog)

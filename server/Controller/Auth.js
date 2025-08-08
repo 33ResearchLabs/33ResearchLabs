@@ -32,7 +32,7 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true, // can't be accessed by JS on client
       secure: process.env.NODE_ENV === "production", // only over HTTPS in production
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
@@ -50,19 +50,19 @@ export const login = async (req, res) => {
 };
 
 
-export const register = async (req,res) => {
-   const { email, password } = req.body;
+export const register = async (req, res) => {
+  const { email, password } = req.body;
 
   if (!email || !password || !email.trim() || !password.trim()) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  const exisitingUser  = await AdminLogin.findOne({ email });
+  const exisitingUser = await AdminLogin.findOne({ email });
   if (exisitingUser) {
     return res.status(400).json({ message: "Admin already exists" });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);   
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   const newAdmin = new AdminLogin({
     email,
@@ -77,7 +77,7 @@ export const register = async (req,res) => {
   }
 };
 
-export const Logout = (req, res)=>{
+export const Logout = (req, res) => {
   console.log("Logout called");
   res.cookie("token", "", {
     httpOnly: true,
@@ -85,17 +85,3 @@ export const Logout = (req, res)=>{
   });
   return res.status(200).json({ message: "Logged out successfully" })
 }
-
-export const verify = (req, res) => {
-  const { _id } = req.admin;
-  try {
-    if (!_id) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    return res.status(200).json({ success: true, message: "Authorized" }); // ✅ send a response body
-  } catch (error) {
-    console.error("Verify error:", error);
-    return res.status(500).json({ message: 'Internal server error', error });
-  }
-};
