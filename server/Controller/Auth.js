@@ -30,10 +30,10 @@ export const login = async (req, res) => {
 
     // Set the token in a cookie
     res.cookie("token", token, {
-      httpOnly: true, // can't be accessed by JS on client
-      secure: process.env.NODE_ENV === "production", // only over HTTPS in production
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     return res.status(200).json({
@@ -48,7 +48,6 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 export const register = async (req, res) => {
   const { email, password } = req.body;
@@ -83,5 +82,19 @@ export const Logout = (req, res) => {
     httpOnly: true,
     expires: new Date(0),
   });
-  return res.status(200).json({ message: "Logged out successfully" })
-}
+  return res.status(200).json({ message: "Logged out successfully" });
+};
+
+export const verify = (req, res) => {
+  const { _id } = req.admin;
+  try {
+    if (!_id) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    return res.status(200).json({ success: true, message: "Authorized" }); // ✅ send a response body
+  } catch (error) {
+    console.error("Verify error:", error);
+    return res.status(500).json({ message: "Internal server error", error });
+  }
+};

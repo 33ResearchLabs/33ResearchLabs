@@ -47,14 +47,16 @@ export const getABlog = async (req, res) => {
 
 export const UpdateBlog = async (req, res) => {
   const id = req.params.id;
-  const { title, content,  author } = req.body;
-const { filename } = req.file;
-  // Validation: At least one field should be non-empty
+  const { title, content, author } = req.body;
+
+  const filename = req.file?.filename; // Safely access filename
+
+  // Validation: At least one field must be provided
   if (
     (!title || !title.trim()) &&
     (!content || !content.trim()) &&
     (!author || !author.trim()) &&
-    (!filename || (typeof filename === "string" && !filename.trim()))
+    !filename
   ) {
     return res
       .status(400)
@@ -62,7 +64,7 @@ const { filename } = req.file;
   }
 
   try {
-    const existingBlog = await Blog.findOne({ _id: id });
+    const existingBlog = await Blog.findById(id);
 
     if (!existingBlog) {
       return res.status(404).json({ message: "Blog not found" });
@@ -73,19 +75,19 @@ const { filename } = req.file;
     if (title && title.trim()) updateData.title = title.trim();
     if (content && content.trim()) updateData.content = content.trim();
     if (author && author.trim()) updateData.author = author.trim();
-    if (filename && (typeof imafilenamege !== "string" || filename.trim())) updateData.image = filename;
+    if (filename) updateData.image = filename;
 
-    const updatedBlog = await Blog.findOneAndUpdate(
-      { _id: id },
-      updateData,
-      { new: true }
-    );
+    const updatedBlog = await Blog.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
 
-    res.status(200).json(updatedBlog);
+    return res.status(200).json(updatedBlog);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error updating blog:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 export const DeleteBlog = async (req, res) => {
   const id = req.params.id;
