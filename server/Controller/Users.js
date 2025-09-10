@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import UserConsultation from "../models/userConsultation.js";
 import Subscribe from "../models/UserSubscribe.js";
 import { io } from "../index.js";
+import { updateDailyCount } from "../middleware/dailyLimitCheck.js";
 dotenv.config();
 
 export const postUserQuery = async (req, res) => {
@@ -50,6 +51,9 @@ export const postUserQuery = async (req, res) => {
 
     await newQuery.save();
     console.log("✅ User query saved to database");
+
+    // ✅ 2.5. Update daily limit count
+    await updateDailyCount(req.limitRecord, 'query');
 
     // ✅ 3. Setup and send mail to owner
     const transporter = nodemailer.createTransport({
@@ -112,7 +116,10 @@ export const postUserConsultation = async (req, res) => {
     });
 
     await newQuery.save();
-    console.log("✅ User query saved to database");
+    console.log("✅ User consultation saved to database");
+
+    // ✅ 2.5. Update daily limit count
+    await updateDailyCount(req.limitRecord, 'consultation');
 
     // ✅ 3. Setup and send mail to owner
     const transporter = nodemailer.createTransport({

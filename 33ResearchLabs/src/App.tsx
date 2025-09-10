@@ -65,23 +65,114 @@ const App = () => (
           <ScrollToTop />
           <Routes>
             {/* Public Routes with Layout (includes navbar) */}
-            <Route path="/" element={<Layout><Index /></Layout>} />
-            <Route path="/services" element={<Layout><Services /></Layout>} />
-            <Route path="/ventures" element={<Layout><Ventures /></Layout>} />
-            <Route path="/insights" element={<Layout><Insights /></Layout>} />
-            <Route path="/insights/article/:id" element={<Layout><ArticleDetail /></Layout>} />
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <Index />
+                </Layout>
+              }
+            />
+            <Route
+              path="/services"
+              element={
+                <Layout>
+                  <Services />
+                </Layout>
+              }
+            />
+            <Route
+              path="/ventures"
+              element={
+                <Layout>
+                  <Ventures />
+                </Layout>
+              }
+            />
+            <Route
+              path="/insights"
+              element={
+                <Layout>
+                  <Insights />
+                </Layout>
+              }
+            />
+            <Route
+              path="/insights/article/:id"
+              element={
+                <Layout>
+                  <ArticleDetail />
+                </Layout>
+              }
+            />
             {/* <Route path="/pricing" element={<Layout><PricingPage /></Layout>} /> */}
-            <Route path="/about-us" element={<Layout><AboutUs /></Layout>} />
-            <Route path="/team" element={<Layout><Team /></Layout>} />
-            <Route path="/contact-us" element={<Layout><Contact /></Layout>} />
-            <Route path="/privacy" element={<Layout><PrivacyPolicy /></Layout>} />
-            <Route path="/terms" element={<Layout><TermPage /></Layout>} />
-            <Route path="/gdpr" element={<Layout><GdprPage /></Layout>} />
-            <Route path="/cookie-policy" element={<Layout><CookiesPolicy /></Layout>} />
-            <Route path="/company-culture" element={<Layout><CompanyCulture /></Layout>} />
+            <Route
+              path="/about-us"
+              element={
+                <Layout>
+                  <AboutUs />
+                </Layout>
+              }
+            />
+            <Route
+              path="/team"
+              element={
+                <Layout>
+                  <Team />
+                </Layout>
+              }
+            />
+            <Route
+              path="/contact-us"
+              element={
+                <Layout>
+                  <Contact />
+                </Layout>
+              }
+            />
+            <Route
+              path="/privacy"
+              element={
+                <Layout>
+                  <PrivacyPolicy />
+                </Layout>
+              }
+            />
+            <Route
+              path="/terms"
+              element={
+                <Layout>
+                  <TermPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/gdpr"
+              element={
+                <Layout>
+                  <GdprPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/cookie-policy"
+              element={
+                <Layout>
+                  <CookiesPolicy />
+                </Layout>
+              }
+            />
+            <Route
+              path="/company-culture"
+              element={
+                <Layout>
+                  <CompanyCulture />
+                </Layout>
+              }
+            />
             {/* <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
             <Route path="/blog/:id" element={<Layout><BlogDetailPage /></Layout>} /> */}
-            
+
             {/* Login page without layout */}
             <Route path="/login" element={<Login />} />
 
@@ -107,7 +198,14 @@ const App = () => (
             </Route>
 
             {/* 404 Page with layout */}
-            <Route path="*" element={<Layout><NotFound /></Layout>} />
+            <Route
+              path="*"
+              element={
+                <Layout>
+                  <NotFound />
+                </Layout>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
