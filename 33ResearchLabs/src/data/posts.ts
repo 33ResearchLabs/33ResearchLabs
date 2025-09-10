@@ -89,7 +89,7 @@ export  const posts = [
       "As LLMs grow in complexity, traditional cloud infrastructure hits fundamental limits. We explore the architectural patterns that will define the next generation of AI systems.",
     author: "Sarah Chen",
     role: "Head of AI Research",
-    date: "December 15, 2024",
+    date: "August 16, 2025",
     readTime: "12 min read",
     category: "AI",
     icon: Brain,
