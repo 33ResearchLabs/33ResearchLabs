@@ -56,7 +56,7 @@ export  const posts = [
       readTime: "12 min read",
       category: "AI",
       icon: Brain,
-      color: "from-blue-400 to-blue-600",
+      color: "from-electric-400 to-electric-600",
     },
     {
       title: "The Economics of Deep Tech: Why VCs Are Missing the Point",
@@ -93,7 +93,7 @@ export  const posts = [
     readTime: "12 min read",
     category: "AI",
     icon: Brain,
-    color: "from-blue-400 to-blue-600",
+    color: "from-electric-400 to-electric-600",
     image:
       "https://r2.erweima.ai/imgcompressed/compressed_b897bcf6d77096abfa9d86e20a66aa8c.webp",
   };

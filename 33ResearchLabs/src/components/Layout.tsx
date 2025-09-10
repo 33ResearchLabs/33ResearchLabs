@@ -13,11 +13,10 @@ import { Button } from "@/components/ui/button";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Ventures", href: "/ventures" },
   { name: "Services", href: "/services" },
+  { name: "Ventures", href: "/ventures" },
   { name: "Insights", href: "/insights" },
-  { name: "Blog", href: "/blog" },
-  { name: "Our Team", href: "/team" },
+  { name: "About us", href: "/about-us" },
 ];
 const socialLinks = [
   {
@@ -42,13 +41,6 @@ const socialLinks = [
     href: "https://linkedin.com/company/33researchlabs",
     label: "LinkedIn",
   },
-];
-
-const productLinks = [
-  { label: "Pricing", url: "/pricing" },
-  { label: "Integrations", url: "#integrations" },
-  { label: "Security", url: "#security" },
-  { label: "About us", url: "/about-us" },
 ];
 
 const legalLinks = [
@@ -94,15 +86,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-neutral-200 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center space-x-2">
-              <img
-                src="/33.png" // or /repu.png if not using SVG
-                alt="33Research Labs Logo"
-                className="w-24 h-24 object-contain" // object-contain avoids cropping
-              />
-              <span className="text-xl font-bold text-blue-500">
-                33Research Labs
-              </span>
+            <Link
+              to={"/"}
+              className="text-xl flex justify-center text-center items-center gap-2 font-bold text-electric-600"
+            >
+              <div className="w-10 h-10 bg-electric-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                <span className="text-white font-bold text-md">33</span>
+              </div>{" "}
+              <div className="text-black text-2xl">Research Labs</div>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
               {navigation.map((item) => (
@@ -157,7 +148,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               ))}
               <Button
-                className="w-full bg-electric-600 hover:bg-electric-700 text-white"
+                className="w-full bg-gradient-to-r from-electric-600 to-electric-500 bg-clip-text text-transparent "
                 asChild
               >
                 <Link to="/contact">Get Started</Link>
@@ -177,19 +168,18 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             {/* Brand */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
-                <Link to="/" className="flex items-center space-x-2">
-                  <img
-                    src="/33.png" // or /repu.png if not using SVG
-                    alt="33Research Labs Logo"
-                    className="w-24 h-24 object-contain" // object-contain avoids cropping
-                  />
-                  <span className="text-xl font-bold text-blue-500">
-                    33Research Labs
-                  </span>
+                <Link
+                  to={"/"}
+                  className="text-xl flex justify-center text-center items-center gap-2 font-bold text-electric-600"
+                >
+                  <div className="w-10 h-10 bg-electric-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                    <span className="text-white font-bold text-md">33</span>
+                  </div>{" "}
+                  <div className="text-white text-2xl">Research Labs</div>
                 </Link>
               </div>
               <p className="text-neutral-400 max-w-md">
-                33Research Labs is a venture studio and deep-tech powerhouse
+                33 Research Labs is a venture studio and deep-tech powerhouse
                 building the future of crypto, AI, and Web3. Development,
                 marketing, and growth under one roof.
               </p>
@@ -206,15 +196,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     {link.icon}
                   </a>
                 ))}
-                <Link to={"/login"} className="bg-blue-500  w-fit rounded-md">
-                  <button className="m-2 text-black"> Admin</button>
-                </Link>
               </div>
             </div>
 
             {/* Navigation */}
             <div>
-              <h3 className="font-semibold mb-4">33ResearchLabs</h3>
+              <h3 className="font-semibold mb-4">33 Research Labs</h3>
               <ul className="space-y-3">
                 {navigation.map((item) => (
                   <li key={item.name}>
@@ -223,23 +210,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                       className="text-neutral-400 hover:text-white transition-colors duration-200"
                     >
                       {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Product */}
-            <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-3">
-                {productLinks.map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      to={item.url}
-                      className="text-neutral-400 hover:text-white transition-colors duration-200"
-                    >
-                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -266,7 +236,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           <div className="border-t border-neutral-800 mt-12 pt-8 text-center">
             <p className="text-neutral-400">
-              © {new Date().getFullYear()} 33Research Labs. All rights reserved.
+              © {new Date().getFullYear()} 33 Research Labs. All rights
+              reserved.
             </p>
           </div>
         </div>

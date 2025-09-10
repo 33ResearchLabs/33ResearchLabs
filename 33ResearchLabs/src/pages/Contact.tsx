@@ -38,6 +38,16 @@ const Contact = () => {
     budget: "",
     projectDescription: "",
   });
+
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    projectType: "",
+    budget: "",
+    projectDescription: "",
+  });
   const BackendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -48,20 +58,102 @@ const Contact = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const validateField = (name: string, value: string) => {
+    let error = "";
+
+    switch (name) {
+      case "firstName":
+        if (!value.trim()) {
+          error = "First name is required";
+        } else if (value.trim().length < 2) {
+          error = "First name must be at least 2 characters";
+        }
+        break;
+
+      case "lastName":
+        if (!value.trim()) {
+          error = "Last name is required";
+        } else if (value.trim().length < 2) {
+          error = "Last name must be at least 2 characters";
+        }
+        break;
+
+      case "email":
+        if (!value.trim()) {
+          error = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Please enter a valid email address";
+        }
+        break;
+
+      case "company":
+        if (!value.trim()) {
+          error = "Company name is required";
+        }
+        break;
+
+      case "projectType":
+        if (!value) {
+          error = "Please select a project type";
+        }
+        break;
+
+      case "budget":
+        if (!value) {
+          error = "Please select a budget range";
+        }
+        break;
+
+      case "projectDescription":
+        if (!value.trim()) {
+          error = "Project description is required";
+        } else if (value.trim().length < 10) {
+          error = "Project description must be at least 10 characters";
+        }
+        break;
+
+      default:
+        break;
+    }
+
+    return error;
+  };
+
+  const validateForm = () => {
+    const newErrors = { ...errors };
+    let isValid = true;
+
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key as keyof typeof formData]);
+      newErrors[key as keyof typeof errors] = error;
+      if (error) isValid = false;
+    });
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    const error = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true);
     e.preventDefault();
+    
+    if (!validateForm()) {
+      toast.error("Please fix the errors in the form");
+      return;
+    }
+
+    setLoading(true);
     try {
       console.log("Submitted Data:", formData);
-      // ✅ Replace this with API call or EmailJS integration
-      toast.success("Message sent successfully!");
       const response = await axios.post(
         `${BackendUrl}/api/users/query`,
         formData
@@ -70,6 +162,15 @@ const Contact = () => {
       if (response.status === 200) {
         toast.success("✅ Consultation request sent successfully!");
         setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          company: "",
+          projectType: "",
+          budget: "",
+          projectDescription: "",
+        });
+        setErrors({
           firstName: "",
           lastName: "",
           email: "",
@@ -135,45 +236,71 @@ const Contact = () => {
             </p>
             <form onSubmit={handleFormSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input
-                  name="firstName"
-                  placeholder="John"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
-                <Input
-                  name="lastName"
-                  placeholder="Doe"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
+                <div>
+                  <Input
+                    name="firstName"
+                    placeholder="John"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className={errors.firstName ? "border-red-500" : ""}
+                  />
+                  {errors.firstName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    name="lastName"
+                    placeholder="Doe"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className={errors.lastName ? "border-red-500" : ""}
+                  />
+                  {errors.lastName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                  )}
+                </div>
               </div>
 
-              <Input
-                name="email"
-                type="email"
-                placeholder="john@company.com"
-                value={formData.email}
-                onChange={handleChange}
-              />
+              <div>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="john@company.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={errors.email ? "border-red-500" : ""}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
+              </div>
 
-              <Input
-                name="company"
-                placeholder="Acme Inc."
-                value={formData.company}
-                onChange={handleChange}
-              />
+              <div>
+                <Input
+                  name="company"
+                  placeholder="Acme Inc."
+                  value={formData.company}
+                  onChange={handleChange}
+                  className={errors.company ? "border-red-500" : ""}
+                />
+                {errors.company && (
+                  <p className="text-red-500 text-sm mt-1">{errors.company}</p>
+                )}
+              </div>
 
               <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-2">
                   Project Type
                 </label>
                 <Select
-                  onValueChange={(value) =>
-                    setFormData((prev) => ({ ...prev, projectType: value }))
-                  }
+                  onValueChange={(value) => {
+                    setFormData((prev) => ({ ...prev, projectType: value }));
+                    const error = validateField("projectType", value);
+                    setErrors((prev) => ({ ...prev, projectType: error }));
+                  }}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className={errors.projectType ? "border-red-500" : ""}>
                     <SelectValue placeholder="Select project type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -189,6 +316,9 @@ const Contact = () => {
                     <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.projectType && (
+                  <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>
+                )}
               </div>
 
               <div>
@@ -196,11 +326,13 @@ const Contact = () => {
                   Budget Range
                 </label>
                 <Select
-                  onValueChange={(value) =>
-                    setFormData((prev) => ({ ...prev, budget: value }))
-                  }
+                  onValueChange={(value) => {
+                    setFormData((prev) => ({ ...prev, budget: value }));
+                    const error = validateField("budget", value);
+                    setErrors((prev) => ({ ...prev, budget: error }));
+                  }}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className={errors.budget ? "border-red-500" : ""}>
                     <SelectValue placeholder="Select budget range" />
                   </SelectTrigger>
                   <SelectContent>
@@ -211,15 +343,24 @@ const Contact = () => {
                     <SelectItem value="1m+">$1M+</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.budget && (
+                  <p className="text-red-500 text-sm mt-1">{errors.budget}</p>
+                )}
               </div>
 
-              <Textarea
-                name="projectDescription"
-                rows={6}
-                placeholder="Tell us about your project, timeline, tech stack, etc."
-                value={formData.projectDescription}
-                onChange={handleChange}
-              />
+              <div>
+                <Textarea
+                  name="projectDescription"
+                  rows={6}
+                  placeholder="Tell us about your project, timeline, tech stack, etc."
+                  value={formData.projectDescription}
+                  onChange={handleChange}
+                  className={errors.projectDescription ? "border-red-500" : ""}
+                />
+                {errors.projectDescription && (
+                  <p className="text-red-500 text-sm mt-1">{errors.projectDescription}</p>
+                )}
+              </div>
 
               <Button
                 type="submit"
@@ -293,13 +434,13 @@ const Contact = () => {
 
       {/* FAQ */}
       <section className="py-24 bg-neutral-50">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="max-w-4xl mx-auto px-4  gap-16">
           <div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-6">
+            <h2 className="text-3xl text-center lg:text-4xl font-bold text-neutral-900 mb-6">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-neutral-600 mb-6">
-              Common questions about working with 33Research Labs
+            <p className="text-lg text-center text-neutral-600 mb-6">
+              Common questions about working with 33 Research Labs
             </p>
             {faqs.map((faq, index) => (
               <div
@@ -328,7 +469,7 @@ const Contact = () => {
             ))}
           </div>
 
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold text-neutral-900 mb-2">
                 What's your typical project timeline?
@@ -362,7 +503,7 @@ const Contact = () => {
                 Yes, we offer flexible support packages after project launch.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -387,7 +528,7 @@ const Contact = () => {
               onClick={() => setIsModalOpen(true)}
               size="lg"
               variant="outline"
-              className="border-white text-blue-500 hover:bg-white hover:text-electric-600"
+              className="border-white text-electric-600 hover:bg-white hover:text-electric-600"
             >
               Schedule Consultation
             </Button>

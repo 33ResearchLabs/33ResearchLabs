@@ -341,7 +341,7 @@ const Services = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-6">
-                Why Partner with 33Research Labs
+                Why Partner with 33 Research Labs
               </h2>
               <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
                 We're not just consultants—we're builders. Our team combines

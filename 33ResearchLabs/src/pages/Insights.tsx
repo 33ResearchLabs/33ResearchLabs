@@ -11,6 +11,7 @@ import {
   Layers as LayersIcon,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,7 @@ const Insights = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const BackendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubscribeEmail = async (e) => {
@@ -54,7 +56,7 @@ const Insights = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "AI":
-        return "bg-blue-100 text-blue-800";
+        return "bg-electric-100 text-electric-800";
       case "Blockchain":
         return "bg-purple-100 text-purple-800";
       case "Cybersecurity":
@@ -185,11 +187,12 @@ const Insights = () => {
                       <span>{featuredPost.readTime}</span>
                     </div>
                   </div>
-                  <Button
-                    disabled
+
+                  <Button 
                     className="bg-electric-600 hover:bg-electric-700 text-white w-fit"
+                    onClick={() => navigate("/insights/article/ai-infrastructure")}
                   >
-                    Read Full Article <ArrowUpRight className="ml-2 h-4 w-4" />
+                    Read More Article <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardContent>
               </div>

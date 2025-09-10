@@ -11,4 +11,5 @@ router.post('/consultation', postUserConsultation)
 router.post('/subscribe', postUserSubscribe)
 // get blog only
 router.get('/blog/:id', getABlog)
+
 export default router

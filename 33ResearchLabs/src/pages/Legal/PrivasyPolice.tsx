@@ -7,12 +7,12 @@ export const PrivacyPolicy = () => {
         <h1 className="text-4xl font-bold text-black mb-4 text-center">
           Privacy Policy
         </h1>
-        <p className="text-sm text-gray-500 mb-8 text-center">
-          Last Updated: July 29, 2025
-        </p>
 
         <p className="mb-6 text-gray-700">
-          At <span className="text-blue-500 font-semibold">33researchlabs</span>
+          At{" "}
+          <span className="text-electric-600 font-semibold">
+            33 Research Labs
+          </span>
           , we are committed to protecting your privacy. This Privacy Policy
           outlines how we collect, use, disclose, and safeguard your personal
           information when you interact with our website or engage with our
@@ -98,7 +98,7 @@ export const PrivacyPolicy = () => {
           <br />
           <a
             href="mailto:33Research Labs@gmail.com"
-            className="text-blue-500 font-medium flex"
+            className="text-electric-600 font-medium flex"
           >
             <span className="pr-2 text-black">
               <Mail size={20} />

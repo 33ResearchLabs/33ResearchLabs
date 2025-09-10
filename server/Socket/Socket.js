@@ -1,4 +1,6 @@
 import { Server } from "socket.io";
+import dotenv from "dotenv";
+dotenv.config();
 const server = require("http").createServer();
 const io = new Server(server, {
   cors: {
@@ -6,4 +8,4 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-io.listen(process.env.PORT || 3000,()=>console.log("socket started"));
+io.listen(process.env.PORT || 3000, () => console.log("socket started"));

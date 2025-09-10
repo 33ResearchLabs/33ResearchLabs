@@ -45,9 +45,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a] flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-[#1e293b] p-8 rounded-2xl shadow-xl border border-[#334155]">
-        <h2 className="text-3xl font-bold text-white mb-6 text-center">
+    <div className="min-h-screen  flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-gray-100 p-8 rounded-2xl shadow-xl border border-[#334155]">
+        <h2 className="text-3xl font-bold text-black mb-6 text-center">
           Welcome Back
         </h2>
         <p className="text-muted-foreground text-sm text-center mb-6">
@@ -67,7 +67,7 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="text-sm text-white block mb-1">Email</label>
+            <label className="text-sm text-black block mb-1">Email</label>
             <div className="relative">
               <Mail
                 className="absolute left-3 top-2.5 text-muted-foreground"
@@ -86,7 +86,7 @@ const Login = () => {
           </div>
 
           <div>
-            <label className="text-sm text-white block mb-1">Password</label>
+            <label className="text-sm text-black block mb-1">Password</label>
             <div className="relative">
               <Lock
                 className="absolute left-3 top-2.5 text-muted-foreground"

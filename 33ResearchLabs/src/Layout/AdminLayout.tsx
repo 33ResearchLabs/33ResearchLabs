@@ -22,10 +22,10 @@ export const AdminLayout: React.FC = () => {
     };
   }, []);
   return (
-    <div className="flex min-h-screen  text-gray-700">
-      <AdminSidebar /> {/* Sidebar stays on the left */}
-      <div className="flex-1 p-6">
-        <Outlet /> {/* This will render AdminDashboard or BlogDashboard */}
+    <div className="flex min-h-screen bg-neutral-50">
+      <AdminSidebar />
+      <div className="flex-1 overflow-auto">
+        <Outlet />
       </div>
     </div>
   );

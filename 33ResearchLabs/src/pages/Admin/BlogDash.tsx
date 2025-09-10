@@ -1,8 +1,19 @@
 import { useState, useEffect } from "react";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Edit, Trash2, Eye, Calendar, Image } from "lucide-react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 interface Blog {
   _id: number;
@@ -58,92 +69,267 @@ export const BlogDashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6 p-6 w-full">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-white">Blog Dashboard</h2>
-        <Link
-          to="/admin/newblog"
-          className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition"
-        >
-          <Plus size={18} />
-          Create New Blog
-        </Link>
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-electric-50/20">
+      {/* Header */}
+      <div className="bg-white border-b border-neutral-200 px-6 py-4">
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-3xl font-bold text-neutral-900">
+              Blog Management
+            </h2>
+            <p className="text-neutral-600 mt-1">
+              Manage your blog posts and content
+            </p>
+          </div>
+          <Link to="/admin/newblog">
+            <Button className="bg-electric-600 hover:bg-electric-700 text-white">
+              <Plus className="h-4 w-4 mr-2" />
+              Create New Blog
+            </Button>
+          </Link>
+        </div>
       </div>
 
-      <div className="border border-gray-700 p-6 rounded-xl shadow-md max-w-5xl w-full">
-        <div className="m-4 bg-blue-500 shadow-md hover:shadow-black w-fit p-4 rounded-md">
-          <h3 className="text-lg text-white mb-4">Total Blogs: {totalBlogs}</h3>
-        </div>
+      <div className="p-6">
+        {/* Stats Card */}
+        <Card className="mb-6 border-neutral-200">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-neutral-900">
+              <Eye className="h-5 w-5 text-electric-600" />
+              <span>Blog Overview</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg">
+                <div className="text-2xl font-bold">{totalBlogs}</div>
+                <p className="text-blue-100 text-sm">Total Blogs</p>
+              </div>
+              <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg">
+                <div className="text-2xl font-bold">
+                  {
+                    blogs.filter(
+                      (blog) =>
+                        new Date(blog.createdAt) >
+                        new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+                    ).length
+                  }
+                </div>
+                <p className="text-green-100 text-sm">This Month</p>
+              </div>
+              <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-lg">
+                <div className="text-2xl font-bold">
+                  {
+                    blogs.filter(
+                      (blog) =>
+                        new Date(blog.createdAt) >
+                        new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+                    ).length
+                  }
+                </div>
+                <p className="text-purple-100 text-sm">This Week</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-        {loading ? (
-          <p className="text-muted-foreground">Loading blogs...</p>
-        ) : blogs.length === 0 ? (
-          <p className="text-muted-foreground">No blogs found.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {blogs.map((blog) => (
-              <div
-                key={blog._id}
-                onClick={() => setSelectedBlog(blog)}
-                className="cursor-pointer p-4 rounded-lg shadow-md hover:shadow-blue-500 transition-all border border-gray-600"
+        {/* Blog Table */}
+        <Card className="border-neutral-200">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-neutral-900">
+              <Image className="h-5 w-5 text-electric-600" />
+              <span>All Blog Posts</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-electric-600"></div>
+                <span className="ml-2 text-neutral-600">Loading blogs...</span>
+              </div>
+            ) : blogs.length === 0 ? (
+              <div className="text-center py-12">
+                <Image className="h-12 w-12 text-neutral-400 mx-auto mb-4" />
+                <p className="text-neutral-500 text-lg">No blogs found</p>
+                <p className="text-neutral-400 text-sm mb-4">
+                  Create your first blog post to get started
+                </p>
+                <Link to="/admin/newblog">
+                  <Button className="bg-electric-600 hover:bg-electric-700 text-white">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create First Blog
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-neutral-200">
+                      <TableHead className="font-semibold text-neutral-900">
+                        Preview
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Title
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Content Preview
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Created
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Actions
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {blogs.map((blog) => (
+                      <TableRow
+                        key={blog._id}
+                        className="border-neutral-200 hover:bg-neutral-50 transition-colors cursor-pointer"
+                        onClick={() => setSelectedBlog(blog)}
+                      >
+                        <TableCell className="py-4">
+                          <div className="w-16 h-16 rounded-lg overflow-hidden border border-neutral-200">
+                            <img
+                              src={`${BackendUrl}/uploads/${blog.image}`}
+                              alt={blog.title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-4">
+                          <div className="font-medium text-neutral-900 capitalize">
+                            {blog.title}
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-4">
+                          <div className="text-neutral-600 text-sm line-clamp-2 max-w-xs">
+                            {blog.content.substring(0, 100)}...
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-4">
+                          <div className="flex items-center space-x-1 text-neutral-600 text-sm">
+                            <Calendar className="h-4 w-4" />
+                            <span>
+                              {new Date(blog.createdAt).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-4">
+                          <div className="flex items-center space-x-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedBlog(blog);
+                              }}
+                              className="border-neutral-300 hover:bg-neutral-100"
+                            >
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                            <Link to={`/admin/blog/editblog/${blog._id}`}>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={(e) => e.stopPropagation()}
+                                className="border-amber-300 text-amber-600 hover:bg-amber-50"
+                              >
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                            </Link>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDelete(blog._id);
+                              }}
+                              className="border-red-300 text-red-600 hover:bg-red-50"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Modern Modal */}
+      {selectedBlog && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-electric-600 to-electric-500 text-white p-6 relative">
+              <button
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                onClick={() => setSelectedBlog(null)}
               >
-                <h4 className="text-gray-200 text-lg font-medium mb-2 capitalize">
-                  {blog.title}
-                </h4>
-                <p className="text-gray-700 text-sm line-clamp-3">
-                  {blog.content}
-                </p>
-                <p className="text-xs text-gray-500 mt-2">
-                  {new Date(blog.createdAt).toLocaleDateString()}
-                </p>
+                <X className="h-6 w-6" />
+              </button>
+              <h3 className="text-2xl font-bold capitalize pr-12">
+                {selectedBlog.title}
+              </h3>
+              <div className="flex items-center space-x-2 mt-2 text-electric-100">
+                <Calendar className="h-4 w-4" />
+                <span className="text-sm">
+                  Posted on {new Date(selectedBlog.createdAt).toLocaleString()}
+                </span>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="overflow-y-auto max-h-[60vh] p-6">
+              <div className="mb-6">
                 <img
-                  src={`${BackendUrl}/uploads/${blog.image}`}
-                  alt="image"
-                  className="mt-2 max-h-40 object-cover rounded-md"
+                  src={`${BackendUrl}/uploads/${selectedBlog.image}`}
+                  alt="Blog"
+                  className="w-full h-64 object-cover rounded-lg shadow-md"
                 />
               </div>
-            ))}
-          </div>
-        )}
-      </div>
 
-      {/* Modal */}
-      {selectedBlog && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 relative">
-            <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
-              onClick={() => setSelectedBlog(null)}
-            >
-              <X />
-            </button>
+              <div className="prose max-w-none">
+                <h4 className="text-lg font-semibold text-neutral-900 mb-3">
+                  Content
+                </h4>
+                <div className="text-neutral-700 leading-relaxed bg-neutral-50 p-4 rounded-lg">
+                  {selectedBlog.content}
+                </div>
+              </div>
+            </div>
 
-            <h3 className="text-2xl text-white font-semibold mb-2 capitalize">
-              {selectedBlog.title}
-            </h3>
-            <p className="text-gray-300 mb-4">{selectedBlog.content}</p>
-            <img
-              src={`${BackendUrl}/uploads/${selectedBlog.image}`}
-              alt="Blog"
-              className="w-full rounded-md mb-4"
-            />
-            <p className="text-xs text-gray-500 mb-6">
-              Posted on: {new Date(selectedBlog.createdAt).toLocaleString()}
-            </p>
-
-            <div className="flex gap-4">
-              <Link
-                to={`/admin/blog/editblog/${selectedBlog._id}`}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={() => handleDelete(selectedBlog._id)}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
-              >
-                Delete
-              </button>
+            {/* Modal Footer */}
+            <div className="border-t border-neutral-200 bg-neutral-50 px-6 py-4">
+              <div className="flex items-center justify-end space-x-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedBlog(null)}
+                  className="border-neutral-300 hover:bg-neutral-100"
+                >
+                  Close
+                </Button>
+                <Link to={`/admin/blog/editblog/${selectedBlog._id}`}>
+                  <Button className="bg-amber-500 hover:bg-amber-600 text-white">
+                    <Edit className="h-4 w-4 mr-2" />
+                    Edit Blog
+                  </Button>
+                </Link>
+                <Button
+                  onClick={() => handleDelete(selectedBlog._id)}
+                  className="bg-red-500 hover:bg-red-600 text-white"
+                >
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Delete
+                </Button>
+              </div>
             </div>
           </div>
         </div>

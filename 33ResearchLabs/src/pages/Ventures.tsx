@@ -44,7 +44,7 @@ const Ventures = () => {
       category: "AI",
       metrics: { users: "5K+", models: "10K+", uptime: "99.9%" },
       icon: Cpu,
-      color: "from-blue-400 to-blue-600",
+      color: "from-electric-400 to-electric-600",
     },
     {
       name: "SecureVault",
@@ -62,7 +62,7 @@ const Ventures = () => {
       case "Live":
         return "bg-green-100 text-green-800";
       case "Series A":
-        return "bg-blue-100 text-blue-800";
+        return "bg-electric-100 text-electric-800";
       case "Beta":
         return "bg-yellow-100 text-yellow-800";
       case "Development":
@@ -205,7 +205,8 @@ const Ventures = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-6">
-                Our <span className="text-blue-500">Investment</span> Philosophy
+                Our <span className="text-electric-600">Investment</span>{" "}
+                Philosophy
               </h2>
               <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
                 We invest in problems that matter. Each venture addresses

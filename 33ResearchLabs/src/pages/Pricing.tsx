@@ -43,7 +43,7 @@ const plans = [
 ];
 export default function PricingPage() {
   return (
-    <div className=" text-blue-500 min-h-screen py-16 px-6 mt-6">
+    <div className=" text-electric-600 min-h-screen py-16 px-6 mt-6">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-4">
           Choose Your 33 Research Plan
@@ -64,7 +64,7 @@ export default function PricingPage() {
               } bg-[#1E293B] flex flex-col justify-between hover:scale-105 transition-all duration-300`}
             >
               <div>
-                <h3 className="text-2xl font-semibold text-blue-200">
+                <h3 className="text-2xl font-semibold text-electric-200">
                   {plan.name}
                 </h3>
                 <p className="text-3xl font-bold text-orange-400 mt-2">
@@ -85,7 +85,7 @@ export default function PricingPage() {
                     ? "/contact-us"
                     : "/contact-us"
                 }
-                className="mt-6 w-full bg-white text-gray-600 py-2 px-4 rounded-lg font-medium transition- hover:bg-blue-500 hover:text-whi"
+                className="mt-6 w-full bg-white text-gray-600 py-2 px-4 rounded-lg font-medium transition- hover:bg-electric-500 hover:text-whi"
               >
                 {plan.buttonText}
               </Link>

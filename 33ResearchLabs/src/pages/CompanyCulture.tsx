@@ -6,11 +6,11 @@ export const CompanyCulture = () => {
     <section className="py-16 px-6 md:px-20">
       <div className="max-w-6xl mx-auto text-gray-700">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 text-black">
-          Our Company <span className="text-blue-500">Culture</span>
+          Our Company <span className="text-electric-600">Culture</span>
         </h1>
 
         <p className="text-lg mb-10 text-center max-w-3xl mx-auto text-black">
-          At 33Research Labs, we believe that culture is the foundation of
+          At 33 Research Labs, we believe that culture is the foundation of
           innovation. Our values guide how we work, collaborate, and grow
           together.
         </p>
@@ -52,7 +52,7 @@ export const CompanyCulture = () => {
           </h3>
           <Link
             to="/contact-us"
-            className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition duration-200"
+            className="inline-block bg-white text-electric-600 font-semibold px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition duration-200"
           >
             Join Our Team
           </Link>

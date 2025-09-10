@@ -66,7 +66,7 @@ const BlogPage = () => {
   return (
     <div className="box-border min-h-screen  text-white mt-16">
       {/* Banner */}
-      <h1 className="text-3xl md:text-4xl font-bold text-blue-500 mb-4 pt-5 text-center">
+      <h1 className="text-3xl md:text-4xl font-bold text-electric-600 mb-4 pt-5 text-center">
         Our Latest Blogs
       </h1>
       <FeaturedPostCard />
