@@ -122,24 +122,24 @@ export  const posts = [
 
   export const faqs = [
   {
-    question: "What is 33ResearchLabs?",
+    question: "What is 33 Research Labs?",
     answer:
-      "33ResearchLabs is a dominant force in Web3, AI, and crypto development. We offer complete development, marketing, and scalable growth solutions, enabling businesses and startups to confidently innovate.",
+      "33 Research Labs is a dominant force in Web3, AI, and crypto development. We offer complete development, marketing, and scalable growth solutions, enabling businesses and startups to confidently innovate.",
   },
   {
-    question: "What services are provided by 33ResearchLabs?",
+    question: "What services are provided by 33 Research Labs?",
     answer:
       "We provide full-stack Web3 and AI platform development, blockchain integration, smart contract creation, token launch strategy, crypto project marketing, and growth acceleration services in one location.",
   },
   {
-    question: "What distinguishes 33ResearchLabs from other tech firms?",
+    question: "What distinguishes 33 Research Labs from other tech firms?",
     answer:
       "In contrast to conventional businesses, we integrate community development, strategic marketing, and in-depth technological knowledge. Our interdisciplinary team helps close the gap between cutting-edge technology and practical application in the fields of AI and crypto.",
   },
   {
     question: "Do you collaborate with companies in their early stages?",
     answer:
-      "Indeed. Our speciality at 33ResearchLabs is assisting early-stage firms with idea validation, MVP development, and rapid scaling. We can help you whether you need proof-of-concept or go-to-market support.",
+      "Indeed. Our speciality at 33 Research Labs is assisting early-stage firms with idea validation, MVP development, and rapid scaling. We can help you whether you need proof-of-concept or go-to-market support.",
   },
   {
     question: "Can you assist with security and auditing smart contracts?",
@@ -157,7 +157,7 @@ export  const posts = [
       "Numerous industries, including DeFi, NFTs, gaming, fintech, healthcare, logistics, and more, are served by our products. We can create the link if your company wants to use Web3 or AI.",
   },
   {
-    question: "How can I begin using 33ResearchLabs?",
+    question: "How can I begin using 33 Research Labs?",
     answer:
       "You can email us directly or use the form on our website to get in touch with us. Following an initial conversation, we will suggest a customised roadmap to quickly and accurately realise your project.",
   },

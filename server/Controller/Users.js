@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import UserConsultation from "../models/userConsultation.js";
 import Subscribe from "../models/UserSubscribe.js";
 import { io } from "../index.js";
+import { updateDailyCount } from "../middleware/dailyLimitCheck.js";
 dotenv.config();
 
 export const postUserQuery = async (req, res) => {
@@ -31,13 +32,7 @@ export const postUserQuery = async (req, res) => {
   }
 
   try {
-    // ✅ 1. Check if query already exists
-    const existingQuery = await UserQuery.findOne({ email });
-    if (existingQuery) {
-      return res.status(400).json({ message: "User query already exists" });
-    }
-
-    // ✅ 2. Save user query to database
+    // ✅ 1. Save user query to database
     const newQuery = new UserQuery({
       firstName,
       lastName,
@@ -50,6 +45,9 @@ export const postUserQuery = async (req, res) => {
 
     await newQuery.save();
     console.log("✅ User query saved to database");
+
+    // ✅ 2.5. Update daily limit count
+    await updateDailyCount(req.limitRecord, 'query');
 
     // ✅ 3. Setup and send mail to owner
     const transporter = nodemailer.createTransport({
@@ -97,13 +95,7 @@ export const postUserConsultation = async (req, res) => {
   }
 
   try {
-    // ✅ 1. Check if query already exists
-    const existingQuery = await UserQuery.findOne({ email });
-    if (existingQuery) {
-      return res.status(400).json({ message: "User query already exists" });
-    }
-
-    // ✅ 2. Save user query to database
+    // ✅ 1. Save user consultation to database
     const newQuery = new UserConsultation({
       name,
       email,
@@ -112,7 +104,10 @@ export const postUserConsultation = async (req, res) => {
     });
 
     await newQuery.save();
-    console.log("✅ User query saved to database");
+    console.log("✅ User consultation saved to database");
+
+    // ✅ 2.5. Update daily limit count
+    await updateDailyCount(req.limitRecord, 'consultation');
 
     // ✅ 3. Setup and send mail to owner
     const transporter = nodemailer.createTransport({
@@ -160,13 +155,13 @@ export const postUserSubscribe = async (req, res) => {
   }
 
   try {
-    // ✅ 1. Check if query already exists
-    const existingQuery = await UserQuery.findOne({ email });
-    if (existingQuery) {
-      return res.status(409).json({ message: "User email already exists" });
+    // ✅ 1. Check if subscription already exists
+    const existingSubscription = await Subscribe.findOne({ email });
+    if (existingSubscription) {
+      return res.status(409).json({ message: "User email already subscribed" });
     }
 
-    // ✅ 2. Save user query to database
+    // ✅ 2. Save user subscription to database
     const newQuery = new Subscribe({
       email,
     });
