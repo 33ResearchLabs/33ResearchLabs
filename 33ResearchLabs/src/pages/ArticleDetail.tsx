@@ -2,49 +2,55 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { findPostBySlug, featuredPost } from "@/data/posts";
 
 const ArticleDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // Find the article by slug from URL params
+  const post = findPostBySlug(id || "");
+
+  // If no post found, show 404 or redirect
+  if (!post) {
+    navigate("/insights");
+    return null;
+  }
+
+  // Prepare article content (handle both featured post and regular posts)
   const articleContent = {
-    title:
-      "The Future of AI Infrastructure: Why Foundation Models Need New Architecture",
-    category: "AI",
-    author: "33ResearchLabs Team",
-    role: "Technical Research",
-    date: "March 15, 2024",
-    readTime: "8 min read",
-    image: "/api/placeholder/800/400",
-    content: `In today's rapidly evolving technological landscape, Artificial Intelligence (AI) has become a ubiquitous presence, revolutionizing industries and transforming the way we interact with machines. As AI continues to advance, the need for innovative infrastructure that can support the growing complexity of AI models is becoming increasingly crucial. In this article, we will explore the future of AI infrastructure and why foundation models require new architecture to meet the demands of tomorrow's AI applications.
+    title: post.title,
+    category: post.category,
+    author: post.author,
+    role: (post as any).role || "Technical Research",
+    date: post.date,
+    readTime: post.readTime,
+    image: post.image || "/ai.jpg",
+    content: `${post.excerpt}
 
-## The Evolution of AI Infrastructure
+## Deep Dive Analysis
 
-Over the past decade, AI has made significant strides in its capabilities, from speech recognition and image classification to natural language processing and autonomous driving. These advancements have been made possible by the development of sophisticated AI models, such as large-scale neural networks like GPT-3 and BERT, which have pushed the boundaries of what AI can achieve.
+This article explores the cutting-edge developments and implications in ${post.category.toLowerCase()} technology. Our research team has analyzed the latest trends and emerging patterns to provide comprehensive insights into this rapidly evolving field.
 
-However, as AI models become more complex and data-intensive, the need for robust infrastructure to support their training and deployment has become increasingly apparent. Traditional AI infrastructure, built on conventional server architectures, is struggling to keep pace with the demands of modern AI workloads, leading to performance bottlenecks and scalability issues.
+## Key Insights and Technical Details
 
-## The Challenges of Foundation Models
+The technology landscape continues to evolve at an unprecedented pace, with new innovations emerging regularly. Understanding these developments is crucial for organizations looking to stay competitive and leverage the latest advancements effectively.
 
-Foundation models, such as GPT-3 and BERT, are pre-trained models that can be fine-tuned for specific tasks, making them incredibly versatile and powerful. However, these models are also incredibly large and resource-intensive, requiring massive amounts of data and computational power to train and deploy effectively.
+## Implementation Strategies
 
-The sheer size and complexity of foundation models present significant challenges for traditional AI infrastructure. Training these models can take weeks or even months, consuming vast amounts of energy and resources in the process. Additionally, the deployment of these models on a large scale requires scalable infrastructure that can handle the high computational demands of real-time AI applications.
+Organizations seeking to implement these technologies should consider various factors including scalability, security, and long-term viability. A strategic approach ensures successful adoption and maximum return on investment.
 
-## The Need for New Architecture
+## Future Implications
 
-To address these challenges, a new generation of AI infrastructure is needed, one that is specifically designed to support the unique requirements of foundation models. This new architecture must be optimized for the parallel processing and distributed computing needed to train and deploy large-scale AI models efficiently.
+Looking ahead, these developments will likely have far-reaching implications across multiple industries. Companies that position themselves early will be best equipped to capitalize on emerging opportunities.
 
-One approach to achieving this is through the use of specialized hardware, such as Graphics Processing Units (GPUs) and Tensor Processing Units (TPUs), which are specifically designed for AI workloads. These hardware accelerators can significantly speed up the training and deployment of AI models, making them more efficient and cost-effective.
+## The Role of 33ResearchLabs
 
-Additionally, innovations in software architecture, such as distributed computing frameworks like Kubernetes and Apache Spark, can help orchestrate the deployment of AI models across multiple servers, enabling seamless scalability and performance optimization.
+At 33ResearchLabs, we continue to lead innovation in this space through cutting-edge research and development. Our team of experts works tirelessly to identify emerging trends and develop solutions that drive the future of technology.
 
 ## Conclusion
 
-As AI continues to advance at a rapid pace, the need for new infrastructure to support the growing demands of foundation models is clear. By investing in innovative hardware and software solutions tailored to the unique requirements of AI workloads, organizations can unlock the full potential of AI and drive future innovation across industries.
-
-## The Role of 33ResearchLabs in Shaping the Future of AI Infrastructure
-
-33ResearchLabs is a leader in developing innovative solutions for AI infrastructure. By leveraging their expertise and cutting-edge technology, they are revolutionizing the way foundation models are designed and implemented. Through continuous research and development, 33ResearchLabs is paving the way for the future of AI infrastructure.`,
+The insights presented in this analysis highlight the importance of staying informed about technological developments. As the landscape continues to evolve, organizations must remain agile and forward-thinking to succeed in an increasingly competitive environment.`,
   };
 
   const getCategoryColor = (category: string) => {
@@ -63,70 +69,68 @@ As AI continues to advance at a rapid pace, the need for new infrastructure to s
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className=" bg-white">
       {/* Header */}
       <div className="bg-gradient-to-br from-neutral-50 to-electric-50/30 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* <Button
-            variant="outline"
-            onClick={() => navigate("/insights")}
-            className="mb-6 hover:bg-electric-50"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Insights
-          </Button> */}
-
-          <div className="mb-6 pt-8">
-            <Badge
-              className={`${getCategoryColor(articleContent.category)} mb-4`}
-            >
-              {articleContent.category}
-            </Badge>
-            <h1 className="text-3xl lg:text-5xl font-bold text-neutral-900 mb-4 leading-tight">
-              {articleContent.title}
-            </h1>
-          </div>
-
-          {/* Author Info */}
-          <div className="flex items-center space-x-4 mb-6 py-10">
-            <div className="w-12 h-12 bg-electric-100 rounded-full flex items-center justify-center">
-              <User className="h-6 w-6 text-electric-600" />
-            </div>
-            <div>
-              <div className="font-medium text-neutral-900 ">
-                {articleContent.author}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Content */}
+            <div className="space-y-6">
+              <div>
+                <Badge
+                  className={`${getCategoryColor(
+                    articleContent.category
+                  )} mb-4`}
+                >
+                  {articleContent.category}
+                </Badge>
+                <h1 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4 leading-tight">
+                  {articleContent.title}
+                </h1>
               </div>
-              <div className="text-sm text-neutral-500">
-                {articleContent.role}
+
+              {/* Author Info */}
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-electric-100 rounded-full flex items-center justify-center">
+                  <User className="h-6 w-6 text-electric-600" />
+                </div>
+                <div>
+                  <div className="font-medium text-neutral-900">
+                    {articleContent.author}
+                  </div>
+                  <div className="text-sm text-neutral-500">
+                    {articleContent.role}
+                  </div>
+                </div>
+              </div>
+
+              {/* Meta Info */}
+              <div className="flex items-center space-x-6 text-sm text-neutral-500">
+                <div className="flex items-center space-x-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>{articleContent.date}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Clock className="h-4 w-4" />
+                  <span>{articleContent.readTime}</span>
+                </div>
+                <Button variant="outline" size="sm" className="ml-auto">
+                  <Share2 className="h-4 w-4 mr-2" />
+                  Share
+                </Button>
               </div>
             </div>
-          </div>
 
-          {/* Meta Info */}
-          <div className="flex items-center space-x-6 text-sm text-neutral-500 mb-8">
-            <div className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4" />
-              <span>{articleContent.date}</span>
+            {/* Right Side - Image */}
+            <div className="lg:pl-8">
+              <img
+                src={articleContent.image}
+                alt={articleContent.title}
+                className="w-full h-64 lg:h-70 mt-10 object-cover rounded-lg shadow-lg"
+              />
             </div>
-            <div className="flex items-center space-x-2">
-              <Clock className="h-4 w-4" />
-              <span>{articleContent.readTime}</span>
-            </div>
-            <Button variant="outline" size="sm" className="ml-auto">
-              <Share2 className="h-4 w-4 mr-2" />
-              Share
-            </Button>
           </div>
         </div>
-      </div>
-
-      {/* Featured Image */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <img
-          src={"/ai.jpg"}
-          alt={articleContent.title}
-          className="w-full h-64 lg:h-96 object-cover rounded-lg shadow-lg"
-        />
       </div>
 
       {/* Article Content */}

@@ -13,80 +13,96 @@ import {
   Mail,
 } from "lucide-react";
 
-export  const posts = [
-    {
-      title: "Zero-Knowledge Proofs: Beyond Privacy to Performance",
-      excerpt:
-        "How ZK technology is evolving from privacy protection to computational efficiency.",
-      author: "Marcus Rodriguez",
-      date: "December 12, 2024",
-      readTime: "8 min read",
-      category: "Blockchain",
-      icon: LayersIcon,
-      color: "from-purple-400 to-purple-600",
-    },
-    {
-      title: "Quantum-Resistant Cryptography: Preparing for Q-Day",
-      excerpt:
-        "The timeline for quantum computers breaking current encryption—and what to do about it.",
-      author: "Dr. Emily Watson",
-      date: "December 10, 2024",
-      readTime: "15 min read",
-      category: "Cybersecurity",
-      icon: ShieldIcon,
-      color: "from-red-400 to-red-600",
-    },
-    {
-      title: "Multi-Chain Infrastructure: Lessons from Building ChainFlow",
-      excerpt:
-        "Technical deep-dive into building seamless cross-chain protocols.",
-      author: "Alex Kim",
-      date: "December 8, 2024",
-      readTime: "10 min read",
-      category: "Blockchain",
-      icon: LayersIcon,
-      color: "from-purple-400 to-purple-600",
-    },
-    {
-      title: "MLOps at Scale: Deploying AI in Production",
-      excerpt:
-        "From model training to production monitoring—the complete MLOps pipeline.",
-      author: "David Park",
-      date: "December 5, 2024",
-      readTime: "12 min read",
-      category: "AI",
-      icon: Brain,
-      color: "from-electric-400 to-electric-600",
-    },
-    {
-      title: "The Economics of Deep Tech: Why VCs Are Missing the Point",
-      excerpt:
-        "Traditional metrics fail in deep tech. Here's how we evaluate infrastructure investments.",
-      author: "Lisa Chang",
-      date: "December 3, 2024",
-      readTime: "6 min read",
-      category: "Business",
-      icon: TrendingUp,
-      color: "from-green-400 to-green-600",
-    },
-    {
-      title: "Building Trust in Trustless Systems",
-      excerpt:
-        "Social consensus mechanisms and their role in decentralized governance.",
-      author: "James Liu",
-      date: "November 30, 2024",
-      readTime: "9 min read",
-      category: "Blockchain",
-      icon: LayersIcon,
-      color: "from-purple-400 to-purple-600",
-    },
-  ];
+// Utility function to generate URL-friendly slugs
+export const generateSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .trim()
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+};
+
+// Function to find post by slug
+export const findPostBySlug = (slug: string) => {
+  return posts.find(post => generateSlug(post.title) === slug) || 
+         (generateSlug(featuredPost.title) === slug ? featuredPost : null);
+};
+
+export const posts = [
+  {
+    title: "Zero-Knowledge Proofs: Beyond Privacy to Performance",
+    image:'/images/1.png',
+    author: "Marcus Rodriguez",
+    date: "July 12, 2025",
+    readTime: "2 min read",
+    category: "Blockchain",
+    icon: "LayersIcon",
+    color: "from-purple-400 to-purple-600",
+    excerpt: "Zero-Knowledge Proofs (ZKPs) have evolved from privacy tools to performance enhancers in blockchain technology. These cryptographic protocols now enable faster, more scalable networks through zk-SNARKs and zk-STARKs, compressing complex computations into lightweight proofs. ZK-rollups bundle thousands of transactions off-chain, dramatically reducing network congestion and gas fees while maintaining security.",
+  },
+  {
+    title: "Quantum-Resistant Cryptography: Preparing for Q-Day",
+     image:'/images/2.png',
+    author: "Dr. Emily Watson",
+    date: "August 10, 2025",
+    readTime: "2 min read",
+    category: "Cybersecurity",
+    icon: "ShieldIcon",
+    color: "from-red-400 to-red-600",
+    excerpt: "Quantum computing threatens current cryptographic systems, with 'Q-Day' marking when quantum machines can break widely used encryption. Organizations must adopt quantum-resistant cryptography (PQC) now, using lattice-based algorithms like CRYSTALS-Kyber to future-proof digital security. The race is on to implement these solutions before quantum computers become capable of breaking traditional encryption.",
+  },
+  {
+    title: "Multi-Chain Infrastructure: Lessons from Building ChainFlow",
+     image:'/images/3.png',
+    author: "Alex Kim",
+    date: "April 8, 2025",
+    readTime: "2 min read",
+    category: "Blockchain",
+    icon: "LayersIcon",
+    color: "from-purple-400 to-purple-600",
+    excerpt: "Multi-chain infrastructure addresses blockchain fragmentation by enabling interoperability between networks like Ethereum, Solana, and Polygon. ChainFlow's development revealed key lessons: secure cross-chain bridges, developer-friendly SDKs, and seamless user experiences are essential. The future of blockchain lies in collaborative, interconnected ecosystems rather than isolated networks.",
+  },
+  {
+    title: "MLOps at Scale: Deploying AI in Production",
+     image:'/images/4.png',
+    author: "David Park",
+    date: "July 5, 2025",
+    readTime: "2 min read",
+    category: "AI",
+    icon: "Brain",
+    color: "from-electric-400 to-electric-600",
+    excerpt: "MLOps bridges the gap between AI research and production deployment, streamlining the ML lifecycle through automation, monitoring, and governance. Like DevOps transformed software delivery, MLOps revolutionizes how organizations operationalize AI at scale. Success requires automated pipelines, real-time monitoring, and cross-team collaboration to turn innovative models into scalable business value.",
+  },
+  {
+    title: "The Economics of Deep Tech: Why VCs Are Missing the Point",
+     image:'/images/5.jpg',
+    author: "Lisa Chang",
+    date: "August 3, 2025",
+    readTime: "2 min read",
+    category: "Business",
+    icon: "TrendingUp",
+    color: "from-green-400 to-green-600",
+    excerpt: "Traditional venture capital models fall short in deep tech, where capital-intensive R&D requires years before commercial viability. Unlike software startups, deep tech ventures face technical rather than market risk, demanding patient capital and ecosystem collaboration. VCs must adapt their strategies with longer horizons and hybrid funding models to capture transformative opportunities.",
+  },
+  {
+    title: "Building Trust in Trustless Systems",
+     image:'/images/6.png',
+    author: "James Liu",
+    date: "March 30, 2025",
+    readTime: "2 min read",
+    category: "Blockchain",
+    icon: "LayersIcon",
+    color: "from-purple-400 to-purple-600",
+    excerpt: "Blockchain promises trustless systems where cryptography and consensus replace intermediaries, yet user confidence remains essential. Building trust requires combining technical robustness with transparency, community governance, and security assurance. While blockchains eliminate central authorities, success depends on fostering trust through reliable user experiences and institutional adoption.",
+  },
+];
 
  export  const featuredPost = {
     title:
       "The Future of AI Infrastructure: Why Foundation Models Need New Architecture",
-    excerpt:
-      "As LLMs grow in complexity, traditional cloud infrastructure hits fundamental limits. We explore the architectural patterns that will define the next generation of AI systems.",
+    excerpt: "As LLMs grow in complexity, traditional cloud infrastructure hits fundamental limits. New architectural patterns combining specialized hardware, distributed computing, and edge deployment are essential for next-generation AI systems. The future demands infrastructure designed specifically for foundation models.",
     author: "Sarah Chen",
     role: "Head of AI Research",
     date: "August 16, 2025",
@@ -215,7 +231,7 @@ export const partnerMeta: Record<
       "Global VC firm managing over $25B. Backed Snap, Faire, Epic Games, and Rubrik.",
   },
   "Accel Partners": {
-    image: "https://images.seeklogo.com/logo-png/45/1/accel-logo-png_seeklogo-453006.png",
+    image: "https://www.finbots.ai/wp-content/uploads/2022/10/Page_Company-10.png",
     description:
       "Early backer of Facebook, Slack, Spotify, and Dropbox. Invests globally from seed to growth.",
   },

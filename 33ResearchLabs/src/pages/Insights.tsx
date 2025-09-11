@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { featuredPost, posts } from "@/data/posts";
+import { featuredPost, posts, generateSlug } from "@/data/posts";
 import axios from "axios";
 import { toast } from "sonner";
 
@@ -188,9 +188,13 @@ const Insights = () => {
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     className="bg-electric-600 hover:bg-electric-700 text-white w-fit"
-                    onClick={() => navigate("/insights/article/ai-infrastructure")}
+                    onClick={() =>
+                      navigate(
+                        `/insights/article/${generateSlug(featuredPost.title)}`
+                      )
+                    }
                   >
                     Read More Article <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -208,11 +212,14 @@ const Insights = () => {
               <Card
                 key={index}
                 className="border-neutral-200 hover:shadow-lg transition-all duration-300 cursor-pointer group overflow-hidden"
+                onClick={() =>
+                  navigate(`/insights/article/${generateSlug(post.title)}`)
+                }
               >
                 <div
                   className={`h-24 bg-gradient-to-r ${post.color} flex items-center justify-between px-6 relative overflow-hidden`}
                 >
-                  <post.icon className="h-8 w-8 text-white/90" />
+                  <post.icon />
                   <div className="text-white/70 text-xs font-mono">
                     {post.category.toUpperCase()}
                   </div>
@@ -229,14 +236,14 @@ const Insights = () => {
                   <h3 className="text-lg font-semibold text-neutral-900 mb-3 group-hover:text-electric-600 transition-colors duration-200">
                     {post.title}
                   </h3>
-                  <p className="text-neutral-600 text-sm leading-relaxed mb-4">
+                  <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-3">
                     {post.excerpt}
                   </p>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-electric-100 rounded-full flex items-center justify-center">
+                      <div className="w-8 h-4 bg-electric-100 rounded-full flex items-center justify-center">
                         <span className="text-electric-600 font-medium text-xs">
                           {post.author
                             .split(" ")

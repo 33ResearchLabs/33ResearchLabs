@@ -14,7 +14,13 @@ import { Button } from "@/components/ui/button";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
-  { name: "Ventures", href: "/ventures" },
+  { name: "Insights", href: "/insights" },
+  { name: "About us", href: "/about-us" },
+  { name: "Contact us", href: "/contact-us" },
+];
+const Topnavigation = [
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
   { name: "Insights", href: "/insights" },
   { name: "About us", href: "/about-us" },
 ];
@@ -48,7 +54,6 @@ const legalLinks = [
   { label: "Terms of Service", url: "/terms" },
   { label: "Cookie Policy", url: "/cookie-policy" },
   { label: "GDPR", url: "/gdpr" },
-  { label: "Contact us", url: "/contact-us" },
 ];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -96,7 +101,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <div className="text-black text-2xl">Research Labs</div>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              {navigation.map((item) => (
+              {Topnavigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
@@ -164,7 +169,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Footer */}
       <footer className="bg-neutral-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
@@ -201,7 +206,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* Navigation */}
             <div>
-              <h3 className="font-semibold mb-4">33 Research Labs</h3>
+              <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-3">
                 {navigation.map((item) => (
                   <li key={item.name}>
@@ -218,7 +223,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* Legal */}
             <div>
-              <h3 className="font-semibold mb-4">More</h3>
+              <h3 className="font-semibold mb-4">Legal</h3>
               <ul className="space-y-3">
                 {legalLinks.map((item) => (
                   <li key={item.label}>
@@ -236,8 +241,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           <div className="border-t border-neutral-800 mt-12 pt-8 text-center">
             <p className="text-neutral-400">
-              © {new Date().getFullYear()} 33 Research Labs. All rights
-              reserved.
+              © {new Date().getFullYear()}{" "}
+              <span className="text-white font-bold">33 Research Labs.</span>{" "}
+              All rights reserved.
             </p>
           </div>
         </div>

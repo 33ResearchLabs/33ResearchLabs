@@ -81,14 +81,7 @@ const App = () => (
                 </Layout>
               }
             />
-            <Route
-              path="/ventures"
-              element={
-                <Layout>
-                  <Ventures />
-                </Layout>
-              }
-            />
+
             <Route
               path="/insights"
               element={
