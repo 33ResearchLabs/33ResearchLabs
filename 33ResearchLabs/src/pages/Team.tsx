@@ -11,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
 
 const Team = () => {
   const leadership = [
@@ -125,6 +127,19 @@ const Team = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Team – 33 Research Labs | World-Class AI, Web3 & Cybersecurity Talent</title>
+        <meta
+          name="description"
+          content="Meet the world-class team at 33 Research Labs. Expert engineers, researchers, and strategists building the future of AI, Web3, and cybersecurity."
+        />
+        <meta
+          name="keywords"
+          content="33 Research Labs team, AI experts, Web3 developers, cybersecurity professionals, blockchain engineers, startup team"
+        />
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <link rel="canonical" href={generateCanonicalUrl("/team")} />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

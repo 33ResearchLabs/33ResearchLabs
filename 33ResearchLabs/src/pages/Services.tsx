@@ -15,6 +15,8 @@ import { motion } from "framer-motion";
 import CoreServices from "@/components/CoreService";
 import { useState } from "react";
 import ScheduleModal from "@/components/ScheduleModal";
+import { Helmet } from "react-helmet";
+import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
 
 const Services = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -201,6 +203,19 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Services – 33 Research Labs | AI, Web3 & Cybersecurity Development</title>
+        <meta
+          name="description"
+          content="Transform your ideas into production-ready solutions with 33 Research Labs. MVP development, security audits, AI implementation, and Web3 infrastructure services."
+        />
+        <meta
+          name="keywords"
+          content="33 Research Labs services, AI development, Web3 development, cybersecurity audits, MVP development, smart contract audits, blockchain development"
+        />
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <link rel="canonical" href={generateCanonicalUrl("/services")} />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -234,7 +249,10 @@ const Services = () => {
               Our Expertise
             </h2>
             <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-              We combine cutting-edge research, technical expertise, and market insight to deliver services that drive sustainable impact. From blockchain protocols to AI-driven insights, we support innovators at every stage.
+              We combine cutting-edge research, technical expertise, and market
+              insight to deliver services that drive sustainable impact. From
+              blockchain protocols to AI-driven insights, we support innovators
+              at every stage.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -265,7 +283,7 @@ const Services = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-              What We Offer
+              What We Offer ?
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
               Comprehensive services across the full technology stack

@@ -12,10 +12,25 @@ import {
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
+import { Helmet } from "react-helmet";
+import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
 
 const AboutUs = () => {
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>About Us – 33 Research Labs | Building the Infrastructure of the Future</title>
+        <meta
+          name="description"
+          content="33 Research Labs is a crypto-native venture studio building next-gen AI, Web3, and cybersecurity infrastructure. Learn about our mission and vision."
+        />
+        <meta
+          name="keywords"
+          content="about 33 Research Labs, AI venture studio, Web3 infrastructure, blockchain development company, cybersecurity startup"
+        />
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <link rel="canonical" href={generateCanonicalUrl("/about-us")} />
+      </Helmet>
       {/* Hero Section */}
       <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

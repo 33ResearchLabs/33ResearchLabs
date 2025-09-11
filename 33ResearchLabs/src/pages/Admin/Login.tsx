@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Mail, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -46,6 +48,10 @@ const Login = () => {
 
   return (
     <div className="min-h-screen  flex items-center justify-center px-4">
+      <Helmet>
+        <title>Admin Login – 33 Research Labs</title>
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.NOINDEX)} />
+      </Helmet>
       <div className="w-full max-w-md bg-gray-100 p-8 rounded-2xl shadow-xl border border-[#334155]">
         <h2 className="text-3xl font-bold text-black mb-6 text-center">
           Welcome Back

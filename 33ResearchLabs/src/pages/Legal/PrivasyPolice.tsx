@@ -1,7 +1,16 @@
 import { Mail } from "lucide-react";
+import { Helmet } from "react-helmet";
+import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
 
 export const PrivacyPolicy = () => {
   return (
+    <>
+      <Helmet>
+        <title>Privacy Policy – 33 Research Labs</title>
+        <meta name="description" content="33 Research Labs Privacy Policy. Learn how we collect, use, and protect your personal information." />
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.LEGAL)} />
+        <link rel="canonical" href={generateCanonicalUrl("/privacy")} />
+      </Helmet>
     <section className="text-neutral-800 bg-white py-16 px-6 md:px-20 mt-5">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-black mb-4 text-center">
@@ -109,5 +118,6 @@ export const PrivacyPolicy = () => {
         </p>
       </div>
     </section>
+    </>
   );
 };
