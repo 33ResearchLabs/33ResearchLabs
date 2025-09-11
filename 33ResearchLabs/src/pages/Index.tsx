@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { partnerMeta, partners } from "@/data/posts";
+import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
+import { trackEvent } from "@/utils/googleAnalytics";
 
 // NOTE: No need for useEffect or useNavigate for this scroll behavior.
 
@@ -55,7 +57,9 @@ const Index = () => {
           content="Crypto-native venture studio and deep-tech consultancy helping launch next-gen AI and Web3 products."
         />
         <meta property="og:image" content="/preview.jpg" />
-        <meta property="og:url" content="https://www.33 Research Labs.xyz/" />
+        <meta property="og:url" content="https://www.33researchlabs.xyz/" />
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <link rel="canonical" href={generateCanonicalUrl("/")} />
       </Helmet>
 
       {/* Hero Section */}
@@ -88,7 +92,10 @@ const Index = () => {
                 className="bg-electric-600 hover:bg-electric-700 text-white transform transition-transform duration-300 hover:scale-105"
                 asChild
               >
-                <Link to="/contact-us">
+                <Link 
+                  to="/contact-us"
+                  onClick={() => trackEvent('click', 'cta', 'hero_start_building')}
+                >
                   Start Building
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -106,7 +113,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-              Where We Focus
+              Where We Focus ?
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
               33 Research Labs brings deep expertise across the technologies
@@ -146,7 +153,7 @@ const Index = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 text-center">
             What Makes{" "}
             <span className="text-electric-600">33 Research Labs</span>{" "}
-            Different?
+            Different ?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex items-start space-x-4 p-6 bg-electric-50 rounded-xl shadow-sm border border-electric-100">
@@ -273,7 +280,10 @@ const Index = () => {
             <strong className="font-semibold">33 Research Labs</strong> can help
             you design, build, and scale your product.
           </p>
-          <Link to="/contact-us">
+          <Link 
+            to="/contact-us"
+            onClick={() => trackEvent('click', 'cta', 'footer_get_in_touch')}
+          >
             <button className="mt-8 bg-white text-electric-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-electric-100 transition duration-300 transform hover:scale-105">
               Get in Touch
             </button>

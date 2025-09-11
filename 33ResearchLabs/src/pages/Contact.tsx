@@ -25,6 +25,9 @@ import { contactInfo, faqs } from "@/data/posts";
 import ScheduleModal from "@/components/ScheduleModal";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
+import { trackEvent, trackConversion } from "@/utils/googleAnalytics";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -161,6 +164,16 @@ const Contact = () => {
 
       if (response.status === 200) {
         toast.success("✅ Consultation request sent successfully!");
+        
+        // Track successful form submission
+        trackConversion('contact_form_submit', {
+          project_type: formData.projectType,
+          budget_range: formData.budget,
+          company: formData.company
+        });
+        
+        trackEvent('form_submit', 'contact', 'consultation_request');
+        
         setFormData({
           firstName: "",
           lastName: "",
@@ -204,6 +217,19 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Contact Us – 33 Research Labs | Get In Touch</title>
+        <meta
+          name="description"
+          content="Ready to build the next big thing? Contact 33 Research Labs for AI, Web3, and cybersecurity development. Schedule a consultation today."
+        />
+        <meta
+          name="keywords"
+          content="contact 33 Research Labs, AI development consultation, Web3 development contact, cybersecurity consultation, startup development"
+        />
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <link rel="canonical" href={generateCanonicalUrl("/contact-us")} />
+      </Helmet>
       <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30 text-center">
         <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">

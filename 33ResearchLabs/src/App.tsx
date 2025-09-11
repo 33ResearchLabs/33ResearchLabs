@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Layout & Components
 import Layout from "./components/Layout";
 import { ScrollToTop } from "./components/ScrollToTop";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 // Pages
 import Index from "./pages/Index";
@@ -63,6 +64,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <GoogleAnalytics />
           <Routes>
             {/* Public Routes with Layout (includes navbar) */}
             <Route

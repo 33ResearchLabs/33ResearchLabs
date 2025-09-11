@@ -18,6 +18,8 @@ import { Badge } from "@/components/ui/badge";
 import { featuredPost, posts, generateSlug } from "@/data/posts";
 import axios from "axios";
 import { toast } from "sonner";
+import { Helmet } from "react-helmet";
+import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
 
 const Insights = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -83,6 +85,19 @@ const Insights = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Insights – 33 Research Labs | AI, Web3 & Cybersecurity Thought Leadership</title>
+        <meta
+          name="description"
+          content="Deep tech insights from 33 Research Labs. Thought leadership, technical breakdowns, and founder notes from the cutting edge of AI, Web3, and cybersecurity."
+        />
+        <meta
+          name="keywords"
+          content="33 Research Labs insights, AI thought leadership, Web3 insights, cybersecurity trends, blockchain analysis, technical articles"
+        />
+        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.CONTENT)} />
+        <link rel="canonical" href={generateCanonicalUrl("/insights")} />
+      </Helmet>
       <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
@@ -290,7 +305,7 @@ const Insights = () => {
               />
               <Button
                 onClick={handleSubscribeEmail}
-                className="bg-electric-600 hover:bg-electric-700 text-white"
+                className="bg-electric-600 hover:bg-electric-700 text-white py-6"
               >
                 Subscribe
               </Button>
