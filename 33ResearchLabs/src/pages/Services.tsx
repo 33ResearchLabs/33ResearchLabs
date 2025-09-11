@@ -64,6 +64,56 @@ const Services = () => {
     },
   ];
 
+  const ourExpertise = [
+    {
+      company: "33 Research Labs",
+      mission:
+        "We combine cutting-edge research, technical expertise, and market insight to deliver services that drive sustainable impact. From blockchain protocols to AI-driven insights, we support innovators at every stage.",
+      services: [
+        {
+          title: "Blockchain Protocol & Infrastructure Development",
+          description:
+            "We design and build high-performance, secure, and scalable blockchain protocols. Whether it’s a Layer-1, Layer-2 network, or side-chain architecture, our engineers craft resilient infrastructures optimized for throughput, decentralization, and interoperability.",
+        },
+        {
+          title: "Smart Contract Design & Audits",
+          description:
+            "Creating robust, trustworthy smart contracts is essential. We develop custom smart contracts tailored to your project (DeFi, NFTs, tokenomics, etc.), and provide thorough auditing services—identifying vulnerabilities, optimizing gas, and ensuring compliance.",
+        },
+        {
+          title: "AI‑Driven On‑Chain Intelligence & Analytics",
+          description:
+            "Leverage the power of artificial intelligence to extract real insights from on-chain data. We build systems that analyze transaction flows, user behavior, network health, and market signals—helping you make data‑backed strategic decisions faster.",
+        },
+        {
+          title: "Tokenomics Strategy & Token Design",
+          description:
+            "A token is more than just a symbol. We help you design token models that align incentives, sustain community engagement, and ensure long‑term project health. This includes supply mechanisms, vesting schedules, governance dynamics, and economic simulations.",
+        },
+        {
+          title: "Decentralized Application (dApp) Development",
+          description:
+            "From back‑end protocol logic to front‑end user interfaces, we build full‑stack dApps that are user friendly, secure, and performant. Wallet integrations, cross‑chain bridges, UX/UI design—everything needed to deliver seamless user experiences.",
+        },
+        {
+          title: "Web3 Go‑to‑Market & Growth Advisory",
+          description:
+            "Launch with impact. We partner with you to create strategies for product positioning, community growth, influencer partnerships, and market entry (exchanges, listings, etc.). Our goal is to connect your innovation to its audience.",
+        },
+        {
+          title: "Security, Compliance, & Risk Management",
+          description:
+            "Navigating the technical & regulatory risks in crypto and AI domains takes expertise. We audit for security vulnerabilities, assist with regulatory compliance (where applicable), conduct penetration testing, and build frameworks to manage risk proactively.",
+        },
+        {
+          title: "Research & Innovation Lab",
+          description:
+            "33 Research Labs is not just about immediate launches—we invest in long‑term research. This includes prototyping new protocols, exploring quantum resistance, cryptography, AI/ML in decentralized settings, benchmarking emerging blockchains, and advising on future trends.",
+        },
+      ],
+    },
+  ];
+
   const process = [
     {
       step: "01",
@@ -175,6 +225,40 @@ const Services = () => {
 
       {/* our approch */}
       <CoreServices />
+
+      {/* Our Expertise  */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
+              Our Expertise
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+              We combine cutting-edge research, technical expertise, and market insight to deliver services that drive sustainable impact. From blockchain protocols to AI-driven insights, we support innovators at every stage.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {ourExpertise[0].services.map((service, index) => (
+              <Card
+                key={service.title}
+                className="border-neutral-200 hover:border-electric-300 hover:scale-105 hover:shadow-md hover:shadow-black transition-all duration-300 h-full"
+              >
+                <CardHeader className="pb-6">
+                  <div className="w-12 h-12 bg-electric-100 rounded-lg flex items-center justify-center mb-6">
+                    <Code className="h-6 w-6 text-electric-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-neutral-600 leading-relaxed">
+                    {service.description}
+                  </p>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Services Grid */}
       <section className="py-24 bg-white">

@@ -11,7 +11,7 @@ export const CookiesPolicy = () => {
         <p className="mb-6 text-gray-700">
           This Cookies Policy explains how{" "}
           <span className="text-electric-600 font-semibold">
-            33Research Labs
+            33 Research Labs
           </span>{" "}
           ("we", "us", or "our") uses cookies and similar technologies on our
           website{" "}
