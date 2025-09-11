@@ -3,6 +3,13 @@ import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { findPostBySlug, featuredPost } from "@/data/posts";
+import ShareButton from "@/components/ShareButton";
+import { Helmet } from "react-helmet";
+import {
+  generateCanonicalUrl,
+  generateRobotsContent,
+  ROBOTS_CONFIG,
+} from "@/utils/seo";
 
 const ArticleDetail = () => {
   const { id } = useParams();
@@ -70,6 +77,35 @@ The insights presented in this analysis highlight the importance of staying info
 
   return (
     <div className=" bg-white">
+      <Helmet>
+        <title>{articleContent.title} – 33 Research Labs</title>
+        <meta name="description" content={post.excerpt} />
+        <meta
+          name="keywords"
+          content={`${post.category}, 33 Research Labs, AI, Web3, Cybersecurity, ${post.author}`}
+        />
+        <meta name="author" content={post.author} />
+        <meta property="article:author" content={post.author} />
+        <meta property="article:published_time" content={post.date} />
+        <meta property="article:section" content={post.category} />
+        <meta property="og:title" content={articleContent.title} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:image" content={articleContent.image} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={articleContent.title} />
+        <meta name="twitter:description" content={post.excerpt} />
+        <meta name="twitter:image" content={articleContent.image} />
+        <meta
+          name="robots"
+          content={generateRobotsContent(ROBOTS_CONFIG.CONTENT)}
+        />
+        <link
+          rel="canonical"
+          href={generateCanonicalUrl(`/insights/article/${id}`)}
+        />
+      </Helmet>
       {/* Header */}
       <div className="bg-gradient-to-br from-neutral-50 to-electric-50/30 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,10 +150,13 @@ The insights presented in this analysis highlight the importance of staying info
                   <Clock className="h-4 w-4" />
                   <span>{articleContent.readTime}</span>
                 </div>
-                <Button variant="outline" size="sm" className="ml-auto">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
-                </Button>
+                <ShareButton
+                  title={articleContent.title}
+                  description={post.excerpt}
+                  className="ml-auto"
+                  variant="outline"
+                  size="sm"
+                />
               </div>
             </div>
 
@@ -153,6 +192,31 @@ The insights presented in this analysis highlight the importance of staying info
               </p>
             );
           })}
+        </div>
+
+        {/* Share Section at End of Article */}
+        <div className="flex items-center justify-between pt-8 mt-12 border-t border-gray-200">
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-gray-600 font-medium">
+              Share this article:
+            </span>
+            <ShareButton
+              title={articleContent.title}
+              description={post.excerpt}
+              variant="outline"
+              size="default"
+            />
+          </div>
+
+          {/* Back to Insights Link */}
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/insights")}
+            className="text-electric-600 hover:text-electric-700"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Insights
+          </Button>
         </div>
       </article>
 
