@@ -37,25 +37,25 @@ const AdminProfile = () => {
     email: "admin@33researchlabs.com",
     role: "Super Admin",
   });
-  
+
   const [emailForm, setEmailForm] = useState({
     currentEmail: "",
     newEmail: "",
     confirmEmail: "",
   });
-  
+
   const [passwordForm, setPasswordForm] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
-  
+
   const [showPasswords, setShowPasswords] = useState({
     current: false,
     new: false,
     confirm: false,
   });
-  
+
   const [loading, setLoading] = useState({
     email: false,
     password: false,
@@ -73,13 +73,16 @@ const AdminProfile = () => {
         });
         if (response.status === 200) {
           setAdminData(response.data);
-          setEmailForm(prev => ({ ...prev, currentEmail: response.data.email }));
+          setEmailForm((prev) => ({
+            ...prev,
+            currentEmail: response.data.email,
+          }));
         }
       } catch (error) {
         console.error("Error fetching admin profile:", error);
         toast.error("Failed to load profile data");
       } finally {
-        setLoading(prev => ({ ...prev, profile: false }));
+        setLoading((prev) => ({ ...prev, profile: false }));
       }
     };
 
@@ -89,19 +92,19 @@ const AdminProfile = () => {
   // Update email
   const handleEmailUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (emailForm.newEmail !== emailForm.confirmEmail) {
       toast.error("New email addresses do not match");
       return;
     }
-    
+
     if (emailForm.newEmail === emailForm.currentEmail) {
       toast.error("New email must be different from current email");
       return;
     }
 
-    setLoading(prev => ({ ...prev, email: true }));
-    
+    setLoading((prev) => ({ ...prev, email: true }));
+
     try {
       const response = await axios.patch(
         `${BackendUrl}/api/admin/update-email`,
@@ -111,10 +114,10 @@ const AdminProfile = () => {
         },
         { withCredentials: true }
       );
-      
+
       if (response.status === 200) {
         toast.success("Email updated successfully");
-        setAdminData(prev => ({ ...prev, email: emailForm.newEmail }));
+        setAdminData((prev) => ({ ...prev, email: emailForm.newEmail }));
         setEmailForm({
           currentEmail: emailForm.newEmail,
           newEmail: "",
@@ -124,26 +127,26 @@ const AdminProfile = () => {
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Failed to update email");
     } finally {
-      setLoading(prev => ({ ...prev, email: false }));
+      setLoading((prev) => ({ ...prev, email: false }));
     }
   };
 
   // Update password
   const handlePasswordUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (passwordForm.newPassword !== passwordForm.confirmPassword) {
       toast.error("New passwords do not match");
       return;
     }
-    
+
     if (passwordForm.newPassword.length < 8) {
       toast.error("Password must be at least 8 characters long");
       return;
     }
 
-    setLoading(prev => ({ ...prev, password: true }));
-    
+    setLoading((prev) => ({ ...prev, password: true }));
+
     try {
       const response = await axios.patch(
         `${BackendUrl}/api/admin/update-password`,
@@ -153,7 +156,7 @@ const AdminProfile = () => {
         },
         { withCredentials: true }
       );
-      
+
       if (response.status === 200) {
         toast.success("Password updated successfully");
         setPasswordForm({
@@ -163,9 +166,11 @@ const AdminProfile = () => {
         });
       }
     } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Failed to update password");
+      toast.error(
+        error?.response?.data?.message || "Failed to update password"
+      );
     } finally {
-      setLoading(prev => ({ ...prev, password: false }));
+      setLoading((prev) => ({ ...prev, password: false }));
     }
   };
 
@@ -185,12 +190,16 @@ const AdminProfile = () => {
       {/* Header */}
       <div className="bg-white border-b border-neutral-200 px-6 py-4">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-r from-electric-600 to-electric-500 rounded-full flex items-center justify-center">
+          <div className="w-12 h-12 bg-[#1DA1F2] rounded-full flex items-center justify-center">
             <Settings className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-neutral-900">Admin Profile</h2>
-            <p className="text-neutral-600 mt-1">Manage your account settings and preferences</p>
+            <h2 className="text-3xl font-bold text-neutral-900">
+              Admin Profile
+            </h2>
+            <p className="text-neutral-600 mt-1">
+              Manage your account settings and preferences
+            </p>
           </div>
         </div>
       </div>
@@ -200,19 +209,21 @@ const AdminProfile = () => {
         <Card className="mb-6 border-neutral-200">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2 text-neutral-900">
-              <User className="h-5 w-5 text-electric-600" />
+              <User className="h-5 w-5 text-[#1DA1F2]" />
               <span>Profile Overview</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center space-x-6">
-              <div className="w-20 h-20 bg-gradient-to-r from-electric-600 to-electric-500 rounded-full flex items-center justify-center">
+              <div className="w-20 h-20 bg-[#1DA1F2] rounded-full flex items-center justify-center">
                 <User className="h-10 w-10 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-bold text-neutral-900">{adminData.name}</h3>
+                <h3 className="text-2xl font-bold text-neutral-900">
+                  {adminData.name}
+                </h3>
                 <p className="text-neutral-600 mb-2">{adminData.email}</p>
-                <Badge className="bg-electric-100 text-electric-800">
+                <Badge className="bg-electric-100 text-[#1DA1F2]">
                   <Shield className="h-3 w-3 mr-1" />
                   {adminData.role}
                 </Badge>
@@ -220,7 +231,10 @@ const AdminProfile = () => {
               <div className="text-right text-sm text-neutral-500">
                 <p>Admin ID: {adminData.id}</p>
                 {adminData.lastLogin && (
-                  <p>Last login: {new Date(adminData.lastLogin).toLocaleDateString()}</p>
+                  <p>
+                    Last login:{" "}
+                    {new Date(adminData.lastLogin).toLocaleDateString()}
+                  </p>
                 )}
               </div>
             </div>
@@ -232,7 +246,7 @@ const AdminProfile = () => {
           <Card className="border-neutral-200">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                <Mail className="h-5 w-5 text-electric-600" />
+                <Mail className="h-5 w-5 text-[#1DA1F2]" />
                 <span>Update Email Address</span>
               </CardTitle>
             </CardHeader>
@@ -250,9 +264,9 @@ const AdminProfile = () => {
                     className="bg-neutral-50 border-neutral-300"
                   />
                 </div>
-                
+
                 <Separator />
-                
+
                 <div>
                   <Label htmlFor="newEmail" className="text-neutral-700">
                     New Email Address
@@ -261,13 +275,18 @@ const AdminProfile = () => {
                     id="newEmail"
                     type="email"
                     value={emailForm.newEmail}
-                    onChange={(e) => setEmailForm(prev => ({ ...prev, newEmail: e.target.value }))}
+                    onChange={(e) =>
+                      setEmailForm((prev) => ({
+                        ...prev,
+                        newEmail: e.target.value,
+                      }))
+                    }
                     placeholder="Enter new email address"
                     required
                     className="border-neutral-300"
                   />
                 </div>
-                
+
                 <div>
                   <Label htmlFor="confirmEmail" className="text-neutral-700">
                     Confirm New Email
@@ -276,17 +295,26 @@ const AdminProfile = () => {
                     id="confirmEmail"
                     type="email"
                     value={emailForm.confirmEmail}
-                    onChange={(e) => setEmailForm(prev => ({ ...prev, confirmEmail: e.target.value }))}
+                    onChange={(e) =>
+                      setEmailForm((prev) => ({
+                        ...prev,
+                        confirmEmail: e.target.value,
+                      }))
+                    }
                     placeholder="Confirm new email address"
                     required
                     className="border-neutral-300"
                   />
                 </div>
-                
+
                 <Button
                   type="submit"
-                  disabled={loading.email || !emailForm.newEmail || !emailForm.confirmEmail}
-                  className="w-full bg-electric-600 hover:bg-electric-700 text-white"
+                  disabled={
+                    loading.email ||
+                    !emailForm.newEmail ||
+                    !emailForm.confirmEmail
+                  }
+                  className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white"
                 >
                   {loading.email ? (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
@@ -303,7 +331,7 @@ const AdminProfile = () => {
           <Card className="border-neutral-200">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                <Lock className="h-5 w-5 text-electric-600" />
+                <Lock className="h-5 w-5 text-[#1DA1F2]" />
                 <span>Update Password</span>
               </CardTitle>
             </CardHeader>
@@ -318,7 +346,12 @@ const AdminProfile = () => {
                       id="currentPassword"
                       type={showPasswords.current ? "text" : "password"}
                       value={passwordForm.currentPassword}
-                      onChange={(e) => setPasswordForm(prev => ({ ...prev, currentPassword: e.target.value }))}
+                      onChange={(e) =>
+                        setPasswordForm((prev) => ({
+                          ...prev,
+                          currentPassword: e.target.value,
+                        }))
+                      }
                       placeholder="Enter current password"
                       required
                       className="border-neutral-300 pr-10"
@@ -328,7 +361,12 @@ const AdminProfile = () => {
                       variant="ghost"
                       size="sm"
                       className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                      onClick={() => setShowPasswords(prev => ({ ...prev, current: !prev.current }))}
+                      onClick={() =>
+                        setShowPasswords((prev) => ({
+                          ...prev,
+                          current: !prev.current,
+                        }))
+                      }
                     >
                       {showPasswords.current ? (
                         <EyeOff className="h-4 w-4 text-neutral-500" />
@@ -338,9 +376,9 @@ const AdminProfile = () => {
                     </Button>
                   </div>
                 </div>
-                
+
                 <Separator />
-                
+
                 <div>
                   <Label htmlFor="newPassword" className="text-neutral-700">
                     New Password
@@ -350,7 +388,12 @@ const AdminProfile = () => {
                       id="newPassword"
                       type={showPasswords.new ? "text" : "password"}
                       value={passwordForm.newPassword}
-                      onChange={(e) => setPasswordForm(prev => ({ ...prev, newPassword: e.target.value }))}
+                      onChange={(e) =>
+                        setPasswordForm((prev) => ({
+                          ...prev,
+                          newPassword: e.target.value,
+                        }))
+                      }
                       placeholder="Enter new password"
                       required
                       className="border-neutral-300 pr-10"
@@ -360,7 +403,12 @@ const AdminProfile = () => {
                       variant="ghost"
                       size="sm"
                       className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                      onClick={() => setShowPasswords(prev => ({ ...prev, new: !prev.new }))}
+                      onClick={() =>
+                        setShowPasswords((prev) => ({
+                          ...prev,
+                          new: !prev.new,
+                        }))
+                      }
                     >
                       {showPasswords.new ? (
                         <EyeOff className="h-4 w-4 text-neutral-500" />
@@ -373,7 +421,7 @@ const AdminProfile = () => {
                     Password must be at least 8 characters long
                   </p>
                 </div>
-                
+
                 <div>
                   <Label htmlFor="confirmPassword" className="text-neutral-700">
                     Confirm New Password
@@ -383,7 +431,12 @@ const AdminProfile = () => {
                       id="confirmPassword"
                       type={showPasswords.confirm ? "text" : "password"}
                       value={passwordForm.confirmPassword}
-                      onChange={(e) => setPasswordForm(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                      onChange={(e) =>
+                        setPasswordForm((prev) => ({
+                          ...prev,
+                          confirmPassword: e.target.value,
+                        }))
+                      }
                       placeholder="Confirm new password"
                       required
                       className="border-neutral-300 pr-10"
@@ -393,7 +446,12 @@ const AdminProfile = () => {
                       variant="ghost"
                       size="sm"
                       className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                      onClick={() => setShowPasswords(prev => ({ ...prev, confirm: !prev.confirm }))}
+                      onClick={() =>
+                        setShowPasswords((prev) => ({
+                          ...prev,
+                          confirm: !prev.confirm,
+                        }))
+                      }
                     >
                       {showPasswords.confirm ? (
                         <EyeOff className="h-4 w-4 text-neutral-500" />
@@ -403,11 +461,16 @@ const AdminProfile = () => {
                     </Button>
                   </div>
                 </div>
-                
+
                 <Button
                   type="submit"
-                  disabled={loading.password || !passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmPassword}
-                  className="w-full bg-electric-600 hover:bg-electric-700 text-white"
+                  disabled={
+                    loading.password ||
+                    !passwordForm.currentPassword ||
+                    !passwordForm.newPassword ||
+                    !passwordForm.confirmPassword
+                  }
+                  className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white"
                 >
                   {loading.password ? (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
@@ -425,7 +488,7 @@ const AdminProfile = () => {
         <Card className="mt-6 border-neutral-200">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2 text-neutral-900">
-              <Shield className="h-5 w-5 text-electric-600" />
+              <Shield className="h-5 w-5 text-[#1DA1F2]" />
               <span>Security Information</span>
             </CardTitle>
           </CardHeader>
@@ -434,29 +497,41 @@ const AdminProfile = () => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-neutral-700">Two-factor authentication enabled</span>
+                  <span className="text-neutral-700">
+                    Two-factor authentication enabled
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-neutral-700">Strong password policy enforced</span>
+                  <span className="text-neutral-700">
+                    Strong password policy enforced
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-neutral-700">Session timeout configured</span>
+                  <span className="text-neutral-700">
+                    Session timeout configured
+                  </span>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <AlertCircle className="h-5 w-5 text-yellow-600" />
-                  <span className="text-neutral-700">Login notifications enabled</span>
+                  <span className="text-neutral-700">
+                    Login notifications enabled
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Bell className="h-5 w-5 text-blue-600" />
-                  <span className="text-neutral-700">Security alerts configured</span>
+                  <span className="text-neutral-700">
+                    Security alerts configured
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Shield className="h-5 w-5 text-electric-600" />
-                  <span className="text-neutral-700">Admin privileges active</span>
+                  <Shield className="h-5 w-5 text-[#1DA1F2]" />
+                  <span className="text-neutral-700">
+                    Admin privileges active
+                  </span>
                 </div>
               </div>
             </div>

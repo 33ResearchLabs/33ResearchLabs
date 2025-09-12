@@ -10,9 +10,7 @@ export const GdprPage = () => {
 
         <p className="mb-6 text-gray-700">
           At{" "}
-          <span className="text-electric-600 font-semibold">
-            33 Research Labs
-          </span>
+          <span className="text-[#1DA1F2] font-semibold">33 Research Labs</span>
           , we are fully committed to protecting the privacy and personal data
           of our users, in compliance with the General Data Protection
           Regulation (EU) 2016/679 (GDPR). This statement outlines your rights
@@ -29,21 +27,19 @@ export const GdprPage = () => {
         </p>
         <ul className="list-disc list-inside text-gray-700 mb-4">
           <li>
-            <span className="text-electric-600 font-medium">Consent</span> –
-            where you have clearly agreed to the processing
+            <span className="text-[#1DA1F2] font-medium">Consent</span> – where
+            you have clearly agreed to the processing
           </li>
           <li>
-            <span className="text-electric-600 font-medium">Contract</span> –
+            <span className="text-[#1DA1F2] font-medium">Contract</span> –
             necessary to fulfill a contractual obligation
           </li>
           <li>
-            <span className="text-electric-600 font-medium">
-              Legal obligation
-            </span>{" "}
+            <span className="text-[#1DA1F2] font-medium">Legal obligation</span>{" "}
             – where required by law
           </li>
           <li>
-            <span className="text-electric-600 font-medium">
+            <span className="text-[#1DA1F2] font-medium">
               Legitimate interests
             </span>{" "}
             – when needed for business operations, provided your rights are not
@@ -56,37 +52,35 @@ export const GdprPage = () => {
         </h2>
         <ul className="list-disc list-inside text-gray-700 mb-4">
           <li>
-            <strong className="text-electric-600">Right to Access</strong> –
+            <strong className="text-[#1DA1F2]">Right to Access</strong> –
             Request copies of your personal data
           </li>
           <li>
-            <strong className="text-electric-600">
-              Right to Rectification
-            </strong>{" "}
-            – Correct inaccurate or incomplete data
+            <strong className="text-[#1DA1F2]">Right to Rectification</strong> –
+            Correct inaccurate or incomplete data
           </li>
           <li>
-            <strong className="text-electric-600">Right to Erasure</strong> –
+            <strong className="text-[#1DA1F2]">Right to Erasure</strong> –
             Request deletion of your data ("Right to be Forgotten")
           </li>
           <li>
-            <strong className="text-electric-600">
+            <strong className="text-[#1DA1F2]">
               Right to Restrict Processing
             </strong>{" "}
             – Ask us to limit usage of your data
           </li>
           <li>
-            <strong className="text-electric-600">
+            <strong className="text-[#1DA1F2]">
               Right to Data Portability
             </strong>{" "}
             – Obtain your data in a structured format
           </li>
           <li>
-            <strong className="text-electric-600">Right to Object</strong> –
-            Object to data processing, including direct marketing
+            <strong className="text-[#1DA1F2]">Right to Object</strong> – Object
+            to data processing, including direct marketing
           </li>
           <li>
-            <strong className="text-electric-600">
+            <strong className="text-[#1DA1F2]">
               Right to Withdraw Consent
             </strong>{" "}
             – Revoke consent at any time
@@ -94,10 +88,7 @@ export const GdprPage = () => {
         </ul>
         <p className="text-gray-700 mb-6">
           📧 To exercise your rights, email us at{" "}
-          <a
-            href="mailto:33researchlabs@gmail.com"
-            className="text-electric-700"
-          >
+          <a href="mailto:33researchlabs@gmail.com" className="text-[#1DA1F2]">
             33researchlabs@gmail.com
           </a>
         </p>
@@ -145,7 +136,7 @@ export const GdprPage = () => {
         <p className="text-gray-700 mb-6">
           <a
             href="mailto:33researchlabs@gmail.com"
-            className="text-electric-600 flex"
+            className="text-[#1DA1F2] flex"
           >
             <span className="pr-2 text-black">
               <Mail size={20} />
@@ -156,7 +147,7 @@ export const GdprPage = () => {
           🌐{" "}
           <a
             href="https://www.33researchlabs.xyz/"
-            className="text-electric-600"
+            className="text-[#1DA1F2]"
             target="_blank"
           >
             www.33researchlabs.xyz
@@ -173,7 +164,7 @@ export const GdprPage = () => {
           <a
             href="https://edpb.europa.eu/about-edpb/board/members_en"
             target="_blank"
-            className="text-electric-600"
+            className="text-[#1DA1F2]"
           >
             EDPB Member List
           </a>

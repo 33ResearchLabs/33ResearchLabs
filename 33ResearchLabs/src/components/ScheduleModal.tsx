@@ -67,7 +67,7 @@ const ScheduleModal = ({ isOpen, onClose }) => {
           <Dialog.Panel className="bg-white w-full max-w-xl rounded-2xl shadow-xl p-8 relative">
             {/* Header */}
             <div className="flex items-center space-x-3 mb-4">
-              <Calendar className="h-6 w-6 text-electric-600" />
+              <Calendar className="h-6 w-6 text-[#1DA1F2]" />
               <Dialog.Title className="text-2xl font-bold text-neutral-900">
                 Schedule a Consultation
               </Dialog.Title>
@@ -112,7 +112,7 @@ const ScheduleModal = ({ isOpen, onClose }) => {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-electric-600 hover:bg-electric-700 text-white"
+                className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white"
               >
                 {loading ? "Submitting..." : "Submit"}
                 {!loading && <Send className="ml-2 h-4 w-4" />}

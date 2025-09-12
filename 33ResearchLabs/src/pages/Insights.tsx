@@ -19,7 +19,11 @@ import { featuredPost, posts, generateSlug } from "@/data/posts";
 import axios from "axios";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet";
-import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
+import {
+  generateCanonicalUrl,
+  generateRobotsContent,
+  ROBOTS_CONFIG,
+} from "@/utils/seo";
 
 const Insights = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -58,7 +62,7 @@ const Insights = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "AI":
-        return "bg-electric-100 text-electric-800";
+        return "bg-electric-100 text-[#1DA1F2]";
       case "Blockchain":
         return "bg-purple-100 text-purple-800";
       case "Cybersecurity":
@@ -86,7 +90,10 @@ const Insights = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Insights – 33 Research Labs | AI, Web3 & Cybersecurity Thought Leadership</title>
+        <title>
+          Insights – 33 Research Labs | AI, Web3 & Cybersecurity Thought
+          Leadership
+        </title>
         <meta
           name="description"
           content="Deep tech insights from 33 Research Labs. Thought leadership, technical breakdowns, and founder notes from the cutting edge of AI, Web3, and cybersecurity."
@@ -95,7 +102,10 @@ const Insights = () => {
           name="keywords"
           content="33 Research Labs insights, AI thought leadership, Web3 insights, cybersecurity trends, blockchain analysis, technical articles"
         />
-        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.CONTENT)} />
+        <meta
+          name="robots"
+          content={generateRobotsContent(ROBOTS_CONFIG.CONTENT)}
+        />
         <link rel="canonical" href={generateCanonicalUrl("/insights")} />
       </Helmet>
       <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
@@ -103,7 +113,7 @@ const Insights = () => {
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
               Deep Tech{" "}
-              <span className="bg-gradient-to-r from-electric-600 to-electric-500 bg-clip-text text-transparent">
+              <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
                 Insights
               </span>
             </h1>
@@ -131,7 +141,7 @@ const Insights = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={
                   selectedCategory === category
-                    ? "bg-electric-600 hover:bg-electric-700"
+                    ? "bg-[#1DA1F2] hover:bg-electric-700"
                     : ""
                 }
               >
@@ -146,7 +156,7 @@ const Insights = () => {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <Badge className="bg-electric-100 text-electric-800 mb-4">
+              <Badge className="bg-electric-100 text-[#1DA1F2] mb-4">
                 Featured
               </Badge>
               <h2 className="text-2xl font-bold text-neutral-900">
@@ -176,7 +186,7 @@ const Insights = () => {
                   </p>
                   <div className="flex items-center space-x-4 mb-6">
                     <div className="w-10 h-10 bg-electric-100 rounded-full flex items-center justify-center">
-                      <span className="text-electric-600 font-medium text-sm">
+                      <span className="text-[#1DA1F2] font-medium text-sm">
                         {featuredPost.author
                           .split(" ")
                           .map((n) => n[0])
@@ -204,7 +214,7 @@ const Insights = () => {
                   </div>
 
                   <Button
-                    className="bg-electric-600 hover:bg-electric-700 text-white w-fit"
+                    className="bg-[#1DA1F2] hover:bg-electric-700 text-white w-fit"
                     onClick={() =>
                       navigate(
                         `/insights/article/${generateSlug(featuredPost.title)}`
@@ -248,7 +258,7 @@ const Insights = () => {
                   >
                     {post.category}
                   </Badge>
-                  <h3 className="text-lg font-semibold text-neutral-900 mb-3 group-hover:text-electric-600 transition-colors duration-200">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-3 group-hover:text-[#1DA1F2] transition-colors duration-200">
                     {post.title}
                   </h3>
                   <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-3">
@@ -259,7 +269,7 @@ const Insights = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-4 bg-electric-100 rounded-full flex items-center justify-center">
-                        <span className="text-electric-600 font-medium text-xs">
+                        <span className="text-[#1DA1F2] font-medium text-xs">
                           {post.author
                             .split(" ")
                             .map((n) => n[0])
@@ -270,7 +280,7 @@ const Insights = () => {
                         {post.author}
                       </div>
                     </div>
-                    <Bookmark className="h-4 w-4 text-neutral-400 hover:text-electric-600 transition-colors duration-200" />
+                    <Bookmark className="h-4 w-4 text-neutral-400 hover:text-[#1DA1F2] transition-colors duration-200" />
                   </div>
                   <div className="flex items-center space-x-4 text-xs text-neutral-500 mt-4">
                     <span>{post.date}</span>
@@ -287,7 +297,7 @@ const Insights = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <div className="w-16 h-16 bg-electric-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <TrendingUp className="h-8 w-8 text-electric-600" />
+              <TrendingUp className="h-8 w-8 text-[#1DA1F2]" />
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
               Stay Ahead of the Curve
@@ -305,7 +315,7 @@ const Insights = () => {
               />
               <Button
                 onClick={handleSubscribeEmail}
-                className="bg-electric-600 hover:bg-electric-700 text-white py-6"
+                className="bg-[#1DA1F2] hover:bg-electric-700 text-white py-6"
               >
                 Subscribe
               </Button>
@@ -317,7 +327,7 @@ const Insights = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-electric-600 to-electric-700">
+      <section className="py-16 bg-[#1DA1F2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>

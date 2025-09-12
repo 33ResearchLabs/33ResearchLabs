@@ -82,7 +82,7 @@ export const BlogDashboard = () => {
             </p>
           </div>
           <Link to="/admin/newblog">
-            <Button className="bg-electric-600 hover:bg-electric-700 text-white">
+            <Button className="bg-[#1DA1F2] hover:bg-electric-700 text-white">
               <Plus className="h-4 w-4 mr-2" />
               Create New Blog
             </Button>
@@ -95,7 +95,7 @@ export const BlogDashboard = () => {
         <Card className="mb-6 border-neutral-200">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2 text-neutral-900">
-              <Eye className="h-5 w-5 text-electric-600" />
+              <Eye className="h-5 w-5 text-[#1DA1F2]" />
               <span>Blog Overview</span>
             </CardTitle>
           </CardHeader>
@@ -137,7 +137,7 @@ export const BlogDashboard = () => {
         <Card className="border-neutral-200">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2 text-neutral-900">
-              <Image className="h-5 w-5 text-electric-600" />
+              <Image className="h-5 w-5 text-[#1DA1F2]" />
               <span>All Blog Posts</span>
             </CardTitle>
           </CardHeader>
@@ -155,7 +155,7 @@ export const BlogDashboard = () => {
                   Create your first blog post to get started
                 </p>
                 <Link to="/admin/newblog">
-                  <Button className="bg-electric-600 hover:bg-electric-700 text-white">
+                  <Button className="bg-[#1DA1F2] hover:bg-electric-700 text-white">
                     <Plus className="h-4 w-4 mr-2" />
                     Create First Blog
                   </Button>
@@ -268,7 +268,7 @@ export const BlogDashboard = () => {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-electric-600 to-electric-500 text-white p-6 relative">
+            <div className="bg-[#1DA1F2] text-white p-6 relative">
               <button
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
                 onClick={() => setSelectedBlog(null)}

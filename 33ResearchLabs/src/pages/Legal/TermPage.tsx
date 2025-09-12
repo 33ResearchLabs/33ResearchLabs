@@ -11,9 +11,7 @@ export const TermPage = () => {
         <p className="mb-6 text-gray-700">
           These Terms of Service (“Terms”) govern your use of the services and
           website operated by{" "}
-          <span className="text-electric-600 font-semibold">
-            33 Research Labs
-          </span>
+          <span className="text-[#1DA1F2] font-semibold">33 Research Labs</span>
           . By accessing or using our website or services, you agree to be bound
           by these Terms. If you do not agree with any part of these Terms, you
           must not use our services.
@@ -85,7 +83,7 @@ export const TermPage = () => {
         </h2>
         <p className="text-gray-700 mb-4">
           All content and assets belong to{" "}
-          <span className="text-electric-600">33 Research Labs</span> or its
+          <span className="text-[#1DA1F2]">33 Research Labs</span> or its
           licensors. Unauthorized use or reproduction is strictly prohibited.
         </p>
 
@@ -135,7 +133,7 @@ export const TermPage = () => {
         <p className="text-gray-700">
           <a
             href="mailto:33researchlabs@gmail.com"
-            className="text-electric-600 flex"
+            className="text-[#1DA1F2] flex"
           >
             <span className="pr-2 text-black">
               <Mail size={20} />
@@ -146,7 +144,7 @@ export const TermPage = () => {
           🌐{" "}
           <a
             href="https://www.33researchlabs.xyz/"
-            className="text-electric-600"
+            className="text-[#1DA1F2]"
             target="_blank"
           >
             www.33researchlabs.xyz

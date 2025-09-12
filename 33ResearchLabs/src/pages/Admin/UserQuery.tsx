@@ -201,7 +201,7 @@ const UserQueries = () => {
               Manage customer inquiries and support requests
             </p>
           </div>
-          <Badge className="bg-electric-100 text-electric-800">
+          <Badge className="bg-electric-100 text-[#1DA1F2]">
             {queries.length} Total Queries
           </Badge>
         </div>
@@ -310,7 +310,7 @@ const UserQueries = () => {
         <Card className="border-neutral-200">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <MessageSquare className="h-5 w-5 text-electric-600" />
+              <MessageSquare className="h-5 w-5 text-[#1DA1F2]" />
               <span>Query Management</span>
               <Badge className="ml-auto bg-neutral-100 text-neutral-800">
                 {filteredQueries.length} queries
@@ -365,7 +365,7 @@ const UserQueries = () => {
                         <TableCell className="py-4">
                           <div className="flex items-center space-x-3">
                             <div className="w-8 h-8 bg-electric-100 rounded-full flex items-center justify-center">
-                              <User className="h-4 w-4 text-electric-600" />
+                              <User className="h-4 w-4 text-[#1DA1F2]" />
                             </div>
                             <div>
                               <div className="font-medium text-neutral-900">
@@ -473,7 +473,7 @@ const UserQueries = () => {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-electric-600 to-electric-500 text-white p-6 relative">
+            <div className="bg-[#1DA1F2] text-white p-6 relative">
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
@@ -500,7 +500,7 @@ const UserQueries = () => {
                 <Card className="border-neutral-200">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                      <User className="h-5 w-5 text-electric-600" />
+                      <User className="h-5 w-5 text-[#1DA1F2]" />
                       <span>Personal Information</span>
                     </CardTitle>
                   </CardHeader>
@@ -540,7 +540,7 @@ const UserQueries = () => {
                 <Card className="border-neutral-200">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                      <MessageSquare className="h-5 w-5 text-electric-600" />
+                      <MessageSquare className="h-5 w-5 text-[#1DA1F2]" />
                       <span>Project Details</span>
                     </CardTitle>
                   </CardHeader>
@@ -592,7 +592,7 @@ const UserQueries = () => {
               <Card className="mt-6 border-neutral-200">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                    <MessageSquare className="h-5 w-5 text-electric-600" />
+                    <MessageSquare className="h-5 w-5 text-[#1DA1F2]" />
                     <span>Project Description</span>
                   </CardTitle>
                 </CardHeader>
@@ -609,7 +609,7 @@ const UserQueries = () => {
               <Card className="mt-6 border-neutral-200">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                    <Clock className="h-5 w-5 text-electric-600" />
+                    <Clock className="h-5 w-5 text-[#1DA1F2]" />
                     <span>Timeline</span>
                   </CardTitle>
                 </CardHeader>

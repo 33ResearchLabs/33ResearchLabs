@@ -26,7 +26,11 @@ import ScheduleModal from "@/components/ScheduleModal";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
+import {
+  generateCanonicalUrl,
+  generateRobotsContent,
+  ROBOTS_CONFIG,
+} from "@/utils/seo";
 import { trackEvent, trackConversion } from "@/utils/googleAnalytics";
 
 const Contact = () => {
@@ -148,7 +152,7 @@ const Contact = () => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       toast.error("Please fix the errors in the form");
       return;
@@ -164,16 +168,16 @@ const Contact = () => {
 
       if (response.status === 200) {
         toast.success("✅ Consultation request sent successfully!");
-        
+
         // Track successful form submission
-        trackConversion('contact_form_submit', {
+        trackConversion("contact_form_submit", {
           project_type: formData.projectType,
           budget_range: formData.budget,
-          company: formData.company
+          company: formData.company,
         });
-        
-        trackEvent('form_submit', 'contact', 'consultation_request');
-        
+
+        trackEvent("form_submit", "contact", "consultation_request");
+
         setFormData({
           firstName: "",
           lastName: "",
@@ -227,14 +231,17 @@ const Contact = () => {
           name="keywords"
           content="contact 33 Research Labs, AI development consultation, Web3 development contact, cybersecurity consultation, startup development"
         />
-        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <meta
+          name="robots"
+          content={generateRobotsContent(ROBOTS_CONFIG.INDEX)}
+        />
         <link rel="canonical" href={generateCanonicalUrl("/contact-us")} />
       </Helmet>
       <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30 text-center">
         <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
             Let's{" "}
-            <span className="bg-gradient-to-r from-electric-600 to-electric-500 bg-clip-text text-transparent">
+            <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
               Build
             </span>{" "}
             Together
@@ -271,7 +278,9 @@ const Contact = () => {
                     className={errors.firstName ? "border-red-500" : ""}
                   />
                   {errors.firstName && (
-                    <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.firstName}
+                    </p>
                   )}
                 </div>
                 <div>
@@ -283,7 +292,9 @@ const Contact = () => {
                     className={errors.lastName ? "border-red-500" : ""}
                   />
                   {errors.lastName && (
-                    <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.lastName}
+                    </p>
                   )}
                 </div>
               </div>
@@ -326,7 +337,9 @@ const Contact = () => {
                     setErrors((prev) => ({ ...prev, projectType: error }));
                   }}
                 >
-                  <SelectTrigger className={errors.projectType ? "border-red-500" : ""}>
+                  <SelectTrigger
+                    className={errors.projectType ? "border-red-500" : ""}
+                  >
                     <SelectValue placeholder="Select project type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -343,7 +356,9 @@ const Contact = () => {
                   </SelectContent>
                 </Select>
                 {errors.projectType && (
-                  <p className="text-red-500 text-sm mt-1">{errors.projectType}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.projectType}
+                  </p>
                 )}
               </div>
 
@@ -358,7 +373,9 @@ const Contact = () => {
                     setErrors((prev) => ({ ...prev, budget: error }));
                   }}
                 >
-                  <SelectTrigger className={errors.budget ? "border-red-500" : ""}>
+                  <SelectTrigger
+                    className={errors.budget ? "border-red-500" : ""}
+                  >
                     <SelectValue placeholder="Select budget range" />
                   </SelectTrigger>
                   <SelectContent>
@@ -384,14 +401,16 @@ const Contact = () => {
                   className={errors.projectDescription ? "border-red-500" : ""}
                 />
                 {errors.projectDescription && (
-                  <p className="text-red-500 text-sm mt-1">{errors.projectDescription}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.projectDescription}
+                  </p>
                 )}
               </div>
 
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-electric-600 hover:bg-electric-700 text-white"
+                className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white"
               >
                 Send Message
                 <Send className="ml-2 h-4 w-4" />
@@ -411,7 +430,7 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-electric-100 rounded-lg flex items-center justify-center">
-                    <info.icon className="h-6 w-6 text-electric-600" />
+                    <info.icon className="h-6 w-6 text-[#1DA1F2]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-1">
@@ -429,7 +448,7 @@ const Contact = () => {
             <Card className="border-electric-200 bg-electric-50/50">
               <CardHeader>
                 <div className="flex items-center space-x-3">
-                  <Calendar className="h-6 w-6 text-electric-600" />
+                  <Calendar className="h-6 w-6 text-[#1DA1F2]" />
                   <h3 className="text-lg font-semibold text-neutral-900">
                     Schedule a Call
                   </h3>
@@ -443,7 +462,7 @@ const Contact = () => {
                 <Button
                   onClick={() => setModalMetting(true)}
                   variant="outline"
-                  className="w-full border-electric-600 text-electric-600 hover:bg-electric-600 hover:text-white"
+                  className="w-full border-electric-600 text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white"
                 >
                   Book Meeting
                   <ArrowUpRight className="ml-2 h-4 w-4" />
@@ -533,7 +552,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className="py-24 bg-gradient-to-r from-electric-600 to-electric-700 text-center">
+      <section className="py-24 bg-[#1DA1F2] text-center">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
             Ready to Transform Your Vision?
@@ -554,7 +573,7 @@ const Contact = () => {
               onClick={() => setIsModalOpen(true)}
               size="lg"
               variant="outline"
-              className="border-white text-electric-600 hover:bg-white hover:text-electric-600"
+              className="border-white text-[#1DA1F2] hover:bg-white hover:text-[#1DA1F2]"
             >
               Schedule Consultation
             </Button>
