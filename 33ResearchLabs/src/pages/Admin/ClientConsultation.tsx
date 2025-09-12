@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { 
-  Users, 
-  Mail, 
-  MessageSquare, 
-  Clock, 
+import {
+  Users,
+  Mail,
+  MessageSquare,
+  Clock,
   AlertCircle,
   CheckCircle,
   XCircle,
@@ -13,7 +13,7 @@ import {
   Search,
   Filter,
   Eye,
-  X
+  X,
 } from "lucide-react";
 import axios from "axios";
 import { socket } from "@/App";
@@ -28,13 +28,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
 
 interface UserQuery {
@@ -50,8 +50,11 @@ export const ClientConsultation = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [filteredConsultations, setFilteredConsultations] = useState<UserQuery[]>([]);
-  const [selectedConsultation, setSelectedConsultation] = useState<UserQuery | null>(null);
+  const [filteredConsultations, setFilteredConsultations] = useState<
+    UserQuery[]
+  >([]);
+  const [selectedConsultation, setSelectedConsultation] =
+    useState<UserQuery | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const fetchConsultation = async () => {
     try {
@@ -81,21 +84,22 @@ export const ClientConsultation = () => {
   // Filter consultations based on search and status
   useEffect(() => {
     let filtered = consultation;
-    
+
     // Apply search filter
     if (searchTerm) {
-      filtered = filtered.filter(consult => 
-        consult.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        consult.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        consult.description.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (consult) =>
+          consult.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          consult.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          consult.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    
+
     // Apply status filter
     if (statusFilter !== "all") {
-      filtered = filtered.filter(consult => consult.status === statusFilter);
+      filtered = filtered.filter((consult) => consult.status === statusFilter);
     }
-    
+
     setFilteredConsultations(filtered);
   }, [consultation, searchTerm, statusFilter]);
 
@@ -122,9 +126,9 @@ export const ClientConsultation = () => {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'solved':
+      case "solved":
         return <CheckCircle className="h-4 w-4 text-green-600" />;
-      case 'dismissed':
+      case "dismissed":
         return <XCircle className="h-4 w-4 text-red-600" />;
       default:
         return <AlertCircle className="h-4 w-4 text-yellow-600" />;
@@ -133,12 +137,12 @@ export const ClientConsultation = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'solved':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'dismissed':
-        return 'bg-red-100 text-red-800 border-red-200';
+      case "solved":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "dismissed":
+        return "bg-red-100 text-red-800 border-red-200";
       default:
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
     }
   };
 
@@ -169,10 +173,14 @@ export const ClientConsultation = () => {
       <div className="bg-white border-b border-neutral-200 px-6 py-4">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-3xl font-bold text-neutral-900">Client Consultations</h2>
-            <p className="text-neutral-600 mt-1">Manage client consultation requests</p>
+            <h2 className="text-3xl font-bold text-neutral-900">
+              Client Consultations
+            </h2>
+            <p className="text-neutral-600 mt-1">
+              Manage client consultation requests
+            </p>
           </div>
-          <Badge className="bg-electric-100 text-electric-800 flex items-center space-x-1">
+          <Badge className="bg-electric-100 text-[#1DA1F2] flex items-center space-x-1">
             <Activity className="h-3 w-3" />
             <span>{consultation.length} Active Consultations</span>
           </Badge>
@@ -189,13 +197,15 @@ export const ClientConsultation = () => {
                   <Users className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-neutral-900">{consultation.length}</p>
+                  <p className="text-2xl font-bold text-neutral-900">
+                    {consultation.length}
+                  </p>
                   <p className="text-sm text-neutral-600">Total Requests</p>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="border-neutral-200">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
@@ -203,13 +213,15 @@ export const ClientConsultation = () => {
                   <AlertCircle className="h-5 w-5 text-yellow-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-neutral-900">{consultation.filter(q => q.status === 'pending').length}</p>
+                  <p className="text-2xl font-bold text-neutral-900">
+                    {consultation.filter((q) => q.status === "pending").length}
+                  </p>
                   <p className="text-sm text-neutral-600">Pending</p>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="border-neutral-200">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
@@ -217,13 +229,15 @@ export const ClientConsultation = () => {
                   <CheckCircle className="h-5 w-5 text-green-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-neutral-900">{consultation.filter(q => q.status === 'solved').length}</p>
+                  <p className="text-2xl font-bold text-neutral-900">
+                    {consultation.filter((q) => q.status === "solved").length}
+                  </p>
                   <p className="text-sm text-neutral-600">Resolved</p>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="border-neutral-200">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
@@ -231,7 +245,12 @@ export const ClientConsultation = () => {
                   <XCircle className="h-5 w-5 text-red-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-neutral-900">{consultation.filter(q => q.status === 'dismissed').length}</p>
+                  <p className="text-2xl font-bold text-neutral-900">
+                    {
+                      consultation.filter((q) => q.status === "dismissed")
+                        .length
+                    }
+                  </p>
                   <p className="text-sm text-neutral-600">Dismissed</p>
                 </div>
               </div>
@@ -274,7 +293,7 @@ export const ClientConsultation = () => {
         <Card className="border-neutral-200">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <MessageSquare className="h-5 w-5 text-electric-600" />
+              <MessageSquare className="h-5 w-5 text-[#1DA1F2]" />
               <span>Consultation Requests</span>
               <Badge className="ml-auto bg-neutral-100 text-neutral-800">
                 {filteredConsultations.length} requests
@@ -285,24 +304,40 @@ export const ClientConsultation = () => {
             {filteredConsultations.length === 0 ? (
               <div className="text-center py-12">
                 <Users className="h-12 w-12 text-neutral-400 mx-auto mb-4" />
-                <p className="text-neutral-500 text-lg">{searchTerm || statusFilter !== 'all' ? 'No consultations match your filters' : 'No consultation requests found'}</p>
-                <p className="text-neutral-400 text-sm">Client consultation requests will appear here</p>
+                <p className="text-neutral-500 text-lg">
+                  {searchTerm || statusFilter !== "all"
+                    ? "No consultations match your filters"
+                    : "No consultation requests found"}
+                </p>
+                <p className="text-neutral-400 text-sm">
+                  Client consultation requests will appear here
+                </p>
               </div>
             ) : (
               <div className="overflow-hidden">
                 <Table>
                   <TableHeader>
                     <TableRow className="border-neutral-200">
-                      <TableHead className="font-semibold text-neutral-900">Client</TableHead>
-                      <TableHead className="font-semibold text-neutral-900">Contact</TableHead>
-                      <TableHead className="font-semibold text-neutral-900">Description</TableHead>
-                      <TableHead className="font-semibold text-neutral-900">Status</TableHead>
-                      <TableHead className="font-semibold text-neutral-900">Actions</TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Client
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Contact
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Description
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Status
+                      </TableHead>
+                      <TableHead className="font-semibold text-neutral-900">
+                        Actions
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredConsultations.map((query) => (
-                      <TableRow 
+                      <TableRow
                         key={query._id}
                         className="border-neutral-200 hover:bg-neutral-50 transition-colors cursor-pointer"
                         onClick={() => openModal(query)}
@@ -310,7 +345,7 @@ export const ClientConsultation = () => {
                         <TableCell className="py-4">
                           <div className="flex items-center space-x-3">
                             <div className="w-8 h-8 bg-electric-100 rounded-full flex items-center justify-center">
-                              <User className="h-4 w-4 text-electric-600" />
+                              <User className="h-4 w-4 text-[#1DA1F2]" />
                             </div>
                             <div>
                               <div className="font-medium text-neutral-900">
@@ -334,7 +369,9 @@ export const ClientConsultation = () => {
                           </div>
                         </TableCell>
                         <TableCell className="py-4">
-                          <Badge className={`${getStatusColor(query.status)} border`}>
+                          <Badge
+                            className={`${getStatusColor(query.status)} border`}
+                          >
                             <div className="flex items-center space-x-1">
                               {getStatusIcon(query.status)}
                               <span className="capitalize">{query.status}</span>
@@ -362,7 +399,7 @@ export const ClientConsultation = () => {
                                 updateStatus(query._id, "solved");
                               }}
                               className="border-green-300 text-green-600 hover:bg-green-50"
-                              disabled={query.status === 'solved'}
+                              disabled={query.status === "solved"}
                             >
                               <CheckCircle className="h-4 w-4" />
                             </Button>
@@ -374,7 +411,7 @@ export const ClientConsultation = () => {
                                 updateStatus(query._id, "dismissed");
                               }}
                               className="border-red-300 text-red-600 hover:bg-red-50"
-                              disabled={query.status === 'dismissed'}
+                              disabled={query.status === "dismissed"}
                             >
                               <XCircle className="h-4 w-4" />
                             </Button>
@@ -395,7 +432,7 @@ export const ClientConsultation = () => {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-electric-600 to-electric-500 text-white p-6 relative">
+            <div className="bg-[#1DA1F2] text-white p-6 relative">
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
@@ -422,7 +459,7 @@ export const ClientConsultation = () => {
                 <Card className="border-neutral-200">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                      <Mail className="h-5 w-5 text-electric-600" />
+                      <Mail className="h-5 w-5 text-[#1DA1F2]" />
                       <span>Contact Information</span>
                     </CardTitle>
                   </CardHeader>
@@ -448,10 +485,16 @@ export const ClientConsultation = () => {
                       <label className="block text-sm font-medium text-neutral-700 mb-1">
                         Current Status
                       </label>
-                      <Badge className={`${getStatusColor(selectedConsultation.status)} border w-fit`}>
+                      <Badge
+                        className={`${getStatusColor(
+                          selectedConsultation.status
+                        )} border w-fit`}
+                      >
                         <div className="flex items-center space-x-1">
                           {getStatusIcon(selectedConsultation.status)}
-                          <span className="capitalize">{selectedConsultation.status}</span>
+                          <span className="capitalize">
+                            {selectedConsultation.status}
+                          </span>
                         </div>
                       </Badge>
                     </div>
@@ -462,7 +505,7 @@ export const ClientConsultation = () => {
                 <Card className="border-neutral-200">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                      <MessageSquare className="h-5 w-5 text-electric-600" />
+                      <MessageSquare className="h-5 w-5 text-[#1DA1F2]" />
                       <span>Consultation Details</span>
                     </CardTitle>
                   </CardHeader>
@@ -493,7 +536,7 @@ export const ClientConsultation = () => {
                     closeModal();
                   }}
                   className="bg-green-500 hover:bg-green-600 text-white"
-                  disabled={selectedConsultation.status === 'solved'}
+                  disabled={selectedConsultation.status === "solved"}
                 >
                   <CheckCircle className="h-4 w-4 mr-2" />
                   Mark as Solved
@@ -504,7 +547,7 @@ export const ClientConsultation = () => {
                     closeModal();
                   }}
                   className="bg-red-500 hover:bg-red-600 text-white"
-                  disabled={selectedConsultation.status === 'dismissed'}
+                  disabled={selectedConsultation.status === "dismissed"}
                 >
                   <XCircle className="h-4 w-4 mr-2" />
                   Dismiss

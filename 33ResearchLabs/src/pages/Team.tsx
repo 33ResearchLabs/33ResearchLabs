@@ -12,7 +12,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
+import {
+  generateCanonicalUrl,
+  generateRobotsContent,
+  ROBOTS_CONFIG,
+} from "@/utils/seo";
 
 const Team = () => {
   const leadership = [
@@ -128,7 +132,9 @@ const Team = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Team – 33 Research Labs | World-Class AI, Web3 & Cybersecurity Talent</title>
+        <title>
+          Team – 33 Research Labs | World-Class AI, Web3 & Cybersecurity Talent
+        </title>
         <meta
           name="description"
           content="Meet the world-class team at 33 Research Labs. Expert engineers, researchers, and strategists building the future of AI, Web3, and cybersecurity."
@@ -137,7 +143,10 @@ const Team = () => {
           name="keywords"
           content="33 Research Labs team, AI experts, Web3 developers, cybersecurity professionals, blockchain engineers, startup team"
         />
-        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <meta
+          name="robots"
+          content={generateRobotsContent(ROBOTS_CONFIG.INDEX)}
+        />
         <link rel="canonical" href={generateCanonicalUrl("/team")} />
       </Helmet>
       {/* Hero Section */}
@@ -146,7 +155,7 @@ const Team = () => {
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
               World-Class{" "}
-              <span className="bg-gradient-to-r from-electric-600 to-electric-500 bg-clip-text text-transparent">
+              <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
                 Talent
               </span>
             </h1>
@@ -169,7 +178,7 @@ const Team = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-electric-600 mb-2">
+                <div className="text-4xl font-bold text-[#1DA1F2] mb-2">
                   {stat.value}
                 </div>
                 <div className="text-neutral-600">{stat.label}</div>
@@ -210,7 +219,7 @@ const Team = () => {
                     <h3 className="text-xl font-bold text-neutral-900 mb-1">
                       {leader.name}
                     </h3>
-                    <p className="text-electric-600 font-medium mb-2">
+                    <p className="text-[#1DA1F2] font-medium mb-2">
                       {leader.role}
                     </p>
                     <div className="flex items-center justify-center space-x-1 text-sm text-neutral-500 mb-4">
@@ -231,19 +240,19 @@ const Team = () => {
                   <div className="flex space-x-4 justify-center">
                     <a
                       href={leader.social.linkedin}
-                      className="text-neutral-400 hover:text-electric-600 transition-colors duration-200"
+                      className="text-neutral-400 hover:text-[#1DA1F2] transition-colors duration-200"
                     >
                       <Linkedin className="h-5 w-5" />
                     </a>
                     <a
                       href={leader.social.twitter}
-                      className="text-neutral-400 hover:text-electric-600 transition-colors duration-200"
+                      className="text-neutral-400 hover:text-[#1DA1F2] transition-colors duration-200"
                     >
                       <Twitter className="h-5 w-5" />
                     </a>
                     <a
                       href={leader.social.github}
-                      className="text-neutral-400 hover:text-electric-600 transition-colors duration-200"
+                      className="text-neutral-400 hover:text-[#1DA1F2] transition-colors duration-200"
                     >
                       <Github className="h-5 w-5" />
                     </a>
@@ -274,7 +283,7 @@ const Team = () => {
               >
                 <CardContent className="p-6">
                   <div className="w-16 h-16 bg-electric-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-lg font-bold text-electric-600">
+                    <span className="text-lg font-bold text-[#1DA1F2]">
                       {member.name
                         .split(" ")
                         .map((n) => n[0])
@@ -285,7 +294,7 @@ const Team = () => {
                     <h3 className="text-lg font-semibold text-neutral-900 mb-1">
                       {member.name}
                     </h3>
-                    <p className="text-electric-600 font-medium text-sm mb-2">
+                    <p className="text-[#1DA1F2] font-medium text-sm mb-2">
                       {member.role}
                     </p>
                     <div className="flex items-center justify-center space-x-1 text-xs text-neutral-500 mb-4">
@@ -322,7 +331,7 @@ const Team = () => {
             {values.map((value, index) => (
               <div key={value.title} className="text-center">
                 <div className="w-16 h-16 bg-electric-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <value.icon className="h-8 w-8 text-electric-600" />
+                  <value.icon className="h-8 w-8 text-[#1DA1F2]" />
                 </div>
                 <h3 className="text-xl font-semibold text-neutral-900 mb-4">
                   {value.title}
@@ -351,7 +360,7 @@ const Team = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-black hover:bg-white hover:text-electric-600"
+                className="border-white text-black hover:bg-white hover:text-[#1DA1F2]"
               >
                 Learn About Culture
               </Button>

@@ -62,7 +62,7 @@ const Ventures = () => {
       case "Live":
         return "bg-green-100 text-green-800";
       case "Series A":
-        return "bg-electric-100 text-electric-800";
+        return "bg-electric-100 text-[#1DA1F2]";
       case "Beta":
         return "bg-yellow-100 text-yellow-800";
       case "Development":
@@ -80,7 +80,7 @@ const Ventures = () => {
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
               Our{" "}
-              <span className="bg-gradient-to-r from-electric-600 to-electric-500 bg-clip-text text-transparent">
+              <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
                 Ventures
               </span>
             </h1>
@@ -100,25 +100,25 @@ const Ventures = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-electric-600 mb-2">
+              <div className="text-3xl lg:text-4xl font-bold text-[#1DA1F2] mb-2">
                 12
               </div>
               <div className="text-neutral-600">Active Ventures</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-electric-600 mb-2">
+              <div className="text-3xl lg:text-4xl font-bold text-[#1DA1F2] mb-2">
                 $150M+
               </div>
               <div className="text-neutral-600">Total Funding Raised</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-electric-600 mb-2">
+              <div className="text-3xl lg:text-4xl font-bold text-[#1DA1F2] mb-2">
                 500K+
               </div>
               <div className="text-neutral-600">Combined Users</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-electric-600 mb-2">
+              <div className="text-3xl lg:text-4xl font-bold text-[#1DA1F2] mb-2">
                 8
               </div>
               <div className="text-neutral-600">Successful Exits</div>
@@ -186,7 +186,7 @@ const Ventures = () => {
                     <Button
                       disabled
                       size="sm"
-                      className=" bg-electric-600 hover:bg-electric-700 text-white"
+                      className=" bg-[#1DA1F2] hover:bg-electric-700 text-white"
                     >
                       Case Study
                       <ArrowUpRight className="ml-2 h-4 w-4" />
@@ -205,7 +205,7 @@ const Ventures = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-6">
-                Our <span className="text-electric-600">Investment</span>{" "}
+                Our <span className="text-[#1DA1F2]">Investment</span>{" "}
                 Philosophy
               </h2>
               <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
@@ -216,7 +216,7 @@ const Ventures = () => {
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-electric-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                    <Calendar className="h-4 w-4 text-electric-600" />
+                    <Calendar className="h-4 w-4 text-[#1DA1F2]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-2">
@@ -229,7 +229,7 @@ const Ventures = () => {
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-electric-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                    <Users className="h-4 w-4 text-electric-600" />
+                    <Users className="h-4 w-4 text-[#1DA1F2]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-2">
@@ -242,7 +242,7 @@ const Ventures = () => {
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-electric-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                    <DollarSign className="h-4 w-4 text-electric-600" />
+                    <DollarSign className="h-4 w-4 text-[#1DA1F2]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-2">
@@ -259,7 +259,7 @@ const Ventures = () => {
               <div className="aspect-square bg-gradient-to-br from-electric-100 to-neutral-100 rounded-2xl p-8">
                 <div className="h-full bg-white rounded-xl shadow-lg p-8 flex flex-col justify-center">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-electric-600 mb-2">
+                    <div className="text-4xl font-bold text-[#1DA1F2] mb-2">
                       3-7 years
                     </div>
                     <div className="text-neutral-600 mb-4">

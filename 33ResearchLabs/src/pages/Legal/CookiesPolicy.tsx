@@ -2,7 +2,7 @@ import { Mail } from "lucide-react";
 
 export const CookiesPolicy = () => {
   return (
-    <section className=" text-electric-600 py-16 px-6 md:px-20">
+    <section className=" text-[#1DA1F2] py-16 px-6 md:px-20">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-black mb-4 text-center">
           Cookies Policy
@@ -10,14 +10,12 @@ export const CookiesPolicy = () => {
 
         <p className="mb-6 text-gray-700">
           This Cookies Policy explains how{" "}
-          <span className="text-electric-600 font-semibold">
-            33 Research Labs
-          </span>{" "}
+          <span className="text-[#1DA1F2] font-semibold">33 Research Labs</span>{" "}
           ("we", "us", or "our") uses cookies and similar technologies on our
           website{" "}
           <a
             href="https://www.33researchlabs.xyz/"
-            className="text-electric-600"
+            className="text-[#1DA1F2]"
             target="_blank"
           >
             33 Research Labs{" "}
@@ -43,28 +41,28 @@ export const CookiesPolicy = () => {
         </h2>
         <ul className="list-disc list-inside text-gray-700 mb-4">
           <li>
-            <span className="text-electric-600 font-medium">
+            <span className="text-[#1DA1F2] font-medium">
               Strictly Necessary Cookies:
             </span>
             Essential for the operation of our website — enable navigation,
             secure areas, and form submissions.
           </li>
           <li>
-            <span className="text-electric-600 font-medium">
+            <span className="text-[#1DA1F2] font-medium">
               Performance Cookies:
             </span>
             Collect anonymous data on site usage to help us improve performance
             and user experience.
           </li>
           <li>
-            <span className="text-electric-600 font-medium">
+            <span className="text-[#1DA1F2] font-medium">
               Functionality Cookies:
             </span>
             Remember user preferences like language and deliver a more
             personalized experience.
           </li>
           <li>
-            <span className="text-electric-600 font-medium">
+            <span className="text-[#1DA1F2] font-medium">
               Targeting & Advertising Cookies:
             </span>
             Used by third parties to deliver relevant ads and measure marketing
@@ -122,7 +120,7 @@ export const CookiesPolicy = () => {
         <p className="text-gray-700">
           <a
             href="mailto:33researchlabs@gmail.com"
-            className="text-electric-700 flex"
+            className="text-[#1DA1F2] flex"
           >
             <span className="pr-2 text-black">
               <Mail size={20} />
@@ -133,7 +131,7 @@ export const CookiesPolicy = () => {
           🌐{" "}
           <a
             href="https://www.33researchlabs.xyz/"
-            className="text-electric-700"
+            className="text-[#1DA1F2]"
             target="_blank"
           >
             www.33researchlabs.xyz/

@@ -93,10 +93,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex justify-between items-center h-16">
             <Link
               to={"/"}
-              className="text-xl flex justify-center text-center items-center gap-2 font-bold text-electric-600"
+              className="text-xl flex justify-center text-center items-center gap-2 font-bold text-[#1DA1F2]"
             >
-              <div className="w-10 h-10 bg-electric-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                <span className="text-white font-bold text-md">33</span>
+              <div className="w-10 h-10 bg-[#1DA1F2] rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                <img
+                  src="/apple-touch-icon.png"
+                  alt="logo"
+                  className="rounded-lg"
+                />
               </div>{" "}
               <div className="text-black text-2xl">Research Labs</div>
             </Link>
@@ -107,7 +111,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   to={item.href}
                   className={`text-sm font-medium transition-colors duration-200 ${
                     isActive(item.href)
-                      ? "text-electric-600"
+                      ? "text-[#1DA1F2]"
                       : "text-neutral-600 hover:text-neutral-900"
                   }`}
                 >
@@ -115,7 +119,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               ))}
               <Button
-                className="bg-electric-600 hover:bg-electric-700 text-white"
+                className="bg-[#1DA1F2] hover:bg-electric-700 text-white"
                 asChild
               >
                 <Link to="/contact-us">Get Started</Link>
@@ -145,7 +149,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block text-base font-medium transition-colors duration-200 ${
                     isActive(item.href)
-                      ? "text-electric-600"
+                      ? "text-[#1DA1F2]"
                       : "text-neutral-600 hover:text-neutral-900"
                   }`}
                 >
@@ -153,7 +157,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               ))}
               <Button
-                className="w-full bg-gradient-to-r from-electric-600 to-electric-500 bg-clip-text text-transparent "
+                className="w-full bg-[#1DA1F2] bg-clip-text text-transparent "
                 asChild
               >
                 <Link to="/contact">Get Started</Link>
@@ -175,9 +179,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <div className="flex items-center space-x-2 mb-4">
                 <Link
                   to={"/"}
-                  className="text-xl flex justify-center text-center items-center gap-2 font-bold text-electric-600"
+                  className="text-xl flex justify-center text-center items-center gap-2 font-bold text-[#1DA1F2]"
                 >
-                  <div className="w-10 h-10 bg-electric-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                  <div className="w-10 h-10 bg-[#1DA1F2] rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
                     <span className="text-white font-bold text-md">33</span>
                   </div>{" "}
                   <div className="text-white text-2xl">Research Labs</div>

@@ -125,8 +125,8 @@ export const posts = [
     {
       icon: MapPin,
       title: "Address",
-      value: "Decentralized",
-      description: "Decentralized"
+      value: "Dharampur",
+      description: "Himachal Pradesh, India"
     },
     {
       icon: Clock,

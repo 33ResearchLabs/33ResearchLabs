@@ -63,7 +63,7 @@ The insights presented in this analysis highlight the importance of staying info
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "AI":
-        return "bg-electric-100 text-electric-800";
+        return "bg-electric-100 text-[#1DA1F2]";
       case "Blockchain":
         return "bg-purple-100 text-purple-800";
       case "Cybersecurity":
@@ -128,7 +128,7 @@ The insights presented in this analysis highlight the importance of staying info
               {/* Author Info */}
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 bg-electric-100 rounded-full flex items-center justify-center">
-                  <User className="h-6 w-6 text-electric-600" />
+                  <User className="h-6 w-6 text-[#1DA1F2]" />
                 </div>
                 <div>
                   <div className="font-medium text-neutral-900">
@@ -212,7 +212,7 @@ The insights presented in this analysis highlight the importance of staying info
           <Button
             variant="ghost"
             onClick={() => navigate("/insights")}
-            className="text-electric-600 hover:text-electric-700"
+            className="text-[#1DA1F2] hover:text-[#1DA1F2]"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Insights
@@ -234,7 +234,7 @@ The insights presented in this analysis highlight the importance of staying info
             variant="secondary"
             size="lg"
             onClick={() => navigate("/contact-us")}
-            className="bg-white text-electric-600 hover:bg-electric-50"
+            className="bg-white text-[#1DA1F2] hover:bg-electric-50"
           >
             Get in Touch
           </Button>

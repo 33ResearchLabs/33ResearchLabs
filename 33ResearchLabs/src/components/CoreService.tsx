@@ -59,7 +59,7 @@ const CoreServices = () => {
 
             {/* Icon */}
             <div className="w-10 h-10 bg-electric-100 rounded-lg flex items-center justify-center mb-4">
-              <service.icon className="h-5 w-5 text-electric-600" />
+              <service.icon className="h-5 w-5 text-[#1DA1F2]" />
             </div>
 
             {/* Title */}

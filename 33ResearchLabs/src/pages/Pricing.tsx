@@ -43,7 +43,7 @@ const plans = [
 ];
 export default function PricingPage() {
   return (
-    <div className=" text-electric-600 min-h-screen py-16 px-6 mt-6">
+    <div className=" text-[#1DA1F2] min-h-screen py-16 px-6 mt-6">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-4">
           Choose Your 33 Research Plan

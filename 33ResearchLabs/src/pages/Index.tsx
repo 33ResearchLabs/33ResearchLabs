@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { partnerMeta, partners } from "@/data/posts";
-import { generateCanonicalUrl, generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
+import {
+  generateCanonicalUrl,
+  generateRobotsContent,
+  ROBOTS_CONFIG,
+} from "@/utils/seo";
 import { trackEvent } from "@/utils/googleAnalytics";
 
 // NOTE: No need for useEffect or useNavigate for this scroll behavior.
@@ -58,7 +62,10 @@ const Index = () => {
         />
         <meta property="og:image" content="/preview.jpg" />
         <meta property="og:url" content="https://www.33researchlabs.xyz/" />
-        <meta name="robots" content={generateRobotsContent(ROBOTS_CONFIG.INDEX)} />
+        <meta
+          name="robots"
+          content={generateRobotsContent(ROBOTS_CONFIG.INDEX)}
+        />
         <link rel="canonical" href={generateCanonicalUrl("/")} />
       </Helmet>
 
@@ -72,7 +79,7 @@ const Index = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl lg:text-5xl font-bold mb-6 animate-fade-in relative inline-block group">
-              <span className="text-electric-600">33 Research Labs</span>{" "}
+              <span className="text-[#1DA1F2]">33 Research Labs</span>{" "}
               <br className="hidden md:block" />
               is Building the Infrastructure of the Future
             </h1>
@@ -89,12 +96,14 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
               <Button
                 size="lg"
-                className="bg-electric-600 hover:bg-electric-700 text-white transform transition-transform duration-300 hover:scale-105"
+                className="bg-[#1DA1F2] hover:bg-electric-700 text-white transform transition-transform duration-300 hover:scale-105"
                 asChild
               >
-                <Link 
+                <Link
                   to="/contact-us"
-                  onClick={() => trackEvent('click', 'cta', 'hero_start_building')}
+                  onClick={() =>
+                    trackEvent("click", "cta", "hero_start_building")
+                  }
                 >
                   Start Building
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -128,7 +137,7 @@ const Index = () => {
               >
                 <CardContent className="p-8 hover:scale-105">
                   <div className="w-12 h-12 bg-electric-100 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-electric-200 transition-colors duration-300">
-                    <area.icon className="h-6 w-6 text-electric-600" />
+                    <area.icon className="h-6 w-6 text-[#1DA1F2]" />
                   </div>
                   <h3 className="text-xl font-semibold text-neutral-900 mb-3 text-center">
                     {area.title}
@@ -151,13 +160,12 @@ const Index = () => {
       >
         <div className="bg-white shadow-xl max-w-7xl mx-auto rounded-2xl border border-gray-200 p-6 lg:p-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 text-center">
-            What Makes{" "}
-            <span className="text-electric-600">33 Research Labs</span>{" "}
+            What Makes <span className="text-[#1DA1F2]">33 Research Labs</span>{" "}
             Different ?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex items-start space-x-4 p-6 bg-electric-50 rounded-xl shadow-sm border border-electric-100">
-              <div className="flex-shrink-0 text-electric-600">
+              <div className="flex-shrink-0 text-[#1DA1F2]">
                 <Cpu className="w-8 h-8" />
               </div>
               <div>
@@ -224,7 +232,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-              <span className="text-electric-600">Trusted</span> by Industry
+              <span className="text-[#1DA1F2]">Trusted</span> by Industry
               Leaders
             </h2>
             <p className="text-lg text-neutral-600">
@@ -265,7 +273,7 @@ const Index = () => {
         id="contact-cta"
         className="snap-start  flex flex-col justify-center p-6 lg:p-8 bg-white max-w-7xl mx-auto"
       >
-        <div className="text-center bg-electric-600 text-white p-8 rounded-2xl shadow-lg">
+        <div className="text-center bg-[#1DA1F2] text-white p-8 rounded-2xl shadow-lg">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight py-6">
             Join the Future with <span className="">33 Research Labs</span>
           </h2>
@@ -280,11 +288,11 @@ const Index = () => {
             <strong className="font-semibold">33 Research Labs</strong> can help
             you design, build, and scale your product.
           </p>
-          <Link 
+          <Link
             to="/contact-us"
-            onClick={() => trackEvent('click', 'cta', 'footer_get_in_touch')}
+            onClick={() => trackEvent("click", "cta", "footer_get_in_touch")}
           >
-            <button className="mt-8 bg-white text-electric-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-electric-100 transition duration-300 transform hover:scale-105">
+            <button className="mt-8 bg-white text-[#1DA1F2] font-bold py-3 px-8 rounded-full shadow-lg hover:bg-electric-100 transition duration-300 transform hover:scale-105">
               Get in Touch
             </button>
           </Link>

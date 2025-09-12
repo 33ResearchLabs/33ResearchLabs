@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { 
-  LogOut, 
-  BellDot, 
-  Users, 
-  FileText, 
-  Mail, 
+import {
+  LogOut,
+  BellDot,
+  Users,
+  FileText,
+  Mail,
   TrendingUp,
   BarChart3,
   Calendar,
   Clock,
   Activity,
-  Eye
+  Eye,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -106,7 +106,9 @@ const AdminDashboard = () => {
       <div className="bg-white border-b border-neutral-200 px-6 py-4">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-neutral-900">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-neutral-900">
+              Admin Dashboard
+            </h1>
             <p className="text-neutral-600 mt-1">Welcome back, {admin.name}</p>
           </div>
           <Button
@@ -120,10 +122,9 @@ const AdminDashboard = () => {
       </div>
 
       <div className="p-6">
-
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card 
+          <Card
             className="cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0"
             onClick={() => setShowSubscriberModal(true)}
           >
@@ -154,7 +155,9 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stats.blogs}</div>
-                <p className="text-xs text-green-100 mt-1">Published articles</p>
+                <p className="text-xs text-green-100 mt-1">
+                  Published articles
+                </p>
               </CardContent>
             </Card>
           </Link>
@@ -187,7 +190,9 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stats.consultations}</div>
-                <p className="text-xs text-purple-100 mt-1">Active consultations</p>
+                <p className="text-xs text-purple-100 mt-1">
+                  Active consultations
+                </p>
               </CardContent>
             </Card>
           </Link>
@@ -198,7 +203,7 @@ const AdminDashboard = () => {
           <Card className="border-neutral-200">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                <BarChart3 className="h-5 w-5 text-electric-600" />
+                <BarChart3 className="h-5 w-5 text-[#1DA1F2]" />
                 <span>Recent Activity</span>
               </CardTitle>
             </CardHeader>
@@ -207,21 +212,27 @@ const AdminDashboard = () => {
                 <div className="flex items-center justify-between p-3 bg-neutral-50 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-neutral-700">New blog post published</span>
+                    <span className="text-sm text-neutral-700">
+                      New blog post published
+                    </span>
                   </div>
                   <span className="text-xs text-neutral-500">2 hours ago</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-neutral-50 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm text-neutral-700">5 new subscribers</span>
+                    <span className="text-sm text-neutral-700">
+                      5 new subscribers
+                    </span>
                   </div>
                   <span className="text-xs text-neutral-500">4 hours ago</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-neutral-50 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                    <span className="text-sm text-neutral-700">New client consultation</span>
+                    <span className="text-sm text-neutral-700">
+                      New client consultation
+                    </span>
                   </div>
                   <span className="text-xs text-neutral-500">6 hours ago</span>
                 </div>
@@ -232,32 +243,38 @@ const AdminDashboard = () => {
           <Card className="border-neutral-200">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-neutral-900">
-                <TrendingUp className="h-5 w-5 text-electric-600" />
+                <TrendingUp className="h-5 w-5 text-[#1DA1F2]" />
                 <span>Quick Actions</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-3">
                 <Link to="/admin/newblog">
-                  <Button className="w-full bg-electric-600 hover:bg-electric-700 text-white">
+                  <Button className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white">
                     <FileText className="h-4 w-4 mr-2" />
                     New Blog
                   </Button>
                 </Link>
                 <Link to="/admin/user-query">
-                  <Button variant="outline" className="w-full border-neutral-300 hover:bg-neutral-50">
+                  <Button
+                    variant="outline"
+                    className="w-full border-neutral-300 hover:bg-neutral-50"
+                  >
                     <Mail className="h-4 w-4 mr-2" />
                     View Queries
                   </Button>
                 </Link>
                 <Link to="/admin/client-consultation">
-                  <Button variant="outline" className="w-full border-neutral-300 hover:bg-neutral-50">
+                  <Button
+                    variant="outline"
+                    className="w-full border-neutral-300 hover:bg-neutral-50"
+                  >
                     <Users className="h-4 w-4 mr-2" />
                     Consultations
                   </Button>
                 </Link>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="w-full border-neutral-300 hover:bg-neutral-50"
                   onClick={() => window.location.reload()}
                 >
@@ -274,10 +291,12 @@ const AdminDashboard = () => {
           <CardHeader>
             <CardTitle className="flex items-center justify-between text-neutral-900">
               <div className="flex items-center space-x-2">
-                <Eye className="h-5 w-5 text-electric-600" />
+                <Eye className="h-5 w-5 text-[#1DA1F2]" />
                 <span>System Overview</span>
               </div>
-              <Badge className="bg-green-100 text-green-800">All Systems Operational</Badge>
+              <Badge className="bg-green-100 text-green-800">
+                All Systems Operational
+              </Badge>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -289,12 +308,19 @@ const AdminDashboard = () => {
                 <p className="text-sm text-neutral-600">Last Updated</p>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-600 mb-1">99.9%</div>
+                <div className="text-2xl font-bold text-green-600 mb-1">
+                  99.9%
+                </div>
                 <p className="text-sm text-neutral-600">Uptime</p>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-600 mb-1">
-                  {(stats.subscribers + stats.blogs + stats.queries + stats.consultations).toLocaleString()}
+                  {(
+                    stats.subscribers +
+                    stats.blogs +
+                    stats.queries +
+                    stats.consultations
+                  ).toLocaleString()}
                 </div>
                 <p className="text-sm text-neutral-600">Total Records</p>
               </div>
