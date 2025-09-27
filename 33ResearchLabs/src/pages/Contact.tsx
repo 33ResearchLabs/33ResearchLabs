@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { contactInfo, faqs } from "@/data/posts";
 import ScheduleModal from "@/components/ScheduleModal";
 import { toast } from "sonner";
@@ -126,7 +126,7 @@ const Contact = () => {
     return error;
   };
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     const newErrors = { ...errors };
     let isValid = true;
 
@@ -138,19 +138,22 @@ const Contact = () => {
 
     setErrors(newErrors);
     return isValid;
-  };
+  }, [formData, errors]);
 
-  const handleChange = (
+  const handleChange = useCallback((
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    const error = validateField(name, value);
-    setErrors((prev) => ({ ...prev, [name]: error }));
-  };
+    // Only validate on blur to reduce unnecessary re-renders
+    if (errors[name as keyof typeof errors]) {
+      const error = validateField(name, value);
+      setErrors((prev) => ({ ...prev, [name]: error }));
+    }
+  }, [errors]);
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -208,16 +211,14 @@ const Contact = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [formData, validateForm, BackendUrl, Navigate]);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-electric-600"></div>
-        <div className="text-center mt-4">loading</div>
-      </div>
-    );
-  }
+  const loadingSpinner = useMemo(() => (
+    <div className="flex items-center justify-center">
+      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+      Sending...
+    </div>
+  ), []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -275,6 +276,10 @@ const Contact = () => {
                     placeholder="John"
                     value={formData.firstName}
                     onChange={handleChange}
+                    onBlur={(e) => {
+                      const error = validateField(e.target.name, e.target.value);
+                      setErrors((prev) => ({ ...prev, [e.target.name]: error }));
+                    }}
                     className={errors.firstName ? "border-red-500" : ""}
                   />
                   {errors.firstName && (
@@ -289,6 +294,10 @@ const Contact = () => {
                     placeholder="Doe"
                     value={formData.lastName}
                     onChange={handleChange}
+                    onBlur={(e) => {
+                      const error = validateField(e.target.name, e.target.value);
+                      setErrors((prev) => ({ ...prev, [e.target.name]: error }));
+                    }}
                     className={errors.lastName ? "border-red-500" : ""}
                   />
                   {errors.lastName && (
@@ -306,6 +315,10 @@ const Contact = () => {
                   placeholder="john@company.com"
                   value={formData.email}
                   onChange={handleChange}
+                  onBlur={(e) => {
+                    const error = validateField(e.target.name, e.target.value);
+                    setErrors((prev) => ({ ...prev, [e.target.name]: error }));
+                  }}
                   className={errors.email ? "border-red-500" : ""}
                 />
                 {errors.email && (
@@ -319,6 +332,10 @@ const Contact = () => {
                   placeholder="Acme Inc."
                   value={formData.company}
                   onChange={handleChange}
+                  onBlur={(e) => {
+                    const error = validateField(e.target.name, e.target.value);
+                    setErrors((prev) => ({ ...prev, [e.target.name]: error }));
+                  }}
                   className={errors.company ? "border-red-500" : ""}
                 />
                 {errors.company && (
@@ -398,6 +415,10 @@ const Contact = () => {
                   placeholder="Tell us about your project, timeline, tech stack, etc."
                   value={formData.projectDescription}
                   onChange={handleChange}
+                  onBlur={(e) => {
+                    const error = validateField(e.target.name, e.target.value);
+                    setErrors((prev) => ({ ...prev, [e.target.name]: error }));
+                  }}
                   className={errors.projectDescription ? "border-red-500" : ""}
                 />
                 {errors.projectDescription && (
@@ -410,10 +431,15 @@ const Contact = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white"
+                disabled={loading}
+                className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white disabled:opacity-50"
               >
-                Send Message
-                <Send className="ml-2 h-4 w-4" />
+                {loading ? loadingSpinner : (
+                  <>
+                    Send Message
+                    <Send className="ml-2 h-4 w-4" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
