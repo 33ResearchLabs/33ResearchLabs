@@ -7,6 +7,45 @@ import { io } from "../index.js";
 import { updateDailyCount } from "../middleware/dailyLimitCheck.js";
 dotenv.config();
 
+const sendEmailAsync = async (
+  firstName,
+  lastName,
+  email,
+  projectDescription,
+  company,
+  queryCount
+) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.OWNER_EMAIL,
+        pass: process.env.OWNER_EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.OWNER_EMAIL,
+      to: process.env.OWNER_EMAIL,
+      subject: "📩 New User Query Received from Reputation one Ai",
+      html: `
+        <h3>New User Query</h3>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Company:</strong> ${company}</p>
+        <p><strong>Project Description:</strong> ${projectDescription}</p>
+        <p><strong>Query Count:</strong> ${queryCount} of 3</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Email sent to owner successfully");
+  } catch (error) {
+    console.error("❌ Error sending email:", error);
+    // You could implement retry logic here or save failed emails to a queue
+  }
+};
+
 export const postUserQuery = async (req, res) => {
   const {
     firstName,
@@ -47,34 +86,17 @@ export const postUserQuery = async (req, res) => {
     console.log("✅ User query saved to database");
 
     // ✅ 2.5. Update daily limit count
-    await updateDailyCount(req.limitRecord, 'query');
+    await updateDailyCount(req.limitRecord, "query");
 
     // ✅ 3. Setup and send mail to owner
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.OWNER_EMAIL,
-        pass: process.env.OWNER_EMAIL_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.OWNER_EMAIL,
-      to: process.env.OWNER_EMAIL,
-      subject: "📩 New User Query Received from 33Research Labs",
-      html: `
-        <h3>New User Query</h3>
-        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Company:</strong> ${company}</p>
-        <p><strong>Project Type:</strong> ${projectType}</p>
-        <p><strong>Project Description:</strong> ${projectDescription}</p>
-        <p><strong>Budget:</strong> ${budget}</p>
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Email sent to owner");
+    sendEmailAsync(
+      firstName,
+      lastName,
+      email,
+      projectDescription,
+      company,
+      req.limitRecord ? req.limitRecord.queryCount + 1 : 1
+    );
     io.emit("new-userQuery", "new message");
     // ✅ 4. Respond success
     res.status(200).json({ message: "User query submitted and email sent!" });
@@ -107,7 +129,7 @@ export const postUserConsultation = async (req, res) => {
     console.log("✅ User consultation saved to database");
 
     // ✅ 2.5. Update daily limit count
-    await updateDailyCount(req.limitRecord, 'consultation');
+    await updateDailyCount(req.limitRecord, "consultation");
 
     // ✅ 3. Setup and send mail to owner
     const transporter = nodemailer.createTransport({
@@ -124,7 +146,7 @@ export const postUserConsultation = async (req, res) => {
       subject: "📩 New User Consultation request Received from 33Research Labs",
       html: `
         <h3>New User Consultation</h3>
-        <p><strong>Name:</strong>${name}</p>
+        <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Company:</strong> ${company}</p>
         <p><strong>Description:</strong> ${description}</p>
@@ -204,7 +226,6 @@ export const postUserSubscribe = async (req, res) => {
 
 // controllers/adminController.js
 
-
 export const getPaginatedSubscribers = async (req, res) => {
   try {
     let { page = 1, limit = 5 } = req.query;
@@ -231,10 +252,11 @@ export const getPaginatedSubscribers = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching subscribers:", error);
-    res.status(500).json({ message: "Server error while fetching subscribers" });
+    res
+      .status(500)
+      .json({ message: "Server error while fetching subscribers" });
   }
 };
-
 
 export const getUserQuery = async (req, res) => {
   try {
@@ -279,7 +301,7 @@ export const getUserConsultation = async (req, res) => {
       .sort({ _id: -1 })
       .limit(10);
     res.status(200).json(consultationData);
-  } catch {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -289,7 +311,7 @@ export const updateUserConsultation = async (req, res) => {
   const { status } = req.body;
   try {
     await UserConsultation.findByIdAndUpdate(id, { status });
-    if(status === "dismissed"){
+    if (status === "dismissed") {
       await UserConsultation.deleteOne({ _id: id });
     }
     io.emit("queryUpdate", { id: id, status: status });
