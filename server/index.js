@@ -32,6 +32,8 @@ const limiter = rateLimit({
 app.use(limiter);
 const server = http.createServer(app);
 
+// ✅ Set server timeout to 80 seconds
+server.timeout = 80000; // 80 seconds
 // ✅ Updated CORS configuration for production
 const allowedOrigins = [
   process.env.FRONTEND_URL,
