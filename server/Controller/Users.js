@@ -7,6 +7,15 @@ import { io } from "../index.js";
 import { updateDailyCount } from "../middleware/dailyLimitCheck.js";
 dotenv.config();
 
+// ✅ Reuse single transporter instance (more efficient)
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.OWNER_EMAIL,
+    pass: process.env.OWNER_EMAIL_PASS,
+  },
+});
+
 const sendEmailAsync = async (
   firstName,
   lastName,
@@ -16,14 +25,6 @@ const sendEmailAsync = async (
   queryCount
 ) => {
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.OWNER_EMAIL,
-        pass: process.env.OWNER_EMAIL_PASS,
-      },
-    });
-
     const mailOptions = {
       from: process.env.OWNER_EMAIL,
       to: process.env.OWNER_EMAIL,
@@ -43,6 +44,47 @@ const sendEmailAsync = async (
   } catch (error) {
     console.error("❌ Error sending email:", error);
     // You could implement retry logic here or save failed emails to a queue
+  }
+};
+
+const sendConsultationEmailAsync = async (name, email, company, description) => {
+  try {
+    const mailOptions = {
+      from: process.env.OWNER_EMAIL,
+      to: process.env.OWNER_EMAIL,
+      subject: "📩 New User Consultation request Received from 33Research Labs",
+      html: `
+        <h3>New User Consultation</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Company:</strong> ${company}</p>
+        <p><strong>Description:</strong> ${description}</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Consultation email sent to owner");
+  } catch (error) {
+    console.error("❌ Error sending consultation email:", error);
+  }
+};
+
+const sendSubscribeEmailAsync = async (email) => {
+  try {
+    const mailOptions = {
+      from: process.env.OWNER_EMAIL,
+      to: process.env.OWNER_EMAIL,
+      subject: "📩 New User Subscribe request Received from 33Research Labs",
+      html: `
+        <h3>New User Subscribe</h3>
+        <p><strong>Email:</strong> ${email}</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Subscribe email sent to owner");
+  } catch (error) {
+    console.error("❌ Error sending subscribe email:", error);
   }
 };
 
@@ -125,38 +167,17 @@ export const postUserConsultation = async (req, res) => {
     await newQuery.save();
     console.log("✅ User consultation saved to database");
 
-    // ✅ 2.5. Update daily limit count
+    // ✅ 2. Update daily limit count
     await updateDailyCount(req.limitRecord, "consultation");
+
+    // ✅ 3. Respond immediately (don't wait for email)
     res
       .status(200)
       .json({ message: "User consultation submitted and email sent!" });
 
-    // ✅ 3. Setup and send mail to owner
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.OWNER_EMAIL,
-        pass: process.env.OWNER_EMAIL_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.OWNER_EMAIL,
-      to: process.env.OWNER_EMAIL,
-      subject: "📩 New User Consultation request Received from 33Research Labs",
-      html: `
-        <h3>New User Consultation</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Company:</strong> ${company}</p>
-        <p><strong>Description:</strong> ${description}</p>
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Email sent to owner");
+    // ✅ 4. Send email asynchronously (non-blocking)
+    sendConsultationEmailAsync(name, email, company, description);
     io.emit("new-consultation", { id: newQuery._id, name: newQuery.name });
-    // ✅ 4. Respond success
   } catch (error) {
     console.error("❌ Error in postUserConsultation:", error);
     res
@@ -186,33 +207,13 @@ export const postUserSubscribe = async (req, res) => {
     });
 
     await newQuery.save();
+    console.log("✅ User subscription saved to database");
+
+    // ✅ 3. Respond immediately (don't wait for email)
     res.status(200).json({ message: "User Subscribe sucessfully!" });
-    console.log("✅ User query saved to database");
 
-    // ✅ 3. Setup and send mail to owner
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.OWNER_EMAIL,
-        pass: process.env.OWNER_EMAIL_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: process.env.OWNER_EMAIL,
-      to: process.env.OWNER_EMAIL,
-      subject: "📩 New User Subscribe request Received from 33Research Labs",
-      html: `
-        <h3>New User Subscribe </h3>
-        <p><strong>Email:</strong> ${email}</p>
-       
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Email sent to owner");
-
-    // ✅ 4. Respond success
+    // ✅ 4. Send email asynchronously (non-blocking)
+    sendSubscribeEmailAsync(email);
   } catch (error) {
     console.error("❌ Error in user Subscribe", error);
     res
