@@ -7,14 +7,38 @@ import { io } from "../index.js";
 import { updateDailyCount } from "../middleware/dailyLimitCheck.js";
 dotenv.config();
 
-// ✅ Reuse single transporter instance (more efficient)
+// ✅ Reuse single transporter instance with connection pooling and timeout handling
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.OWNER_EMAIL,
     pass: process.env.OWNER_EMAIL_PASS,
   },
+  pool: true, // Use connection pooling
+  maxConnections: 5, // Max concurrent connections
+  maxMessages: 100, // Max messages per connection
+  rateDelta: 1000, // Time between messages (ms)
+  rateLimit: 5, // Max messages per rateDelta
+  connectionTimeout: 10000, // 10 seconds connection timeout
+  greetingTimeout: 5000, // 5 seconds greeting timeout
+  socketTimeout: 30000, // 30 seconds socket timeout
 });
+
+// Helper function for retry with exponential backoff
+const retryWithBackoff = async (fn, retries = 3, delay = 1000) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      const isLastAttempt = i === retries - 1;
+      if (isLastAttempt) throw error;
+
+      const waitTime = delay * Math.pow(2, i); // Exponential backoff
+      console.log(`⏳ Retry ${i + 1}/${retries} after ${waitTime}ms...`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+    }
+  }
+};
 
 const sendEmailAsync = async (
   firstName,
@@ -39,11 +63,11 @@ const sendEmailAsync = async (
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    await retryWithBackoff(() => transporter.sendMail(mailOptions), 3, 2000);
     console.log("✅ Email sent to owner successfully");
   } catch (error) {
-    console.error("❌ Error sending email:", error);
-    // You could implement retry logic here or save failed emails to a queue
+    console.error("❌ Error sending email after retries:", error.message);
+    // TODO: Save failed emails to a database queue for manual retry
   }
 };
 
@@ -62,10 +86,10 @@ const sendConsultationEmailAsync = async (name, email, company, description) => 
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    await retryWithBackoff(() => transporter.sendMail(mailOptions), 3, 2000);
     console.log("✅ Consultation email sent to owner");
   } catch (error) {
-    console.error("❌ Error sending consultation email:", error);
+    console.error("❌ Error sending consultation email after retries:", error.message);
   }
 };
 
@@ -81,10 +105,10 @@ const sendSubscribeEmailAsync = async (email) => {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    await retryWithBackoff(() => transporter.sendMail(mailOptions), 3, 2000);
     console.log("✅ Subscribe email sent to owner");
   } catch (error) {
-    console.error("❌ Error sending subscribe email:", error);
+    console.error("❌ Error sending subscribe email after retries:", error.message);
   }
 };
 
