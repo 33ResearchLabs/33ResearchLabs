@@ -42,7 +42,6 @@ const Contact = () => {
     email: "",
     company: "",
     projectType: "",
-    budget: "",
     projectDescription: "",
   });
 
@@ -52,7 +51,6 @@ const Contact = () => {
     email: "",
     company: "",
     projectType: "",
-    budget: "",
     projectDescription: "",
   });
   const BackendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -140,85 +138,89 @@ const Contact = () => {
     return isValid;
   }, [formData, errors]);
 
-  const handleChange = useCallback((
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Only validate on blur to reduce unnecessary re-renders
-    if (errors[name as keyof typeof errors]) {
-      const error = validateField(name, value);
-      setErrors((prev) => ({ ...prev, [name]: error }));
-    }
-  }, [errors]);
-
-  const handleFormSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      toast.error("Please fix the errors in the form");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      console.log("Submitted Data:", formData);
-      const response = await axios.post(
-        `${BackendUrl}/api/users/query`,
-        formData
-      );
-
-      if (response.status === 200) {
-        toast.success("✅ Consultation request sent successfully!");
-
-        // Track successful form submission
-        trackConversion("contact_form_submit", {
-          project_type: formData.projectType,
-          budget_range: formData.budget,
-          company: formData.company,
-        });
-
-        trackEvent("form_submit", "contact", "consultation_request");
-
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          company: "",
-          projectType: "",
-          budget: "",
-          projectDescription: "",
-        });
-        setErrors({
-          firstName: "",
-          lastName: "",
-          email: "",
-          company: "",
-          projectType: "",
-          budget: "",
-          projectDescription: "",
-        });
-        Navigate("/");
-      } else {
-        toast.error("Something went wrong. Please try again.");
+      // Only validate on blur to reduce unnecessary re-renders
+      if (errors[name as keyof typeof errors]) {
+        const error = validateField(name, value);
+        setErrors((prev) => ({ ...prev, [name]: error }));
       }
-    } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "❌ Submission failed. Try again."
-      );
-      console.error("❌ Axios error:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [formData, validateForm, BackendUrl, Navigate]);
+    },
+    [errors]
+  );
 
-  const loadingSpinner = useMemo(() => (
-    <div className="flex items-center justify-center">
-      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-      Sending...
-    </div>
-  ), []);
+  const handleFormSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      if (!validateForm()) {
+        toast.error("Please fix the errors in the form");
+        return;
+      }
+
+      setLoading(true);
+      try {
+        console.log("Submitted Data:", formData);
+        const response = await axios.post(
+          `${BackendUrl}/api/users/query`,
+          formData
+        );
+
+        if (response.status === 200) {
+          toast.success("✅ Consultation request sent successfully!");
+
+          // Track successful form submission
+          trackConversion("contact_form_submit", {
+            project_type: formData.projectType,
+            company: formData.company,
+          });
+
+          trackEvent("form_submit", "contact", "consultation_request");
+
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            company: "",
+            projectType: "",
+            projectDescription: "",
+          });
+          setErrors({
+            firstName: "",
+            lastName: "",
+            email: "",
+            company: "",
+            projectType: "",
+            projectDescription: "",
+          });
+          Navigate("/");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      } catch (error) {
+        toast.error(
+          error?.response?.data?.message || "❌ Submission failed. Try again."
+        );
+        console.error("❌ Axios error:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [formData, validateForm, BackendUrl, Navigate]
+  );
+
+  const loadingSpinner = useMemo(
+    () => (
+      <div className="flex items-center justify-center">
+        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+        Sending...
+      </div>
+    ),
+    []
+  );
 
   return (
     <div className="min-h-screen bg-white">
@@ -277,8 +279,14 @@ const Contact = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     onBlur={(e) => {
-                      const error = validateField(e.target.name, e.target.value);
-                      setErrors((prev) => ({ ...prev, [e.target.name]: error }));
+                      const error = validateField(
+                        e.target.name,
+                        e.target.value
+                      );
+                      setErrors((prev) => ({
+                        ...prev,
+                        [e.target.name]: error,
+                      }));
                     }}
                     className={errors.firstName ? "border-red-500" : ""}
                   />
@@ -295,8 +303,14 @@ const Contact = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     onBlur={(e) => {
-                      const error = validateField(e.target.name, e.target.value);
-                      setErrors((prev) => ({ ...prev, [e.target.name]: error }));
+                      const error = validateField(
+                        e.target.name,
+                        e.target.value
+                      );
+                      setErrors((prev) => ({
+                        ...prev,
+                        [e.target.name]: error,
+                      }));
                     }}
                     className={errors.lastName ? "border-red-500" : ""}
                   />
@@ -379,7 +393,7 @@ const Contact = () => {
                 )}
               </div>
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-2">
                   Budget Range
                 </label>
@@ -406,7 +420,7 @@ const Contact = () => {
                 {errors.budget && (
                   <p className="text-red-500 text-sm mt-1">{errors.budget}</p>
                 )}
-              </div>
+              </div> */}
 
               <div>
                 <Textarea
@@ -434,7 +448,9 @@ const Contact = () => {
                 disabled={loading}
                 className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white disabled:opacity-50"
               >
-                {loading ? loadingSpinner : (
+                {loading ? (
+                  loadingSpinner
+                ) : (
                   <>
                     Send Message
                     <Send className="ml-2 h-4 w-4" />

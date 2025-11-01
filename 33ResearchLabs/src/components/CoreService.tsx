@@ -73,11 +73,16 @@ const CoreServices = () => {
             </p>
 
             {/* Feature Points */}
-            <ul className="space-y-2 text-sm text-neutral-700 pl-4 list-disc">
+            <ul className="space-y-2 text-sm text-neutral-700 pl-4 list-disc mb-4">
               {service.points.map((point, i) => (
                 <li key={i}>{point}</li>
               ))}
             </ul>
+
+            {/* Coming Soon Badge */}
+            <span className="inline-block px-3 py-1 text-xs font-medium bg-electric-100 text-electric-600 rounded-full">
+              Coming Soon
+            </span>
           </motion.div>
         ))}
       </div>

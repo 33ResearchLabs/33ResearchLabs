@@ -53,7 +53,6 @@ export const postUserQuery = async (req, res) => {
     email,
     company,
     projectType,
-    budget,
     projectDescription,
   } = req.body;
 
@@ -64,7 +63,6 @@ export const postUserQuery = async (req, res) => {
     !email ||
     !company ||
     !projectType ||
-    !budget ||
     !projectDescription
   ) {
     return res.status(400).json({ message: "All fields are required" });
@@ -78,11 +76,11 @@ export const postUserQuery = async (req, res) => {
       email,
       company,
       projectType,
-      budget,
       projectDescription,
     });
 
     await newQuery.save();
+    res.status(200).json({ message: "User query submitted and email sent!" });
     console.log("✅ User query saved to database");
 
     // ✅ 2.5. Update daily limit count
@@ -99,7 +97,6 @@ export const postUserQuery = async (req, res) => {
     );
     io.emit("new-userQuery", "new message");
     // ✅ 4. Respond success
-    res.status(200).json({ message: "User query submitted and email sent!" });
   } catch (error) {
     console.error("❌ Error in postUserQuery:", error);
     res
@@ -130,6 +127,9 @@ export const postUserConsultation = async (req, res) => {
 
     // ✅ 2.5. Update daily limit count
     await updateDailyCount(req.limitRecord, "consultation");
+    res
+      .status(200)
+      .json({ message: "User consultation submitted and email sent!" });
 
     // ✅ 3. Setup and send mail to owner
     const transporter = nodemailer.createTransport({
@@ -157,9 +157,6 @@ export const postUserConsultation = async (req, res) => {
     console.log("✅ Email sent to owner");
     io.emit("new-consultation", { id: newQuery._id, name: newQuery.name });
     // ✅ 4. Respond success
-    res
-      .status(200)
-      .json({ message: "User consultation submitted and email sent!" });
   } catch (error) {
     console.error("❌ Error in postUserConsultation:", error);
     res
@@ -189,6 +186,7 @@ export const postUserSubscribe = async (req, res) => {
     });
 
     await newQuery.save();
+    res.status(200).json({ message: "User Subscribe sucessfully!" });
     console.log("✅ User query saved to database");
 
     // ✅ 3. Setup and send mail to owner
@@ -215,7 +213,6 @@ export const postUserSubscribe = async (req, res) => {
     console.log("✅ Email sent to owner");
 
     // ✅ 4. Respond success
-    res.status(200).json({ message: "User Subscribe sucessfully!" });
   } catch (error) {
     console.error("❌ Error in user Subscribe", error);
     res
