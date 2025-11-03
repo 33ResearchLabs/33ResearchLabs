@@ -9,14 +9,16 @@ const router = express.Router();
 // get Admin Dashboard deta
 router.get("/stat",GetAllStates)
 
-// post blog 
-router.post("/blog",uploads.single("image"),PostNewBlog);
-// get Blogs
+// post blog
+router.post("/blog", PostNewBlog);
+// get all blogs
 router.get('/blogs', GetBlog)
+// get single blog by id
+router.get('/blog/:id', getABlog)
 // update blog
-router.patch('/blog/:id',uploads.single("image"),UpdateBlog)
-// Delete blog
-router.delete('/blog/:id',DeleteBlog)
+router.patch('/blog/:id', UpdateBlog)
+// delete blog
+router.delete('/blog/:id', DeleteBlog)
 
 // Consultation
 router.get('/consultation', getUserConsultation)
