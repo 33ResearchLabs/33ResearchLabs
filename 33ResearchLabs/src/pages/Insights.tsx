@@ -10,12 +10,12 @@ import {
   Shield as ShieldIcon,
   Layers as LayersIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { featuredPost, posts, generateSlug } from "@/data/posts";
+import { featuredPost, generateSlug } from "@/data/posts";
 import axios from "axios";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet";
@@ -24,34 +24,50 @@ import {
   generateRobotsContent,
   ROBOTS_CONFIG,
 } from "@/utils/seo";
+import { fetchAllPosts, Post } from "@/api/posts";
 
 const Insights = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [posts, setPosts] = useState<Post[]>([]);
   const navigate = useNavigate();
   const BackendUrl = import.meta.env.VITE_BACKEND_URL;
 
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        setIsLoading(true);
+        const data = await fetchAllPosts();
+        setPosts(data);
+      } catch (error) {
+        toast.error("Failed to load posts");
+        console.error("Error loading posts:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadPosts();
+  }, []);
+
   const handleSubscribeEmail = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
+    const loadingToast = toast.loading("Subscribing...");
     try {
       const response = await axios.post(`${BackendUrl}/api/users/subscribe`, {
         email,
       });
 
       if (response.status === 200) {
-        toast.success("✅ Subscribed successfully");
+        toast.success("✅ Subscribed successfully", { id: loadingToast });
         setEmail("");
-        setIsLoading(false);
       } else {
-        setIsLoading(false);
-        toast.error("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again.", { id: loadingToast });
       }
     } catch (error) {
-      setIsLoading(false);
       toast.error(
-        error?.response?.data?.message || "❌ Submission failed. Try again."
+        error?.response?.data?.message || "❌ Submission failed. Try again.",
+        { id: loadingToast }
       );
       console.error("❌ Axios error:", error);
     }
@@ -73,6 +89,18 @@ const Insights = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
+
+  const getIconComponent = (iconName: string) => {
+    const icons = {
+      Brain,
+      LayersIcon,
+      ShieldIcon,
+      TrendingUp,
+      Code,
+    };
+    return icons[iconName] || Code;
+  };
+
   const filteredPosts =
     selectedCategory === "All"
       ? posts
@@ -233,9 +261,11 @@ const Insights = () => {
       <section className="py-16 bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
+            {filteredPosts.map((post, index) => {
+              const IconComponent = getIconComponent(post.icon);
+              return (
               <Card
-                key={index}
+                key={post._id || index}
                 className="border-neutral-200 hover:shadow-lg transition-all duration-300 cursor-pointer group overflow-hidden"
                 onClick={() =>
                   navigate(`/insights/article/${generateSlug(post.title)}`)
@@ -244,7 +274,7 @@ const Insights = () => {
                 <div
                   className={`h-24 bg-gradient-to-r ${post.color} flex items-center justify-between px-6 relative overflow-hidden`}
                 >
-                  <post.icon />
+                  <IconComponent className="h-8 w-8 text-white" />
                   <div className="text-white/70 text-xs font-mono">
                     {post.category.toUpperCase()}
                   </div>
@@ -288,7 +318,8 @@ const Insights = () => {
                   </div>
                 </CardContent>
               </Card>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>

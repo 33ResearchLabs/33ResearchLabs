@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { findPostBySlug, featuredPost } from "@/data/posts";
+import { generateSlug } from "@/data/posts";
 import ShareButton from "@/components/ShareButton";
 import { Helmet } from "react-helmet";
 import {
@@ -10,17 +10,48 @@ import {
   generateRobotsContent,
   ROBOTS_CONFIG,
 } from "@/utils/seo";
+import { useEffect, useState } from "react";
+import { fetchAllPosts, Post } from "@/api/posts";
 
 const ArticleDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [post, setPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Find the article by slug from URL params
-  const post = findPostBySlug(id || "");
+  useEffect(() => {
+    const loadPost = async () => {
+      try {
+        setLoading(true);
+        const posts = await fetchAllPosts();
+        // Find post by matching slug
+        const foundPost = posts.find((p) => generateSlug(p.title) === id);
+        if (foundPost) {
+          setPost(foundPost);
+        } else {
+          navigate("/insights");
+        }
+      } catch (error) {
+        console.error("Error loading post:", error);
+        navigate("/insights");
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadPost();
+  }, [id, navigate]);
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    );
+  }
 
   // If no post found, show 404 or redirect
   if (!post) {
-    navigate("/insights");
     return null;
   }
 
@@ -33,7 +64,9 @@ const ArticleDetail = () => {
     date: post.date,
     readTime: post.readTime,
     image: post.image || "/ai.jpg",
-    content: `${post.excerpt}
+    content:
+      (post as any).content ||
+      `${post.excerpt}
 
 ## Deep Dive Analysis
 
@@ -120,7 +153,7 @@ The insights presented in this analysis highlight the importance of staying info
                 >
                   {articleContent.category}
                 </Badge>
-                <h1 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4 leading-tight">
+                <h1 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4 leading-tight capitalize">
                   {articleContent.title}
                 </h1>
               </div>
@@ -176,21 +209,78 @@ The insights presented in this analysis highlight the importance of staying info
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="prose prose-lg max-w-none prose-headings:text-neutral-900 prose-p:text-neutral-700 prose-p:leading-relaxed">
           {articleContent.content.split("\n\n").map((paragraph, index) => {
-            if (paragraph.startsWith("## ")) {
-              return (
-                <h2
-                  key={index}
-                  className="text-2xl font-bold text-neutral-900 mt-12 mb-6"
-                >
-                  {paragraph.replace("## ", "")}
-                </h2>
-              );
+            const lines = paragraph.split("\n");
+            const elements: React.ReactElement[] = [];
+
+            let i = 0;
+            while (i < lines.length) {
+              const line = lines[i];
+
+              // Handle headings
+              if (line.startsWith("## ")) {
+                elements.push(
+                  <h2
+                    key={`${index}-h2-${i}`}
+                    className="text-2xl font-bold text-neutral-900 mt-12 mb-6"
+                  >
+                    {line.replace("## ", "").trim()}
+                  </h2>
+                );
+                i++;
+              }
+              // Handle bullet points (collect consecutive bullets)
+              else if (line.startsWith("• ") || line.startsWith("* ")) {
+                const bulletPoints: string[] = [];
+                while (
+                  i < lines.length &&
+                  (lines[i].startsWith("• ") || lines[i].startsWith("* "))
+                ) {
+                  bulletPoints.push(lines[i]);
+                  i++;
+                }
+                elements.push(
+                  <ul
+                    key={`${index}-ul-${i}`}
+                    className="list-disc list-inside space-y-3 mb-6 text-neutral-700"
+                  >
+                    {bulletPoints.map((point, j) => {
+                      const cleanedPoint = point
+                        .replace(/^[•*] /, "")
+                        .replace(
+                          /\*\*(.*?)\*\*/g,
+                          '<strong class="font-semibold text-neutral-900">$1</strong>'
+                        );
+                      return (
+                        <li
+                          key={j}
+                          className="leading-relaxed text-lg"
+                          dangerouslySetInnerHTML={{ __html: cleanedPoint }}
+                        />
+                      );
+                    })}
+                  </ul>
+                );
+              }
+              // Regular text
+              else if (line.trim()) {
+                const cleanedLine = line.replace(
+                  /\*\*(.*?)\*\*/g,
+                  '<strong class="font-semibold text-neutral-900">$1</strong>'
+                );
+                elements.push(
+                  <p
+                    key={`${index}-p-${i}`}
+                    className="text-neutral-700 leading-relaxed mb-6 text-lg"
+                    dangerouslySetInnerHTML={{ __html: cleanedLine }}
+                  />
+                );
+                i++;
+              } else {
+                i++;
+              }
             }
-            return (
-              <p key={index} className="text-neutral-700 leading-relaxed mb-6">
-                {paragraph}
-              </p>
-            );
+
+            return <div key={index}>{elements}</div>;
           })}
         </div>
 

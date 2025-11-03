@@ -193,9 +193,12 @@ export const BlogDashboard = () => {
                         <TableCell className="py-4">
                           <div className="w-16 h-16 rounded-lg overflow-hidden border border-neutral-200">
                             <img
-                              src={`${BackendUrl}/uploads/${blog.image}`}
+                              src={blog.image || '/placeholder.png'}
                               alt={blog.title}
                               className="w-full h-full object-cover"
+                              onError={(e) => {
+                                e.currentTarget.src = '/placeholder.png';
+                              }}
                             />
                           </div>
                         </TableCell>
@@ -290,9 +293,12 @@ export const BlogDashboard = () => {
             <div className="overflow-y-auto max-h-[60vh] p-6">
               <div className="mb-6">
                 <img
-                  src={`${BackendUrl}/uploads/${selectedBlog.image}`}
+                  src={selectedBlog.image || '/placeholder.png'}
                   alt="Blog"
                   className="w-full h-64 object-cover rounded-lg shadow-md"
+                  onError={(e) => {
+                    e.currentTarget.src = '/placeholder.png';
+                  }}
                 />
               </div>
 
