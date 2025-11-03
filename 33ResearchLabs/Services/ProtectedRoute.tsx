@@ -2,26 +2,48 @@ import { useEffect, useState, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { verifyToken } from "./AuthServices";
 
-interface ProtectRoute {
+interface ProtectRouteProps {
   children: ReactNode;
 }
 
-export function ProtectedRoute({ children }: ProtectRoute) {
+export function ProtectedRoute({ children }: ProtectRouteProps) {
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  console.log(isAuthenticated, "check Authenticity");
   useEffect(() => {
     async function checkAuth() {
-      const user = await verifyToken();
-      console.log(user);
-      setIsAuthenticated(!!user);
-      setIsAuthenticated(true);
-      setLoading(false);
+      try {
+        const user = await verifyToken();
+        console.log("verifyToken result:", user);
+
+        // ✅ Adjust logic depending on what verifyToken returns
+        if (user && user.valid) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
     }
+
     checkAuth();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen text-gray-600">
+        Checking authentication...
+      </div>
+    );
+  }
 
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <>{children}</>;
 }

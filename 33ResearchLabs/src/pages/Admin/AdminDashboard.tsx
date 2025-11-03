@@ -23,18 +23,11 @@ import { Badge } from "@/components/ui/badge";
 
 const AdminDashboard = () => {
   const [admin, setAdmin] = useState({
-    name: "Admin",
-    email: "admin@email.com",
+    name: "",
+    email: "",
   });
   const [showSubscriberModal, setShowSubscriberModal] = useState(false);
-  useEffect(() => {
-    async function fetched() {
-      const res = await axios.get("http://localhost:4400/api/admin/verify", {
-        withCredentials: true,
-      });
-    }
-    fetched();
-  }, []);
+
   const [stats, setStats] = useState({
     subscribers: 0,
     blogs: 0,
