@@ -180,7 +180,9 @@ const App = () => (
                 </ProtectedRoute>
               }
             >
-              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route index element={<AdminDashboard />} /> {/* /admin */}
+              <Route path="dashboard" element={<AdminDashboard />} />{" "}
+              {/* /admin/dashboard */}
               <Route path="blog" element={<BlogDashboard />} />
               <Route path="blog/editblog/:id" element={<EditBlogPage />} />
               <Route path="newblog" element={<CreateBlogPage />} />
