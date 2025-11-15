@@ -9,7 +9,6 @@ interface ProtectRouteProps {
 export function ProtectedRoute({ children }: ProtectRouteProps) {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  console.log(isAuthenticated, "check Authenticity");
   useEffect(() => {
     async function checkAuth() {
       try {
@@ -17,7 +16,7 @@ export function ProtectedRoute({ children }: ProtectRouteProps) {
         console.log("verifyToken result:", user);
 
         // ✅ Adjust logic depending on what verifyToken returns
-        if (user && user.valid) {
+        if (user && user.admin) {
           setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);
@@ -32,6 +31,7 @@ export function ProtectedRoute({ children }: ProtectRouteProps) {
 
     checkAuth();
   }, []);
+  console.log(isAuthenticated, "check Authenticity");
 
   if (loading) {
     return (
