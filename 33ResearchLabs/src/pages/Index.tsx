@@ -1,305 +1,258 @@
-import { Helmet } from "react-helmet";
-import { ArrowRight, Cpu, Shield, Layers, ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
-import { partnerMeta, partners } from "@/data/posts";
+import React from 'react';
+import Button from '../components/Button';
+import FocusCard from '../components/FocusCard';
+import MetricCard from '../components/MetricCard';
+import DiffCard from '../components/DiffCard';
+import { PRIMARY_BLUE, BG_LIGHTEST_BLUE, TEXT_DARK, BORDER_LIGHT, BG_FOOTER, PASTEL_BLUE, PASTEL_GREEN, PASTEL_YELLOW, PASTEL_PURPLE } from '../config/colors';
+
 import {
-  generateCanonicalUrl,
-  generateRobotsContent,
-  ROBOTS_CONFIG,
-} from "@/utils/seo";
-import { trackEvent } from "@/utils/googleAnalytics";
+  Menu,
+  Lightbulb,
+  Zap,
+  Cog,
+  TrendingUp,
+  Shield,
+  Server,
+  Globe,
+  Twitter,
+  Linkedin,
+  Mail
+} from 'lucide-react';
 
-// NOTE: No need for useEffect or useNavigate for this scroll behavior.
-
-const Index = () => {
-  const focusAreas = [
-    {
-      icon: Cpu,
-      title: "Artificial Intelligence",
-      description:
-        "From LLM infrastructure to autonomous systems. We build AI that thinks ahead.",
-    },
-    {
-      icon: Layers,
-      title: "Blockchain & Web3",
-      description:
-        "Decentralized protocols, DeFi platforms, and next-gen crypto infrastructure.",
-    },
-    {
-      icon: Shield,
-      title: "Cybersecurity",
-      description:
-        "Zero-trust architecture, quantum-resistant protocols, and enterprise security.",
-    },
-  ];
-
+export default function IndexPage() {
   return (
-    // FIX 1: Added snap-scroll behavior to the main container.
-    // It will now scroll vertically (snap-y), be mandatory (snap-mandatory),
-    // fill the screen height (h-screen), and be scrollable (overflow-y-scroll).
-    <main className=" ">
-      <Helmet>
-        <title>
-          33 Research Labs – AI, Web3 & Cybersecurity Infrastructure
-        </title>
-        <meta
-          name="description"
-          content="33 Research Labs is a deep-tech venture studio building next-gen AI, Web3, and cybersecurity products with startup velocity and global scale."
-        />
-        <meta
-          name="keywords"
-          content="33 Research Labs, 33 Research Labs, AI startup, Web3 infrastructure, blockchain, cybersecurity, crypto venture studio"
-        />
-        <meta
-          property="og:title"
-          content="33 Research Labs – Building the Infrastructure of the Future"
-        />
-        <meta
-          property="og:description"
-          content="Crypto-native venture studio and deep-tech consultancy helping launch next-gen AI and Web3 products."
-        />
-        <meta property="og:image" content="/preview.jpg" />
-        <meta property="og:url" content="https://www.33researchlabs.xyz/" />
-        <meta
-          name="robots"
-          content={generateRobotsContent(ROBOTS_CONFIG.INDEX)}
-        />
-        <link rel="canonical" href={generateCanonicalUrl("/")} />
-      </Helmet>
+    <div className={`font-inter text-[${TEXT_DARK}] antialiased min-h-screen bg-white`}>
+      
+      {/* Navigation Bar */}
+      <header 
+        className={`sticky top-0 z-50 bg-white/98 backdrop-blur-sm border-b py-4`}
+        style={{ borderColor: BORDER_LIGHT }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <a href="/" className={`text-2xl font-bold`} style={{ color: TEXT_DARK }}>
+            33 Research <span style={{ color: PRIMARY_BLUE }}>Labs</span>
+          </a>
 
-      {/* Hero Section */}
-      {/* FIX 2: Made this section a snap point.
-          - `snap-start` makes this the snap alignment point.
-          - `` ensures it fills the viewport height.
-          - `flex flex-col justify-center` keeps your content vertically centered. */}
-      <section className="snap-start  flex flex-col justify-center relative overflow-hidden from-white via-neutral-50 to-electric-50/30 py-24 lg:py-32">
-        <div className="absolute inset-0 bg-grid-neutral-100/50 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl lg:text-5xl font-bold mb-6 animate-fade-in relative inline-block group">
-              <span className="text-[#1DA1F2]">33 Research Labs</span>{" "}
-              <br className="hidden md:block" />
-              is Building the Infrastructure of the Future
-            </h1>
-            <p className="text-xl lg:text-2xl text-gray-600 mb-8 leading-relaxed animate-fade-in transition-transform duration-500 hover:scale-105">
-              AI. Blockchain. Cybersecurity. And the velocity of startup
-              execution.
-            </p>
-            <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto animate-fade-in transition-transform duration-500 hover:-translate-y-1">
-              <strong>33 Research Labs</strong> is a crypto-native venture
-              studio and deep-tech consultancy that partners with founders to
-              launch and scale next-gen products across AI, Web3, and digital
-              infrastructure. Engineered for speed. Built with trust.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-              <Button
-                size="lg"
-                className="bg-[#1DA1F2] hover:bg-electric-700 text-white transform transition-transform duration-300 hover:scale-105"
-                asChild
-              >
-                <Link
-                  to="/contact-us"
-                  onClick={() =>
-                    trackEvent("click", "cta", "hero_start_building")
-                  }
-                >
-                  Start Building
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
+          {/* Desktop Links */}
+          <nav className="hidden lg:flex space-x-10 items-center">
+            <a href="/" className={`text-gray-900 font-medium transition hover:text-[#2F6BFF]`}>Home</a>
+            <a href="/services" className={`text-gray-900 font-medium transition hover:text-[#2F6BFF]`}>Services</a>
+            <a href="/insights" className={`text-gray-900 font-medium transition hover:text-[#2F6BFF]`}>Insights</a>
+            <a href="/about-us" className={`text-gray-900 font-medium transition hover:text-[#2F6BFF]`}>About us</a>
+            <Button href="/get-started" primary className="ml-6 py-2.5 px-5">Get Started</Button>
+          </nav>
+
+          {/* Mobile Menu Toggle */}
+          <button className="lg:hidden p-2 border border-gray-300 rounded-lg text-gray-700 hover:border-blue-500">
+            <Menu size={24} />
+          </button>
+        </div>
+      </header>
+
+      {/* 1. Hero Section */}
+      <section className="py-24 md:py-32 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span 
+            className={`inline-block text-sm font-semibold px-4 py-2 mb-4 rounded-full border border-blue-100`}
+            style={{ color: PRIMARY_BLUE, backgroundColor: BG_LIGHTEST_BLUE }}
+          >
+            33 Research Labs
+          </span>
+          <h1 className={`text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight`} style={{ color: TEXT_DARK }}>
+            Building the Infrastructure of the Future.
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
+            We are a full-stack studio accelerating innovation in the Web3, AI, and Cybersecurity domains, combining precision development with strategic market execution.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Button href="/get-started" primary>Start Building</Button>
+            <Button href="/services" primary={false}>View Services</Button>
           </div>
         </div>
       </section>
 
-      {/* Focus Areas */}
-      <section
-        id="services"
-        className="snap-start  flex flex-col justify-center py-24 bg-white"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-              Where We Focus ?
+      {/* 2. Where We Focus Section (Cards) */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="mb-16">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4`} style={{ color: TEXT_DARK }}>
+              Where We <span style={{ color: PRIMARY_BLUE }}>Focus</span>
             </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              33 Research Labs brings deep expertise across the technologies
-              that will define the next decade.
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Our expertise spans the most critical areas of next-generation technology, ensuring your project has a foundation built for scale and security.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {focusAreas.map((area) => (
-              <Card
-                key={area.title}
-                className=" hover:border-electric-300 transition-all duration-300 group shadow-lg hover:bg-electric-400 hover:duration-400"
-              >
-                <CardContent className="p-8 hover:scale-105">
-                  <div className="w-12 h-12 bg-electric-100 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-electric-200 transition-colors duration-300">
-                    <area.icon className="h-6 w-6 text-[#1DA1F2]" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-3 text-center">
-                    {area.title}
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed text-center ">
-                    {area.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+            <FocusCard
+              title="Web3 & Blockchain Development"
+              description="From complex smart contracts to decentralized applications (DApps), we engineer secure, audited, and scalable blockchain solutions on any major network."
+              icon={Globe}
+            />
+            <FocusCard
+              title="AI/ML Integration & Tools"
+              description="Leverage machine learning for data analysis, automated trading strategies, or unique on-chain AI tools. We turn algorithms into market advantages."
+              icon={Server}
+            />
+            <FocusCard
+              title="Cybersecurity & Auditing"
+              description="Security is non-negotiable. We provide comprehensive code audits, penetration testing, and robust security infrastructure design to protect your assets."
+              icon={Shield}
+            />
           </div>
         </div>
       </section>
 
-      {/* Long-form SEO Content */}
-      {/* FIX 3: Changed the wrapping div to a section to make it a snap point. */}
-      <section
-        id="differentiators"
-        className="snap-start  flex flex-col justify-center p-6 lg:p-8 bg-white"
+      {/* 3. What Makes 33 Research Labs Different? Section (Feature Blocks) */}
+      <section 
+        className={`py-20 md:py-24`} 
+        style={{ backgroundColor: BG_LIGHTEST_BLUE }}
       >
-        <div className="bg-white shadow-xl max-w-7xl mx-auto rounded-2xl border border-gray-200 p-6 lg:p-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 text-center">
-            What Makes <span className="text-[#1DA1F2]">33 Research Labs</span>{" "}
-            Different ?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex items-start space-x-4 p-6 bg-electric-50 rounded-xl shadow-sm border border-electric-100">
-              <div className="flex-shrink-0 text-[#1DA1F2]">
-                <Cpu className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  AI-First Approach
-                </h3>
-                <p className="text-gray-600">
-                  From LLM ops to multi-agent coordination, we help teams deploy
-                  intelligent systems that learn and adapt.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4 p-6 bg-green-50 rounded-xl shadow-sm border border-green-100">
-              <div className="flex-shrink-0 text-green-600">
-                <Shield className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  Security by Design
-                </h3>
-                <p className="text-gray-600">
-                  Our cybersecurity experts design resilient systems, from
-                  zero-trust infrastructure to quantum-safe protocols.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4 p-6 bg-purple-50 rounded-xl shadow-sm border border-purple-100">
-              <div className="flex-shrink-0 text-purple-600">
-                <Layers className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  Crypto-Native Expertise
-                </h3>
-                <p className="text-gray-600">
-                  We've helped launch DeFi platforms, audited smart contracts,
-                  and built token economies from the ground up.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4 p-6 bg-yellow-50 rounded-xl shadow-sm border border-yellow-100">
-              <div className="flex-shrink-0 text-yellow-600">
-                <ArrowUpRight className="w-8 h-8" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  Startup Execution Speed
-                </h3>
-                <p className="text-gray-600">
-                  Our team moves fast — helping you go from MVP to production in
-                  weeks, not months.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted Partners */}
-      <section
-        id="trusted-partners"
-        className="snap-start  flex flex-col justify-center py-24 bg-neutral-50"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-              <span className="text-[#1DA1F2]">Trusted</span> by Industry
-              Leaders
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="mb-16">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4`} style={{ color: TEXT_DARK }}>
+              What Makes <span style={{ color: PRIMARY_BLUE }}>33 Research Labs</span> Different?
             </h2>
-            <p className="text-lg text-neutral-600">
-              Trusted by global funds and early adopters backing the future of
-              AI, Web3, and cybersecurity. <br />
-              Discover why teams choose <strong>33 Research Labs</strong> to
-              build and scale.
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Our approach is centered on speed, clarity, and deep sector expertise, differentiating us from conventional development houses.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {partners.map((partner) => {
-              const meta = partnerMeta[partner];
-              return (
-                <div
-                  key={partner}
-                  className="group p-4 border rounded-2xl bg-white shadow-sm hover:shadow-2xl hover:scale-105 hover:shadow-black  transition-all duration-300 flex flex-col items-center text-center"
-                >
-                  <img
-                    src={meta.image}
-                    alt={`${partner} logo`}
-                    className="w-24 h-24 object-contain mb-3 transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <h3 className="text-sm font-semibold text-neutral-900">
-                    {partner}
-                  </h3>
-                  <p className="text-xs text-neutral-600 mt-2 line-clamp-3">
-                    {meta.description}
-                  </p>
-                </div>
-              );
-            })}
+
+          <div className="bg-white p-6 md:p-10 rounded-xl shadow-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <DiffCard
+                title="Integrated Strategy"
+                description="We combine product strategy, technical development, and go-to-market planning from day one, ensuring alignment across all phases."
+                icon={Lightbulb}
+                colorHex={PASTEL_BLUE}
+              />
+              <DiffCard
+                title="Rapid Prototyping"
+                description="Our agile engineering teams are optimized for speed, allowing us to deliver functional prototypes and MVPs faster than industry standards."
+                icon={Zap}
+                colorHex={PASTEL_GREEN}
+              />
+              <DiffCard
+                title="Full-Stack Ownership"
+                description="We handle everything from backend architecture and smart contracts to front-end UI/UX and API integration. One team, zero handoffs."
+                icon={Cog}
+                colorHex={PASTEL_YELLOW}
+              />
+              <DiffCard
+                title="Growth-Oriented"
+                description="Our work is always informed by market data, designed not just to function, but to scale, attract users, and achieve commercial success."
+                icon={TrendingUp}
+                colorHex={PASTEL_PURPLE}
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section
-        id="contact-cta"
-        className="snap-start  flex flex-col justify-center p-6 lg:p-8 bg-white max-w-7xl mx-auto"
-      >
-        <div className="text-center bg-[#1DA1F2] text-white p-8 rounded-2xl shadow-lg">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight py-6">
-            Join the Future with <span className="">33 Research Labs</span>
-          </h2>
-          <p className="text-lg mb-6 opacity-90 max-w-5xl">
-            At <strong className="font-semibold">33 Research Labs</strong>, we
-            believe the next decade of innovation will be shaped by companies
-            who build fast, secure, and intelligently - whether in AI, crypto,
-            or enterprise tech.
-          </p>
-          <p className="text-lg opacity-90">
-            Reach out today to see how{" "}
-            <strong className="font-semibold">33 Research Labs</strong> can help
-            you design, build, and scale your product.
-          </p>
-          <Link
-            to="/contact-us"
-            onClick={() => trackEvent("click", "cta", "footer_get_in_touch")}
-          >
-            <button className="mt-8 bg-white text-[#1DA1F2] font-bold py-3 px-8 rounded-full shadow-lg hover:bg-electric-100 transition duration-300 transform hover:scale-105">
-              Get in Touch
-            </button>
-          </Link>
+      {/* 4. Our Proof of Work Section (Metrics) */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="mb-16">
+            <h2 className={`text-3xl md:text-4xl font-bold`} style={{ color: TEXT_DARK }}>
+              Our <span style={{ color: PRIMARY_BLUE }}>Proof</span> of Work
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-2">
+              Numbers that reflect our execution, not logos.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <MetricCard value="$6M+" description="raised by teams we’ve supported" />
+            <MetricCard value="40+" description="production deployments" />
+            <MetricCard value="12+" description="chains integrated (EVM + Solana + custom networks)" />
+            <MetricCard value="&lt;0.1%" description="post-audit issue rate" />
+            <MetricCard value="3-week" description="average time from prototype to MVP" />
+            <MetricCard value="100K+" description="users across products we helped build" />
+          </div>
         </div>
       </section>
-    </main>
-  );
-};
 
-export default Index;
+      {/* 5. Final CTA Section */}
+      <section 
+        className={`py-20 md:py-28`}
+        style={{ backgroundColor: BG_LIGHTEST_BLUE }}
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4`} style={{ color: TEXT_DARK }}>
+            Join the Future with <span style={{ color: PRIMARY_BLUE }}>33 Research Labs</span>
+          </h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Ready to move from idea to market impact? Our team is standing by to discuss your vision and strategize the path forward.
+          </p>
+          <Button href="/get-started" primary className="py-3.5 px-8">Get in Touch</Button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer 
+        className={`text-gray-300 py-16 text-sm`}
+        style={{ backgroundColor: BG_FOOTER }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-5 md:gap-16">
+            
+            {/* Logo and Socials */}
+            <div className="col-span-2 md:col-span-2">
+              <a href="/" className="text-2xl font-bold text-white mb-4 block">
+                33 Research <span style={{ color: PRIMARY_BLUE }}>Labs</span>
+              </a>
+              <p className="text-gray-500 mb-4">Accelerating innovation in Web3, AI, and Cybersecurity.</p>
+              <div className="flex space-x-4">
+                <a href="https://twitter.com/33ResearchLabs" className="text-gray-400 hover:text-[#2F6BFF] transition">
+                  <Twitter size={20} />
+                </a>
+                <a href="https://www.linkedin.com/company/33researchlabs/" className="text-gray-400 hover:text-[#2F6BFF] transition">
+                  <Linkedin size={20} />
+                </a>
+                <a href="mailto:info@33researchlabs.xyz" className="text-gray-400 hover:text-[#2F6BFF] transition">
+                  <Mail size={20} />
+                </a>
+              </div>
+            </div>
+
+            {/* Company Links */}
+            <div>
+              <h4 className="font-semibold text-white mb-4">Company</h4>
+              <ul className="space-y-3">
+                <li><a href="/about-us" className="text-gray-400 hover:text-[#2F6BFF] transition">About Us</a></li>
+                <li><a href="/careers" className="text-gray-400 hover:text-[#2F6BFF] transition">Careers</a></li>
+                <li><a href="/contact" className="text-gray-400 hover:text-[#2F6BFF] transition">Contact</a></li>
+                <li><a href="/insights" className="text-gray-400 hover:text-[#2F6BFF] transition">Insights</a></li>
+              </ul>
+            </div>
+            
+            {/* Services Links */}
+            <div>
+              <h4 className="font-semibold text-white mb-4">Services</h4>
+              <ul className="space-y-3">
+                <li><a href="/services#blockchain" className="text-gray-400 hover:text-[#2F6BFF] transition">Blockchain Dev</a></li>
+                <li><a href="/services#ai" className="text-gray-400 hover:text-[#2F6BFF] transition">AI/ML Solutions</a></li>
+                <li><a href="/services#security" className="text-gray-400 hover:text-[#2F6BFF] transition">Security & Audit</a></li>
+                <li><a href="/services#marketing" className="text-gray-400 hover:text-[#2F6BFF] transition">Web3 Marketing</a></li>
+              </ul>
+            </div>
+            
+            {/* Legal Links */}
+            <div>
+              <h4 className="font-semibold text-white mb-4">Legal</h4>
+              <ul className="space-y-3">
+                <li><a href="/terms-of-service" className="text-gray-400 hover:text-[#2F6BFF] transition">Terms of Service</a></li>
+                <li><a href="/privacy-policy" className="text-gray-400 hover:text-[#2F6BFF] transition">Privacy Policy</a></li>
+                <li><a href="/disclaimer" className="text-gray-400 hover:text-[#2F6BFF] transition">Disclaimer</a></li>
+                <li><a href="/sitemap.xml" className="text-gray-400 hover:text-[#2F6BFF] transition">Sitemap</a></li>
+              </ul>
+            </div>
+            
+          </div>
+          
+          <div className="border-t border-gray-800 mt-10 pt-8 text-center text-xs text-gray-500">
+            &copy; 2024 33 Research Labs. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

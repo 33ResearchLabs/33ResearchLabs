@@ -1,0 +1,12 @@
+export const PRIMARY_BLUE = "#2F6BFF";
+export const HOVER_BLUE = "#2659D9";
+export const BG_LIGHTEST_BLUE = "#F3F6FF";
+export const TEXT_DARK = "#1C1C1E";
+export const BG_FOOTER = "#1C1C1E";
+export const BORDER_LIGHT = "#E0E0E0";
+export const BORDER_METRICS = "#E6E8EC";
+// Pastel tints for DiffCards
+export const PASTEL_BLUE = "#e8f0ff";
+export const PASTEL_GREEN = "#e9fff1";
+export const PASTEL_YELLOW = "#fff8e8";
+export const PASTEL_PURPLE = "#f8e8ff";
