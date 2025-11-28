@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Favicon and Icons for all platforms -->
@@ -48,13 +45,747 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
-</head>
 
-<body>
-  <div id="root"></div>
+  <!-- New CSS for the premium, minimal design -->
+  <style>
+    /* -------------------------------------- */
+    /* 1. Base Styles & Variables */
+    /* -------------------------------------- */
+    :root {
+      --blue: #2F6BFF; /* Primary Accent Blue */
+      --blue-lightest: #F3F6FF; /* Very light blue tint for backgrounds */
+      --text-dark: #1C1C1E; /* Near Black for Headlines */
+      --text-muted: #6A6A6A; /* Dark Grey for body text */
+      --border-light: #E0E0E0;
+      --bg-white: #FFFFFF;
+      --bg-footer: #1C1C1E;
+      --font-inter: 'Inter', sans-serif;
+      --max-width: 1200px;
+      --spacing-xl: 96px;
+      --spacing-lg: 64px;
+      --spacing-md: 40px;
+      --spacing-sm: 20px;
+      --radius-default: 12px;
+      --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.03);
+      --shadow-lift: 0 4px 6px rgba(0, 0, 0, 0.08), 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Reset and Base Typography */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-inter);
+      color: var(--text-dark);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--blue);
+      transition: color 0.2s, background-color 0.2s;
+    }
+
+    h1, h2, h3 {
+      color: var(--text-dark);
+      line-height: 1.15;
+      font-weight: 700;
+    }
+
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.25rem; }
+    h3 { font-size: 1.5rem; }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.25rem; }
+      h2 { font-size: 1.75rem; }
+      h3 { font-size: 1.25rem; }
+      :root {
+        --spacing-xl: 64px;
+        --spacing-lg: 48px;
+        --spacing-md: 32px;
+        --spacing-sm: 16px;
+      }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: var(--radius-default);
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--blue);
+      color: var(--bg-white);
+    }
+
+    .btn-primary:hover {
+      background-color: #2659D9; /* Slightly darker blue */
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-light);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    /* Utilities */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--spacing-sm);
+      padding-right: var(--spacing-sm);
+    }
+
+    .text-center { text-align: center; }
+
+    /* -------------------------------------- */
+    /* 2. Layout & Components */
+    /* -------------------------------------- */
+
+    /* Navigation Bar */
+    .nav-bar {
+      padding: var(--spacing-sm) 0;
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .nav-logo span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-md);
+    }
+
+    .nav-links a {
+      color: var(--text-dark);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-cta {
+      margin-left: var(--spacing-md);
+    }
+
+    .nav-toggle { display: none; } /* Hidden on desktop */
+
+    @media (max-width: 992px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-toggle { display: block; }
+    }
+
+
+    /* Hero Section */
+    .hero-section {
+      padding: var(--spacing-xl) 0;
+      text-align: center;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--blue);
+      padding: 0.5rem 1rem;
+      background-color: var(--blue-lightest);
+      border-radius: 50px;
+      margin-bottom: var(--spacing-sm);
+      border: 1px solid rgba(47, 107, 255, 0.1);
+    }
+
+    .hero-headline {
+      font-size: 4.5rem;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      font-weight: 800;
+    }
+
+    .hero-subheading {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.4;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      align-items: center;
+    }
+
+    .hero-actions .btn-secondary {
+      border: none;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .hero-headline { font-size: 2.5rem; }
+      .hero-subheading { font-size: 1.1rem; }
+      .hero-actions { flex-direction: column; }
+    }
+
+
+    /* Cards Section (Where We Focus) */
+    .section {
+      padding: var(--spacing-lg) 0;
+    }
+    
+    .section-header {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .section-header h2 {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .focus-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-default);
+      padding: var(--spacing-md);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    .focus-card:hover {
+      border-color: var(--blue);
+      background-color: var(--blue-lightest);
+      box-shadow: var(--shadow-lift);
+      transform: translateY(-4px);
+    }
+
+    .focus-icon {
+      width: 48px;
+      height: 48px;
+      background-color: var(--blue-lightest);
+      color: var(--blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .focus-card h3 {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .focus-card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+    }
+    
+    /* Difference Cards */
+    .difference-section {
+      background-color: var(--blue-lightest); /* Subtle light panel background */
+    }
+
+    .difference-container {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-default);
+      padding: var(--spacing-md);
+      box-shadow: var(--shadow-lift);
+    }
+
+    .difference-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .diff-card {
+      padding: var(--spacing-md);
+      border-radius: var(--radius-default);
+      /* Pastel Tints */
+      --pastel-blue: #e8f0ff; 
+      --pastel-green: #e9fff1;
+      --pastel-yellow: #fff8e8;
+      --pastel-purple: #f8e8ff;
+    }
+
+    .diff-card:nth-child(1) { background-color: var(--pastel-blue); }
+    .diff-card:nth-child(2) { background-color: var(--pastel-green); }
+    .diff-card:nth-child(3) { background-color: var(--pastel-yellow); }
+    .diff-card:nth-child(4) { background-color: var(--pastel-purple); }
+
+
+    .diff-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .diff-icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      /* Using hardcoded colors for a slightly richer but still soft icon look */
+    }
+
+    .diff-card:nth-child(1) .diff-icon { color: var(--blue); }
+    .diff-card:nth-child(2) .diff-icon { color: #28a745; }
+    .diff-card:nth-child(3) .diff-icon { color: #ffc107; }
+    .diff-card:nth-child(4) .diff-icon { color: #8e24aa; }
+
+    .diff-card h3 {
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .diff-card p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      .difference-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* Metrics Section (Replacing Trusted By) */
+    .metrics-section .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-top: -10px; /* Adjust spacing after the main title */
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+
+    .metric-card {
+      background-color: var(--bg-white);
+      border: 1px solid #E6E8EC; /* Light border */
+      border-radius: var(--radius-default);
+      padding: var(--spacing-md);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); /* Very subtle shadow */
+      transition: all 0.2s ease;
+      height: 100%; /* Ensure uniform height in the grid */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .metric-card:hover {
+        border-color: var(--blue-lightest);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: var(--blue); /* Blue accent on the number */
+      line-height: 1;
+    }
+
+    .metric-description {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+
+    /* Final CTA Section */
+    .final-cta-section {
+      background-color: var(--blue-lightest);
+      padding: var(--spacing-xl) 0;
+    }
+
+    .final-cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .final-cta-content h2 {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .final-cta-content h2 span {
+      color: var(--blue);
+    }
+
+    .final-cta-content p {
+      font-size: 1.15rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bg-footer);
+      color: var(--border-light);
+      padding: var(--spacing-lg) 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .footer-column h4 {
+      color: var(--bg-white);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-column a {
+      color: var(--border-light);
+      opacity: 0.8;
+      transition: opacity 0.2s;
+      display: inline-block;
+    }
+
+    .footer-column a:hover {
+      color: var(--blue);
+      opacity: 1;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--bg-white);
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo span {
+      color: var(--blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: var(--spacing-md);
+      padding-top: var(--spacing-md);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    
+    .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 1rem;
+    }
+    .social-links a {
+        color: var(--border-light);
+        font-size: 1.25rem; /* Placeholder for icon size */
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-logo-column { order: 5; }
+    }
+
+  </style>
+  <script type="module" crossorigin src="/assets/index-C6H6PUBv.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DFJCDase.css"></head><body>
+  <!-- The content of the website is now within the root div, redesigned for a premium, minimal look -->
+  <div id="root">
+    
+    <!-- Navigation Bar -->
+    <header class="nav-bar">
+      <div class="container nav-content">
+        <a href="/" class="nav-logo">
+          33 Research <span>Labs</span>
+        </a>
+        <nav class="nav-links">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/insights">Insights</a>
+          <a href="/about-us">About us</a>
+        </nav>
+        <div class="nav-cta">
+          <a href="/get-started" class="btn btn-primary">Get Started</a>
+        </div>
+        <!-- Simple toggle placeholder for mobile menu (no JS functionality included as requested) -->
+        <button class="nav-toggle btn-secondary">Menu</button>
+      </div>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <span class="hero-label">33 Research Labs</span>
+        <h1 class="hero-headline">Building the Infrastructure of the Future.</h1>
+        <p class="hero-subheading">
+          We are a full-stack studio accelerating innovation in the Web3, AI, and Cybersecurity domains, combining precision development with strategic market execution.
+        </p>
+        <div class="hero-actions">
+          <a href="/get-started" class="btn btn-primary">Start Building</a>
+          <a href="/services" class="btn btn-secondary">View Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Where We Focus Section (Cards) -->
+    <section class="section focus-section">
+      <div class="container text-center">
+        <div class="section-header">
+          <h2>Where We <span class="blue-text">Focus</span></h2>
+          <p>Our expertise spans the most critical areas of next-generation technology, ensuring your project has a foundation built for scale and security.</p>
+        </div>
+        <div class="focus-grid">
+          
+          <div class="focus-card">
+            <div class="focus-icon">W3</div>
+            <h3>Web3 & Blockchain Development</h3>
+            <p>From complex smart contracts to decentralized applications (DApps), we engineer secure, audited, and scalable blockchain solutions on any major network.</p>
+          </div>
+          
+          <div class="focus-card">
+            <div class="focus-icon">AI</div>
+            <h3>AI/ML Integration & Tools</h3>
+            <p>Leverage machine learning for data analysis, automated trading strategies, or unique on-chain AI tools. We turn algorithms into market advantages.</p>
+          </div>
+
+          <div class="focus-card">
+            <div class="focus-icon">🛡️</div>
+            <h3>Cybersecurity & Auditing</h3>
+            <p>Security is non-negotiable. We provide comprehensive code audits, penetration testing, and robust security infrastructure design to protect your assets.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. What Makes 33 Research Labs Different? Section (Feature Blocks) -->
+    <section class="section difference-section">
+      <div class="container text-center">
+        <div class="section-header">
+          <h2>What Makes <span class="blue-text">33 Research Labs</span> Different?</h2>
+          <p>Our approach is centered on speed, clarity, and deep sector expertise, differentiating us from conventional development houses.</p>
+        </div>
+
+        <div class="difference-container">
+          <div class="difference-grid">
+            
+            <div class="diff-card">
+              <div class="diff-header">
+                <span class="diff-icon">💡</span>
+                <h3>Integrated Strategy</h3>
+              </div>
+              <p>We combine product strategy, technical development, and go-to-market planning from day one, ensuring alignment across all phases.</p>
+            </div>
+            
+            <div class="diff-card">
+              <div class="diff-header">
+                <span class="diff-icon">⚡</span>
+                <h3>Rapid Prototyping</h3>
+              </div>
+              <p>Our agile engineering teams are optimized for speed, allowing us to deliver functional prototypes and MVPs faster than industry standards.</p>
+            </div>
+            
+            <div class="diff-card">
+              <div class="diff-header">
+                <span class="diff-icon">⚙️</span>
+                <h3>Full-Stack Ownership</h3>
+              </div>
+              <p>We handle everything from backend architecture and smart contracts to front-end UI/UX and API integration. One team, zero handoffs.</p>
+            </div>
+            
+            <div class="diff-card">
+              <div class="diff-header">
+                <span class="diff-icon">📈</span>
+                <h3>Growth-Oriented</h3>
+              </div>
+              <p>Our work is always informed by market data, designed not just to function, but to scale, attract users, and achieve commercial success.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Our Proof of Work Section (Metrics) -->
+    <section class="section metrics-section">
+      <div class="container text-center">
+        <div class="section-header">
+          <h2>Our <span class="blue-text">Proof</span> of Work</h2>
+          <p class="section-subtitle">Numbers that reflect our execution, not logos.</p>
+        </div>
+        <div class="metrics-grid">
+          
+          <div class="metric-card">
+            <div class="metric-value blue-text">$6M+</div>
+            <div class="metric-description">raised by teams we’ve supported</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value blue-text">40+</div>
+            <div class="metric-description">production deployments</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value blue-text">12+</div>
+            <div class="metric-description">chains integrated (EVM + Solana + custom networks)</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-value blue-text">&lt;0.1%</div>
+            <div class="metric-description">post-audit issue rate</div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-value blue-text">3-week</div>
+            <div class="metric-description">average time from prototype to MVP</div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-value blue-text">100K+</div>
+            <div class="metric-description">users across products we helped build</div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Final CTA Section -->
+    <section class="final-cta-section">
+      <div class="container">
+        <div class="final-cta-content">
+          <h2>Join the Future with <span>33 Research Labs</span></h2>
+          <p>Ready to move from idea to market impact? Our team is standing by to discuss your vision and strategize the path forward.</p>
+          <a href="/get-started" class="btn btn-primary">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          
+          <div class="footer-column footer-logo-column">
+            <a href="/" class="footer-logo">
+              33 Research <span>Labs</span>
+            </a>
+            <p style="opacity: 0.7;">Accelerating innovation in Web3, AI, and Cybersecurity.</p>
+            <div class="social-links">
+                <a href="https://twitter.com/33ResearchLabs">X</a>
+                <a href="https://www.linkedin.com/company/33researchlabs/">in</a>
+                <a href="mailto:info@33researchlabs.xyz">✉️</a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/about-us">About Us</a></li>
+              <li><a href="/careers">Careers</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/insights">Insights</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="/services#blockchain">Blockchain Dev</a></li>
+              <li><a href="/services#ai">AI/ML Solutions</a></li>
+              <li><a href="/services#security">Security & Audit</a></li>
+              <li><a href="/services#marketing">Web3 Marketing</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/terms-of-service">Terms of Service</a></li>
+              <li><a href="/privacy-policy">Privacy Policy</a></li>
+              <li><a href="/disclaimer">Disclaimer</a></li>
+              <li><a href="/sitemap.xml">Sitemap</a></li>
+            </ul>
+          </div>
+          
+        </div>
+        
+        <div class="footer-bottom">
+          &copy; 2024 33 Research Labs. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+  </div>
   <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-
-</html>
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script></body></html>
