@@ -1,5 +1,4 @@
 import React from 'react';
-import { PRIMARY_BLUE, BORDER_METRICS, TEXT_DARK, BG_LIGHTEST_BLUE } from '../config/colors';
 
 interface MetricCardProps {
   value: string;
@@ -8,23 +7,11 @@ interface MetricCardProps {
 
 const MetricCard: React.FC<MetricCardProps> = ({ value, description }) => {
   return (
-    <div
-      className={`
-        p-8 bg-white border rounded-xl shadow-sm transition duration-200 h-full
-        flex flex-col justify-center text-left
-      `}
-      style={{
-        borderColor: BORDER_METRICS,
-        '--tw-shadow-color': 'rgba(0, 0, 0, 0.03)',
-      }}
-    >
-      <div
-        className={`text-5xl font-extrabold mb-1 leading-none`}
-        style={{ color: PRIMARY_BLUE }}
-      >
+    <div className="group p-6 lg:p-8 bg-white border border-zinc-100 rounded-2xl transition-all duration-300 hover:border-zinc-200 hover:shadow-[0_4px_20px_rgb(0,0,0,0.03)] h-full flex flex-col justify-center">
+      <div className="text-3xl lg:text-4xl font-semibold text-zinc-900 mb-2 tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-0.5">
         {value}
       </div>
-      <div className={`text-sm text-[${TEXT_DARK}] font-medium`}>
+      <div className="text-[13px] text-zinc-500 font-medium leading-snug">
         {description}
       </div>
     </div>

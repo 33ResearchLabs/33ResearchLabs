@@ -78,7 +78,7 @@ const Insights = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "AI":
-        return "bg-electric-100 text-[#1DA1F2]";
+        return "bg-electric-100 text-[#18181B]";
       case "Blockchain":
         return "bg-purple-100 text-purple-800";
       case "Cybersecurity":
@@ -136,20 +136,17 @@ const Insights = () => {
         />
         <link rel="canonical" href={generateCanonicalUrl("/insights")} />
       </Helmet>
-      <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
-              Deep Tech{" "}
-              <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
-                Insights
-              </span>
+      <section className="py-24 md:py-32 bg-gradient-to-b from-zinc-50 to-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-zinc-900 tracking-[-0.02em] mb-6">
+              Deep Tech <span className="text-zinc-400">Insights</span>
             </h1>
-            <p className="text-xl text-neutral-600 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-zinc-500 mb-6 leading-relaxed">
               Thought leadership, technical breakdowns, and founder notes from
               the cutting edge
             </p>
-            <p className="text-lg text-neutral-500 max-w-3xl mx-auto">
+            <p className="text-[15px] text-zinc-400 max-w-2xl mx-auto">
               We share our learnings from building the future—technical
               deep-dives, market analysis, and honest perspectives on what's
               working in deep tech.
@@ -169,7 +166,7 @@ const Insights = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={
                   selectedCategory === category
-                    ? "bg-[#1DA1F2] hover:bg-electric-700"
+                    ? "bg-[#18181B] hover:bg-electric-700"
                     : ""
                 }
               >
@@ -184,7 +181,7 @@ const Insights = () => {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <Badge className="bg-electric-100 text-[#1DA1F2] mb-4">
+              <Badge className="bg-electric-100 text-[#18181B] mb-4">
                 Featured
               </Badge>
               <h2 className="text-2xl font-bold text-neutral-900">
@@ -214,7 +211,7 @@ const Insights = () => {
                   </p>
                   <div className="flex items-center space-x-4 mb-6">
                     <div className="w-10 h-10 bg-electric-100 rounded-full flex items-center justify-center">
-                      <span className="text-[#1DA1F2] font-medium text-sm">
+                      <span className="text-[#18181B] font-medium text-sm">
                         {featuredPost.author
                           .split(" ")
                           .map((n) => n[0])
@@ -242,7 +239,7 @@ const Insights = () => {
                   </div>
 
                   <Button
-                    className="bg-[#1DA1F2] hover:bg-electric-700 text-white w-fit"
+                    className="bg-[#18181B] hover:bg-electric-700 text-white w-fit"
                     onClick={() =>
                       navigate(
                         `/insights/article/${generateSlug(featuredPost.title)}`
@@ -288,7 +285,7 @@ const Insights = () => {
                   >
                     {post.category}
                   </Badge>
-                  <h3 className="text-lg font-semibold text-neutral-900 mb-3 group-hover:text-[#1DA1F2] transition-colors duration-200">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-3 group-hover:text-[#18181B] transition-colors duration-200">
                     {post.title}
                   </h3>
                   <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-3">
@@ -299,7 +296,7 @@ const Insights = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-4 bg-electric-100 rounded-full flex items-center justify-center">
-                        <span className="text-[#1DA1F2] font-medium text-xs">
+                        <span className="text-[#18181B] font-medium text-xs">
                           {post.author
                             .split(" ")
                             .map((n) => n[0])
@@ -310,7 +307,7 @@ const Insights = () => {
                         {post.author}
                       </div>
                     </div>
-                    <Bookmark className="h-4 w-4 text-neutral-400 hover:text-[#1DA1F2] transition-colors duration-200" />
+                    <Bookmark className="h-4 w-4 text-neutral-400 hover:text-[#18181B] transition-colors duration-200" />
                   </div>
                   <div className="flex items-center space-x-4 text-xs text-neutral-500 mt-4">
                     <span>{post.date}</span>
@@ -328,7 +325,7 @@ const Insights = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <div className="w-16 h-16 bg-electric-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <TrendingUp className="h-8 w-8 text-[#1DA1F2]" />
+              <TrendingUp className="h-8 w-8 text-[#18181B]" />
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
               Stay Ahead of the Curve
@@ -346,7 +343,7 @@ const Insights = () => {
               />
               <Button
                 onClick={handleSubscribeEmail}
-                className="bg-[#1DA1F2] hover:bg-electric-700 text-white py-6"
+                className="bg-[#18181B] hover:bg-electric-700 text-white py-6"
               >
                 Subscribe
               </Button>
@@ -358,20 +355,20 @@ const Insights = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-[#1DA1F2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-zinc-950">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-white mb-2">50+</div>
-              <div className="text-electric-100">Technical Articles</div>
+              <div className="text-3xl font-semibold text-white mb-2">50+</div>
+              <div className="text-zinc-500 text-[14px]">Technical Articles</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-white mb-2">10K+</div>
-              <div className="text-electric-100">Monthly Readers</div>
+              <div className="text-3xl font-semibold text-white mb-2">10K+</div>
+              <div className="text-zinc-500 text-[14px]">Monthly Readers</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-white mb-2">25+</div>
-              <div className="text-electric-100">Expert Contributors</div>
+              <div className="text-3xl font-semibold text-white mb-2">25+</div>
+              <div className="text-zinc-500 text-[14px]">Expert Contributors</div>
             </div>
           </div>
         </div>

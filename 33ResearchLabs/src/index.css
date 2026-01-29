@@ -2,32 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
-/* This CSS block defines global variables and base styles to support the 
-premium, minimal design, ensuring typography and core colors are consistent.
-*/
+/* Enterprise-grade design system */
 
-/* 1. Base Variables and Typography */
 :root {
-  /* Define custom colors as CSS variables for use in global styles or raw CSS */
-  --color-primary-blue: #2F6BFF;
-  --color-text-dark: #1C1C1E;
+  --color-primary: #0A0A0B;
+  --color-primary-blue: #2563EB;
+  --color-text-dark: #0A0A0B;
+  --color-text-secondary: #52525B;
+  --color-text-tertiary: #71717A;
+  --color-border: #E4E4E7;
+  --color-border-subtle: #F4F4F5;
+  --color-bg-subtle: #FAFAFA;
+  --color-bg-elevated: #FFFFFF;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-normal: 0.3s;
+  --duration-fast: 0.15s;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  /* Apply Inter font, which is loaded via the <link> tag in index.html */
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--color-text-dark);
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  background-color: #FFFFFF;
+  font-feature-settings: 'cv11', 'ss01';
+  font-variation-settings: 'opsz' 32;
 }
 
-/* Ensure headings use the correct dark text color */
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-dark);
-  line-height: 1.15;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
 }
 
-/* Ensure the root element fills the viewport for consistent background */
+h1 {
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
 #root {
   min-height: 100vh;
+}
+
+/* Refined selection */
+::selection {
+  background-color: rgba(37, 99, 235, 0.12);
+  color: var(--color-text-dark);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enterprise-grade focus states */
+:focus-visible {
+  outline: 2px solid var(--color-primary-blue);
+  outline-offset: 2px;
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4D4D8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A1A1AA;
 }

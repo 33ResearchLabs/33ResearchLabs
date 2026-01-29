@@ -240,19 +240,15 @@ const Contact = () => {
         />
         <link rel="canonical" href={generateCanonicalUrl("/contact-us")} />
       </Helmet>
-      <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30 text-center">
-        <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
-            Let's{" "}
-            <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
-              Build
-            </span>{" "}
-            Together
+      <section className="py-24 md:py-32 bg-gradient-to-b from-zinc-50 to-white text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-zinc-900 tracking-[-0.02em] mb-6">
+            Let's <span className="text-zinc-400">Build</span> Together
           </h1>
-          <p className="text-xl text-neutral-600 mb-4">
-            Smart form + calendar booking for seamless collaboration
+          <p className="text-lg text-zinc-500 mb-4">
+            Start a conversation about your next project
           </p>
-          <p className="text-lg text-neutral-500 max-w-3xl mx-auto">
+          <p className="text-[15px] text-zinc-400 max-w-2xl mx-auto">
             Ready to discuss your next project? We're here to help transform
             your vision into scalable, secure technology solutions.
           </p>
@@ -446,7 +442,7 @@ const Contact = () => {
                 type="submit"
                 size="lg"
                 disabled={loading}
-                className="w-full bg-[#1DA1F2] hover:bg-electric-700 text-white disabled:opacity-50"
+                className="w-full bg-[#18181B] hover:bg-electric-700 text-white disabled:opacity-50"
               >
                 {loading ? (
                   loadingSpinner
@@ -472,7 +468,7 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-electric-100 rounded-lg flex items-center justify-center">
-                    <info.icon className="h-6 w-6 text-[#1DA1F2]" />
+                    <info.icon className="h-6 w-6 text-[#18181B]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-1">
@@ -490,7 +486,7 @@ const Contact = () => {
             <Card className="border-electric-200 bg-electric-50/50">
               <CardHeader>
                 <div className="flex items-center space-x-3">
-                  <Calendar className="h-6 w-6 text-[#1DA1F2]" />
+                  <Calendar className="h-6 w-6 text-[#18181B]" />
                   <h3 className="text-lg font-semibold text-neutral-900">
                     Schedule a Call
                   </h3>
@@ -504,7 +500,7 @@ const Contact = () => {
                 <Button
                   onClick={() => setModalMetting(true)}
                   variant="outline"
-                  className="w-full border-electric-600 text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white"
+                  className="w-full border-electric-600 text-[#18181B] hover:bg-[#18181B] hover:text-white"
                 >
                   Book Meeting
                   <ArrowUpRight className="ml-2 h-4 w-4" />
@@ -594,20 +590,20 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className="py-24 bg-[#1DA1F2] text-center">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+      <section className="py-24 md:py-32 bg-zinc-950 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-[-0.02em] mb-4">
             Ready to Transform Your Vision?
           </h2>
-          <p className="text-xl text-electric-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto">
             Let's discuss how we can help you build scalable, secure technology
             solutions.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               onClick={() => window.scrollTo(10, 0)}
               size="lg"
-              variant="secondary"
+              className="bg-white text-zinc-900 hover:bg-zinc-100 font-medium"
             >
               Start Your Project
             </Button>
@@ -615,7 +611,7 @@ const Contact = () => {
               onClick={() => setIsModalOpen(true)}
               size="lg"
               variant="outline"
-              className="border-white text-[#1DA1F2] hover:bg-white hover:text-[#1DA1F2]"
+              className="border-zinc-700 text-zinc-300 hover:bg-zinc-900 hover:text-white"
             >
               Schedule Consultation
             </Button>

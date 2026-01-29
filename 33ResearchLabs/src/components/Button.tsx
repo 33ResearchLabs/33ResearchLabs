@@ -1,5 +1,4 @@
 import React from 'react';
-import { PRIMARY_BLUE, HOVER_BLUE, BORDER_LIGHT } from '../config/colors';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -13,16 +12,13 @@ const Button: React.FC<ButtonProps> = ({ children, primary = false, href, classN
     <a
       href={href}
       className={`
-        inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-xl transition duration-200 whitespace-nowrap
+        inline-flex items-center justify-center px-6 py-3 text-[14px] font-medium rounded-lg transition-all duration-200 whitespace-nowrap
         ${primary
-          ? `text-white shadow-md shadow-blue-200 hover:bg-[#2659D9]`
-          : `bg-transparent text-gray-700 border border-[#E0E0E0] hover:border-[#2F6BFF] hover:text-[#2F6BFF]`
+          ? 'bg-zinc-900 text-white hover:bg-zinc-800 shadow-none'
+          : 'bg-transparent text-zinc-600 border border-zinc-200 hover:border-zinc-300 hover:text-zinc-900 hover:bg-zinc-50'
         }
         ${className}
       `}
-      style={{
-        backgroundColor: primary ? PRIMARY_BLUE : 'transparent',
-      }}
     >
       {children}
     </a>

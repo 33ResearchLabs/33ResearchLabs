@@ -226,20 +226,18 @@ const Services = () => {
         <link rel="canonical" href={generateCanonicalUrl("/services")} />
       </Helmet>
       {/* Hero Section */}
-      <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
+      <section className="py-24 md:py-32 bg-gradient-to-b from-zinc-50 to-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-zinc-900 tracking-[-0.02em] mb-6">
               Deep Tech{" "}
-              <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
-                Consulting
-              </span>
+              <span className="text-zinc-400">Consulting</span>
             </h1>
-            <p className="text-xl text-neutral-600 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-zinc-500 mb-6 leading-relaxed">
               From MVP builds to cybersecurity audits—we turn complex problems
               into scalable solutions
             </p>
-            <p className="text-lg text-neutral-500 max-w-3xl mx-auto">
+            <p className="text-[15px] text-zinc-400 max-w-2xl mx-auto">
               Partner with our team of senior engineers, security experts, and
               AI researchers to build technology that defines tomorrow.
             </p>
@@ -272,7 +270,7 @@ const Services = () => {
               >
                 <CardHeader className="pb-6">
                   <div className="w-12 h-12 bg-electric-100 rounded-lg flex items-center justify-center mb-6">
-                    <Code className="h-6 w-6 text-[#1DA1F2]" />
+                    <Code className="h-6 w-6 text-[#18181B]" />
                   </div>
                   <h3 className="text-xl font-semibold text-neutral-900 mb-3">
                     {service.title}
@@ -306,7 +304,7 @@ const Services = () => {
               >
                 <CardHeader className="pb-6">
                   <div className="w-12 h-12 bg-electric-100 rounded-lg flex items-center justify-center mb-6">
-                    <service.icon className="h-6 w-6 text-[#1DA1F2]" />
+                    <service.icon className="h-6 w-6 text-[#18181B]" />
                   </div>
                   <h3 className="text-xl font-semibold text-neutral-900 mb-3">
                     {service.title}
@@ -337,7 +335,7 @@ const Services = () => {
                   <div className="space-y-3">
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center space-x-3">
-                        <CheckCircle className="h-4 w-4 text-[#1DA1F2] flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-[#18181B] flex-shrink-0" />
                         <span className="text-sm text-neutral-700">
                           {feature}
                         </span>
@@ -367,7 +365,7 @@ const Services = () => {
             {process.map((step, index) => (
               <div key={step.step} className="relative">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-[#1DA1F2] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-[#18181B] rounded-full flex items-center justify-center mx-auto mb-6">
                     <span className="text-2xl font-bold text-white">
                       {step.step}
                     </span>
@@ -408,7 +406,7 @@ const Services = () => {
                 <CardHeader>
                   <div className="flex items-center justify-between mb-4">
                     <Badge variant="outline">{study.category}</Badge>
-                    <Award className="h-5 w-5 text-[#1DA1F2]" />
+                    <Award className="h-5 w-5 text-[#18181B]" />
                   </div>
                   <h3 className="text-lg font-semibold text-neutral-900 mb-2">
                     {study.company}
@@ -431,7 +429,7 @@ const Services = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-[#1DA1F2] mb-1">
+                      <div className="text-sm font-medium text-[#18181B] mb-1">
                         Result
                       </div>
                       <div className="text-sm font-semibold text-neutral-900">
@@ -461,7 +459,7 @@ const Services = () => {
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-electric-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                    <Clock className="h-4 w-4 text-[#1DA1F2]" />
+                    <Clock className="h-4 w-4 text-[#18181B]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-2">
@@ -475,7 +473,7 @@ const Services = () => {
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-electric-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                    <Users className="h-4 w-4 text-[#1DA1F2]" />
+                    <Users className="h-4 w-4 text-[#18181B]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-2">
@@ -489,7 +487,7 @@ const Services = () => {
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 bg-electric-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                    <Award className="h-4 w-4 text-[#1DA1F2]" />
+                    <Award className="h-4 w-4 text-[#18181B]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 mb-2">
@@ -506,7 +504,7 @@ const Services = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <div className="bg-electric-100 rounded-xl p-6 text-center">
-                    <div className="text-2xl font-bold text-[#1DA1F2] mb-1">
+                    <div className="text-2xl font-bold text-[#18181B] mb-1">
                       100+
                     </div>
                     <div className="text-sm text-neutral-600">
@@ -532,7 +530,7 @@ const Services = () => {
                     </div>
                   </div>
                   <div className="bg-electric-100 rounded-xl p-6 text-center">
-                    <div className="text-2xl font-bold text-[#1DA1F2] mb-1">
+                    <div className="text-2xl font-bold text-[#18181B] mb-1">
                       24/7
                     </div>
                     <div className="text-sm text-neutral-600">Support</div>
@@ -545,20 +543,20 @@ const Services = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-[#1DA1F2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+      <section className="py-24 md:py-32 bg-zinc-950">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-[-0.02em] mb-4">
             Ready to Build Something Extraordinary?
           </h2>
-          <p className="text-xl text-electric-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto">
             Schedule a technical consultation to discuss your project
             requirements.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               onClick={() => setIsModalOpen(true)}
               size="lg"
-              variant="secondary"
+              className="bg-white text-zinc-900 hover:bg-zinc-100 font-medium"
             >
               Schedule Consultation
               <ArrowUpRight className="ml-2 h-4 w-4" />

@@ -42,18 +42,15 @@ const AboutUs = () => {
         <link rel="canonical" href={generateCanonicalUrl("/about-us")} />
       </Helmet>
       {/* Hero Section */}
-      <section className="py-24 bg-gradient-to-br from-neutral-50 to-electric-50/30">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold text-neutral-900 mb-6">
-            About{" "}
-            <span className="bg-[#1DA1F2] bg-clip-text text-transparent">
-              Us
-            </span>
+      <section className="py-24 md:py-32 bg-gradient-to-b from-zinc-50 to-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-zinc-900 tracking-[-0.02em] mb-6">
+            About <span className="text-zinc-400">Us</span>
           </h1>
-          <h2 className="text-2xl lg:text-3xl font-semibold text-neutral-800 mb-8">
+          <h2 className="text-xl lg:text-2xl font-medium text-zinc-600 mb-8 tracking-[-0.01em]">
             Building the Infrastructure of the Future
           </h2>
-          <p className="text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg text-zinc-500 max-w-3xl mx-auto leading-relaxed">
             At 33 Research Labs, we believe the next great leap in technology
             won't come from isolated breakthroughs — it will come from
             integrated, intelligent, and trustless infrastructure. Our mission
@@ -86,7 +83,7 @@ const AboutUs = () => {
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-electric-50/40 border border-electric-200 p-6 rounded-xl text-center">
-                <Brain className="h-12 w-12 text-[#1DA1F2] mx-auto mb-3" />
+                <Brain className="h-12 w-12 text-[#18181B] mx-auto mb-3" />
                 <h3 className="font-semibold text-neutral-900 mb-2">
                   AI Systems
                 </h3>
@@ -95,7 +92,7 @@ const AboutUs = () => {
                 </p>
               </div>
               <div className="bg-electric-50/40 border border-electric-200 p-6 rounded-xl text-center">
-                <Network className="h-12 w-12 text-[#1DA1F2] mx-auto mb-3" />
+                <Network className="h-12 w-12 text-[#18181B] mx-auto mb-3" />
                 <h3 className="font-semibold text-neutral-900 mb-2">
                   Blockchain
                 </h3>
@@ -104,14 +101,14 @@ const AboutUs = () => {
                 </p>
               </div>
               <div className="bg-electric-50/40 border border-electric-200 p-6 rounded-xl text-center">
-                <Shield className="h-12 w-12 text-[#1DA1F2] mx-auto mb-3" />
+                <Shield className="h-12 w-12 text-[#18181B] mx-auto mb-3" />
                 <h3 className="font-semibold text-neutral-900 mb-2">
                   Cybersecurity
                 </h3>
                 <p className="text-sm text-neutral-600">Secure by Design</p>
               </div>
               <div className="bg-electric-50/40 border border-electric-200 p-6 rounded-xl text-center">
-                <Zap className="h-12 w-12 text-[#1DA1F2] mx-auto mb-3" />
+                <Zap className="h-12 w-12 text-[#18181B] mx-auto mb-3" />
                 <h3 className="font-semibold text-neutral-900 mb-2">
                   Innovation
                 </h3>
@@ -144,26 +141,26 @@ const AboutUs = () => {
                 coming.
               </p>
               <div className="text-center">
-                <p className="text-2xl font-bold text-[#1DA1F2] mb-8">
+                <p className="text-2xl font-bold text-[#18181B] mb-8">
                   33 Research Labs{" "}
                   <span className="text-black">exists to change that.</span>
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex items-center space-x-3 bg-electric-50/40 p-4 rounded-lg">
-                  <Globe className="h-6 w-6 text-[#1DA1F2] flex-shrink-0" />
+                  <Globe className="h-6 w-6 text-[#18181B] flex-shrink-0" />
                   <span className="font-medium text-neutral-900">
                     Decentralized by default
                   </span>
                 </div>
                 <div className="flex items-center space-x-3 bg-electric-50/40 p-4 rounded-lg">
-                  <Lock className="h-6 w-6 text-[#1DA1F2] flex-shrink-0" />
+                  <Lock className="h-6 w-6 text-[#18181B] flex-shrink-0" />
                   <span className="font-medium text-neutral-900">
                     Secure at the protocol level
                   </span>
                 </div>
                 <div className="flex items-center space-x-3 bg-electric-50/40 p-4 rounded-lg">
-                  <Brain className="h-6 w-6 text-[#1DA1F2] flex-shrink-0" />
+                  <Brain className="h-6 w-6 text-[#18181B] flex-shrink-0" />
                   <span className="font-medium text-neutral-900">
                     Intelligent at scale
                   </span>
@@ -191,7 +188,7 @@ const AboutUs = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-gradient-to-br from-electric-50/40 to-electric-100/30 border border-electric-200 p-8 rounded-2xl">
-              <Target className="h-10 w-10 text-[#1DA1F2] mb-4" />
+              <Target className="h-10 w-10 text-[#18181B] mb-4" />
               <h3 className="text-xl font-bold text-neutral-900 mb-4">
                 Deep Technical Expertise
               </h3>
@@ -202,7 +199,7 @@ const AboutUs = () => {
               </p>
             </div>
             <div className="bg-gradient-to-br from-electric-50/40 to-electric-100/30 border border-electric-200 p-8 rounded-2xl">
-              <Network className="h-10 w-10 text-[#1DA1F2] mb-4" />
+              <Network className="h-10 w-10 text-[#18181B] mb-4" />
               <h3 className="text-xl font-bold text-neutral-900 mb-4">
                 Cross-Domain Thinking
               </h3>
@@ -212,7 +209,7 @@ const AboutUs = () => {
               </p>
             </div>
             <div className="bg-gradient-to-br from-electric-50/40 to-electric-100/30 border border-electric-200 p-8 rounded-2xl">
-              <Zap className="h-10 w-10 text-[#1DA1F2] mb-4" />
+              <Zap className="h-10 w-10 text-[#18181B] mb-4" />
               <h3 className="text-xl font-bold text-neutral-900 mb-4">
                 Mission-Driven
               </h3>
@@ -222,7 +219,7 @@ const AboutUs = () => {
               </p>
             </div>
             <div className="bg-gradient-to-br from-electric-50/40 to-electric-100/30 border border-electric-200 p-8 rounded-2xl">
-              <Brain className="h-10 w-10 text-[#1DA1F2] mb-4" />
+              <Brain className="h-10 w-10 text-[#18181B] mb-4" />
               <h3 className="text-xl font-bold text-neutral-900 mb-4">
                 Independent & Research-Oriented
               </h3>
@@ -270,7 +267,7 @@ const AboutUs = () => {
             </h2>
           </div>
           <div className="bg-gradient-to-br from-electric-50/40 to-electric-100/30 border border-electric-200 p-8 lg:p-12 rounded-2xl text-center">
-            <Users className="h-16 w-16 text-[#1DA1F2] mx-auto mb-6" />
+            <Users className="h-16 w-16 text-[#18181B] mx-auto mb-6" />
             <p className="text-lg text-neutral-700 leading-relaxed mb-6">
               We are a small, elite group of engineers, cryptographers, security
               researchers, and AI scientists from leading global institutions
@@ -332,26 +329,26 @@ const AboutUs = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-[#1DA1F2]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+      <section className="py-24 md:py-32 bg-zinc-950">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-[-0.02em] mb-4">
             Let's Build the Future Together
           </h2>
-          <p className="text-xl text-electric-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto">
             Ready to architect the infrastructure of tomorrow? Let's discuss how
             we can bring revolutionary technology to life.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/contact-us"
-              className="px-8 py-4 rounded-lg bg-white text-[#1DA1F2] hover:bg-electric-100 font-semibold transition-colors flex items-center justify-center space-x-2"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white text-zinc-900 hover:bg-zinc-100 text-[14px] font-medium transition-all duration-200"
             >
               <span>Start a Conversation</span>
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/services"
-              className="px-8 py-4 rounded-lg text-white bg-white bg-opacity-10 hover:bg-white hover:text-[#1DA1F2] transition font-semibold"
+              className="inline-flex items-center justify-center px-6 py-3.5 rounded-lg text-zinc-300 border border-zinc-700 hover:bg-zinc-900 hover:text-white text-[14px] font-medium transition-all duration-200"
             >
               Explore Our Services
             </Link>
