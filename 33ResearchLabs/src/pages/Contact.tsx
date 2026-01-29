@@ -25,7 +25,7 @@ import { contactInfo, faqs } from "@/data/posts";
 import ScheduleModal from "@/components/ScheduleModal";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import {
   generateCanonicalUrl,
   generateRobotsContent,

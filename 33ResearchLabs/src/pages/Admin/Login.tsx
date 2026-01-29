@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react"; // 👈 Added icons
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { generateRobotsContent, ROBOTS_CONFIG } from "@/utils/seo";
 
 const Login = () => {

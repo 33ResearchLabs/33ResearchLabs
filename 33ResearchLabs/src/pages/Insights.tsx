@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { featuredPost, generateSlug } from "@/data/posts";
 import axios from "axios";
 import { toast } from "sonner";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import {
   generateCanonicalUrl,
   generateRobotsContent,

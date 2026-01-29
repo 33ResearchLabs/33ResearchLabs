@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { generateSlug } from "@/data/posts";
 import ShareButton from "@/components/ShareButton";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import {
   generateCanonicalUrl,
   generateRobotsContent,

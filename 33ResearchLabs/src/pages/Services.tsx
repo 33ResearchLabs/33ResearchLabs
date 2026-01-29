@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import CoreServices from "@/components/CoreService";
 import { useState } from "react";
 import ScheduleModal from "@/components/ScheduleModal";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import {
   generateCanonicalUrl,
   generateRobotsContent,
