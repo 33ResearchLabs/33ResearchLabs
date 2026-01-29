@@ -141,7 +141,7 @@ export default function IndexPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4">
             <div className="px-8 py-12 border-r border-zinc-100 last:border-r-0">
-              <p className="text-4xl lg:text-5xl font-light text-zinc-900 tracking-tight mb-2">$6M+</p>
+              <p className="text-4xl lg:text-5xl font-light text-zinc-900 tracking-tight mb-2">$10M+</p>
               <p className="text-[13px] text-zinc-500 uppercase tracking-wider">Capital Raised</p>
             </div>
             <div className="px-8 py-12 border-r border-zinc-100 last:border-r-0">
@@ -153,7 +153,7 @@ export default function IndexPage() {
               <p className="text-[13px] text-zinc-500 uppercase tracking-wider">Networks</p>
             </div>
             <div className="px-8 py-12">
-              <p className="text-4xl lg:text-5xl font-light text-zinc-900 tracking-tight mb-2">100K+</p>
+              <p className="text-4xl lg:text-5xl font-light text-zinc-900 tracking-tight mb-2">1M+</p>
               <p className="text-[13px] text-zinc-500 uppercase tracking-wider">End Users</p>
             </div>
           </div>
@@ -311,7 +311,7 @@ export default function IndexPage() {
 
           <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
             <div className="text-center">
-              <p className="text-6xl lg:text-7xl font-light text-zinc-900 tracking-tight mb-4">$6M+</p>
+              <p className="text-6xl lg:text-7xl font-light text-zinc-900 tracking-tight mb-4">$10M+</p>
               <p className="text-zinc-500">raised by teams we've supported</p>
             </div>
             <div className="text-center">
@@ -336,8 +336,8 @@ export default function IndexPage() {
               <p className="text-zinc-500">prototype to MVP</p>
             </div>
             <div className="text-center">
-              <p className="text-6xl lg:text-7xl font-light text-zinc-900 tracking-tight mb-4">100K+</p>
-              <p className="text-zinc-500">users across products</p>
+              <p className="text-6xl lg:text-7xl font-light text-zinc-900 tracking-tight mb-4">1M+</p>
+              <p className="text-zinc-500">users across platforms</p>
             </div>
           </div>
         </div>
