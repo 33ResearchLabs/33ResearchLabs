@@ -47,14 +47,14 @@ export default function IndexPage() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="/contact-us"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 text-white text-[14px] font-medium tracking-wide hover:bg-zinc-800 transition-colors duration-300"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 text-white text-[14px] font-medium tracking-wide rounded-md hover:bg-zinc-800 transition-colors duration-300"
                 >
                   Start a Project
                   <ArrowRight size={16} />
                 </a>
                 <a
                   href="/services"
-                  className="inline-flex items-center gap-3 px-8 py-4 text-zinc-900 text-[14px] font-medium tracking-wide border border-zinc-200 hover:border-zinc-900 transition-colors duration-300"
+                  className="inline-flex items-center gap-3 px-8 py-4 text-zinc-900 text-[14px] font-medium tracking-wide border border-zinc-200 rounded-md hover:border-zinc-900 transition-colors duration-300"
                 >
                   Our Services
                 </a>
@@ -359,7 +359,7 @@ export default function IndexPage() {
             <div className="flex lg:justify-end">
               <a
                 href="/contact-us"
-                className="inline-flex items-center gap-4 px-10 py-5 bg-zinc-900 text-white text-[15px] font-medium tracking-wide hover:bg-zinc-800 transition-colors duration-300 group"
+                className="inline-flex items-center gap-4 px-10 py-5 bg-zinc-900 text-white text-[15px] font-medium tracking-wide rounded-md hover:bg-zinc-800 transition-colors duration-300 group"
               >
                 Get in Touch
                 <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
